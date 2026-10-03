@@ -1,0 +1,43 @@
+{
+  "id": "scam_030",
+  "label": "scam",
+  "title": "'New number, Grandpa' -- voice-clone grandson asks for a Zelle payment",
+  "sources": [
+    "FBI 'Virtual Kidnapping' warnings + FBI SF warning on AI voice cloning of family members",
+    "FTC 2023 alert: scammers use AI to enhance family emergency schemes"
+  ],
+  "claimed_identity": "Leo",
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Grandpa, it's Leo. I lost my phone, this is my new number, save it."
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Leo? You sound a little different."
+    },
+    {
+      "t": "00:09",
+      "speaker": "caller",
+      "text": "I've got a cold. Listen, I'm in trouble, I rear-ended someone and they want $1,800 cash or they call the police."
+    },
+    {
+      "t": "00:17",
+      "speaker": "caller",
+      "text": "Can you Zelle it to my friend's account right now? And please don't tell Mom, she'll kill me."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "emergency",
+      "financial_request",
+      "payment_anomaly",
+      "secrecy",
+      "unusual_urgency"
+    ]
+  }
+}

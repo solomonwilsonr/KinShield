@@ -1,0 +1,30 @@
+{
+  "id": "benign_024",
+  "label": "benign",
+  "language": "hinglish",
+  "title": "[Hinglish] Son confirming Sunday lunch",
+  "sources": [
+    "Ordinary family logistics, code-mixed Hindi-English"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hello Mummy, main hoon. Sunday ko lunch pe aa raha hoon, theek hai?"
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Haan beta, zaroor aao. Kya khaoge?"
+    },
+    {
+      "t": "00:09",
+      "speaker": "caller",
+      "text": "Rajma chawal bana do, bahut din ho gaye. Main mithai le aaunga."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

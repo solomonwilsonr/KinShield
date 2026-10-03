@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KinShield Beta</string>
+    <string name="share_label">Check with KinBot</string>
+    <string name="channel_alerts">Scam alerts</string>
+    <string name="channel_alerts_desc">High-risk alerts from the KinVoice demo</string>
+    <string name="channel_busy">Checks in progress</string>
+    <string name="busy_title">Kip is finishing a check</string>
+</resources>

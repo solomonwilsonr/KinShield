@@ -1,0 +1,17 @@
+{
+  "id": "scam_002",
+  "label": "scam",
+  "title": "Fake attorney follow-up call",
+  "sources": ["IC3 PSA 231117"],
+  "turns": [
+    {"t": "00:00", "speaker": "caller", "text": "Hello, this is Attorney Mark Reilly, I represent your grandson in his court case."},
+    {"t": "00:07", "speaker": "victim", "text": "Yes, he called me earlier. Is he alright?"},
+    {"t": "00:11", "speaker": "caller", "text": "He's fine, but the bond amount changed. I need $6,500 sent by courier within the hour or the judge may revoke it."},
+    {"t": "00:20", "speaker": "victim", "text": "That's more than he said."},
+    {"t": "00:22", "speaker": "caller", "text": "I understand, but this must stay between us -- if the prosecutor finds out family was contacted, it could look bad for him. Please don't call the courthouse directly."}
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": ["authority_pressure", "financial_request", "secrecy", "unusual_urgency"]
+  }
+}

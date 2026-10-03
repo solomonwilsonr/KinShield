@@ -1,0 +1,29 @@
+{
+  "id": "benign_027",
+  "label": "benign",
+  "title": "Real bank fraud alert: 'call the number on the back of your card'",
+  "sources": [
+    "Hard negative for the Phantom Hacker scenarios: genuine automated fraud alert, no payment or secrecy"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is an automated message from your bank's fraud department about a card purchase at an electronics store."
+    },
+    {
+      "t": "00:07",
+      "speaker": "caller",
+      "text": "If you made this purchase, press 1. If not, please hang up and call the number on the back of your card."
+    },
+    {
+      "t": "00:14",
+      "speaker": "caller",
+      "text": "We will never ask for your PIN or ask you to move money over the phone."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "scam_023",
+  "label": "scam",
+  "title": "'Federal Reserve' agent: move savings to a 'protected' account (Phantom Hacker, stage 3)",
+  "sources": [
+    "IC3 PSA 230929: 'Phantom Hacker' layered tech-support/bank/government impostors",
+    "FTC Data Spotlight Aug 2025: 'False alarm, real scam' -- accounts/SSN 'compromised'"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Mrs. Allen, I'm Agent Torres with the Federal Reserve. Your bank already told you your accounts are compromised."
+    },
+    {
+      "t": "00:08",
+      "speaker": "caller",
+      "text": "The government will hold your money in a protected account until this is resolved. I'll give you the account number to wire it to."
+    },
+    {
+      "t": "00:17",
+      "speaker": "victim",
+      "text": "All of it? That's my retirement."
+    },
+    {
+      "t": "00:20",
+      "speaker": "caller",
+      "text": "All of it, today. This is a federal case, so you cannot discuss it with family. Anyone could be involved."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "secrecy",
+      "unusual_urgency"
+    ]
+  }
+}

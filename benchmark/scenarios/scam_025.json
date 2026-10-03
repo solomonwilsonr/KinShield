@@ -1,0 +1,42 @@
+{
+  "id": "scam_025",
+  "label": "scam",
+  "title": "'Your Social Security number is linked to drug smuggling' -- deposit cash in a Bitcoin ATM",
+  "sources": [
+    "FTC Data Spotlight Aug 2025: 'False alarm, real scam' -- accounts/SSN 'compromised'",
+    "FTC Data Spotlight Sep 2024: Bitcoin ATMs as a payment portal for scammers"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is the Social Security Administration. Your Social Security number was found in a car with drugs at the border."
+    },
+    {
+      "t": "00:08",
+      "speaker": "caller",
+      "text": "Your bank accounts will be frozen within the hour. To protect your money, you must withdraw it and deposit it in a Bitcoin ATM."
+    },
+    {
+      "t": "00:17",
+      "speaker": "victim",
+      "text": "I've never used one of those."
+    },
+    {
+      "t": "00:20",
+      "speaker": "caller",
+      "text": "I'll stay on the phone and walk you through it at the gas station. Don't hang up and don't speak to anyone in the store."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "authority_pressure",
+      "unusual_urgency",
+      "financial_request",
+      "payment_anomaly",
+      "secrecy"
+    ]
+  }
+}

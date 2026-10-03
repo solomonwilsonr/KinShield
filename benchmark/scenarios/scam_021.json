@@ -1,0 +1,49 @@
+{
+  "id": "scam_021",
+  "label": "scam",
+  "title": "Son 'stuck in London' needs money (location mismatch)",
+  "sources": [
+    "FTC/IC3 family-emergency pattern; location claim checked against opted-in device (simulated)"
+  ],
+  "claimed_identity": "Daniel",
+  "claimed_location": "London, UK",
+  "trusted_device": {
+    "person": "Daniel",
+    "location": "Chicago, US",
+    "opted_in": true,
+    "simulated": true
+  },
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Mom, it's me, Daniel. I'm in London and my wallet was stolen, I'm stuck."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "Oh no, London? I thought you were at work."
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "I'm here for a conference. I need $2,000 wired right now for a hotel and a flight home."
+    },
+    {
+      "t": "00:18",
+      "speaker": "caller",
+      "text": "Please don't tell Dad, I don't want him worrying. It has to go out in the next hour."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "emergency",
+      "financial_request",
+      "payment_anomaly",
+      "secrecy",
+      "unusual_urgency"
+    ]
+  }
+}

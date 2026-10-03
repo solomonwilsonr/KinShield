@@ -1,0 +1,39 @@
+{
+  "id": "scam_017",
+  "label": "scam",
+  "title": "Charity -- disaster relief high-pressure",
+  "sources": [
+    "FTC fake-charity pattern"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "We're collecting for hurricane victims and your neighbors have all pledged $200."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "That's a lot for me right now."
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "Every minute counts for these families -- can you give gift cards or a wire today?"
+    },
+    {
+      "t": "00:17",
+      "speaker": "caller",
+      "text": "Please don't mention the amount to others, we keep donors private."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency",
+      "secrecy"
+    ]
+  }
+}

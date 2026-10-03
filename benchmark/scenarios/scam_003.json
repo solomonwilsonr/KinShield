@@ -1,0 +1,17 @@
+{
+  "id": "scam_003",
+  "title": "IRS impersonation, immediate arrest threat",
+  "label": "scam",
+  "sources": ["IC3 elder fraud reporting -- government impersonation pattern"],
+  "turns": [
+    {"t": "00:00", "speaker": "caller", "text": "This is Officer Daniels calling on behalf of the IRS regarding unpaid taxes on your account."},
+    {"t": "00:08", "speaker": "victim", "text": "I don't think I owe anything, I filed in April."},
+    {"t": "00:12", "speaker": "caller", "text": "Our records show a discrepancy. If this isn't resolved in the next hour, a warrant will be issued and you will be arrested today."},
+    {"t": "00:22", "speaker": "victim", "text": "Arrested? What do I need to do?"},
+    {"t": "00:24", "speaker": "caller", "text": "You can resolve this immediately with a payment of $2,300 using a prepaid card. Do not hang up or contact anyone else until this is settled."}
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": ["authority_pressure", "unusual_urgency", "financial_request", "payment_anomaly", "secrecy"]
+  }
+}

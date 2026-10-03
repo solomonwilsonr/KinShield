@@ -1,0 +1,24 @@
+{
+  "id": "benign_016",
+  "label": "benign",
+  "title": "Dentist confirming cleaning",
+  "sources": [
+    "Ordinary reminder"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hi, Bright Smile Dental confirming your cleaning next Tuesday at 2."
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Tuesday at 2, thank you."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "benign_025",
+  "label": "benign",
+  "language": "hinglish",
+  "title": "[Hinglish] Surprise party secret (hard negative)",
+  "sources": [
+    "Ambiguous benign: secrecy phrase with a wholesome reason, code-mixed Hindi-English"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Mummy, Papa ko mat batana, main unke 60th birthday pe surprise party kar raha hoon."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "Arre wah! Main kuch nahi bolungi."
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "Saturday shaam ko unhe bahar le jaana, main tab tak ghar sajaa doonga."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

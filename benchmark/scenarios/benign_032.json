@@ -1,0 +1,29 @@
+{
+  "id": "benign_032",
+  "label": "benign",
+  "title": "Real Medicare plan rep returns her call about a dentist",
+  "sources": [
+    "Hard negative for Medicare impostors: a returned call, no payment or personal data request"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hi, this is Dana from your Medicare Advantage plan, returning your call about dental coverage."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "Yes, I wanted to know if Dr. Patel is in network."
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "She is. Your cleaning is covered twice a year with no copay. Anything else I can help with?"
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

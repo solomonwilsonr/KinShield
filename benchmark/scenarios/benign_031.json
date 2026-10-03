@@ -1,0 +1,29 @@
+{
+  "id": "benign_031",
+  "label": "benign",
+  "title": "Son asks Mom to pick up gift cards for the grandkids' birthdays",
+  "sources": [
+    "Hard negative: 'gift cards' mentioned as actual gifts, no urgency, authority, or secrecy"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hi Mom. The twins' birthday is next weekend. They'd love bookstore gift cards from you this year."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "That's easy. Twenty-five each?"
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "Perfect. Bring them to the party Saturday, they can open them with the cake."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

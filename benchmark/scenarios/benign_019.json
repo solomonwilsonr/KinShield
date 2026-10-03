@@ -1,0 +1,29 @@
+{
+  "id": "benign_019",
+  "label": "benign",
+  "title": "Grandson asking for a recipe",
+  "sources": [
+    "Ordinary family call"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Grandma, it's me -- how do you make your pot roast? I'm trying to impress someone."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "Ooh, who is she? Start with a good chuck roast..."
+    },
+    {
+      "t": "00:12",
+      "speaker": "caller",
+      "text": "You're the best, thank you."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

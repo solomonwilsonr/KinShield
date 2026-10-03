@@ -1,0 +1,29 @@
+{
+  "id": "benign_011",
+  "label": "benign",
+  "title": "Son sharing news about a new job",
+  "sources": [
+    "Ordinary family call"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Mom, I got the job! Starting the first of the month."
+    },
+    {
+      "t": "00:05",
+      "speaker": "victim",
+      "text": "That's wonderful, I'm so proud of you."
+    },
+    {
+      "t": "00:08",
+      "speaker": "caller",
+      "text": "Thanks. Let's celebrate this weekend, my treat."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

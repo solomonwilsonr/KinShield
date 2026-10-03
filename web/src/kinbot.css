@@ -1,0 +1,212 @@
+/* KinBot — built on the homepage system (styles.css): nav, hero, demo tabs, meadow panel, dashboard
+   window, tiles, cards, evidence and footer all come from there. This file only adds what KinBot
+   needs on top: the clickable sidebar, the conversation + composer, the steps card and phone layout.
+   Never use the homepage's global `.kip` class here. */
+
+.nav-links a.is-current { color: var(--brand-deep); font-weight: 600; }
+.kb-hero { padding-bottom: 8px; }
+.kb-hero + .demo { padding-top: clamp(40px, 5vw, 64px); }
+.kb-ms-sm { font-size: 14px; }
+
+/* Sidebar: same look as .app-nav, but real buttons */
+.kb-side-nav { display: grid; gap: 4px; }
+.kb-side-btn {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 12px; border: 0; border-radius: 20px;
+  background: transparent; color: var(--ink-2); font: inherit; font-size: 13px; text-align: left; cursor: pointer;
+  transition: background .15s;
+}
+.kb-side-btn:hover { background: var(--paper); }
+.kb-side-btn .ms { font-size: 16px; color: #4B5866; }
+.kb-side-btn .kb-emoji { width: 16px; text-align: center; font-size: 14px; }
+.kb-side-btn.on { background: var(--brand-deep); color: var(--white); }
+.kb-side-btn.on .ms { color: var(--white); }
+.kb-side-btn:disabled { opacity: .5; cursor: default; }
+.kb-side-btn small { margin-left: auto; font-size: 10px; color: var(--brand-deep); }
+.kb-side-btn.on small { color: #C9F5CE; }
+.kb-side-label { margin: 10px 0 2px; padding: 0 12px; font-size: 11px; color: var(--muted); }
+
+/* Conversation */
+.kb-convo { min-height: 0; }
+.kb-thread { display: flex; flex-direction: column; gap: 8px; height: 340px; overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; }
+/* Before the first message, fit the starter prompts instead of reserving the full thread height */
+.kb-thread:has(> .kb-empty:not([hidden])):not(:has(> .bubble)) { height: auto; min-height: 180px; }
+.kb-thread .bubble { white-space: pre-wrap; overflow-wrap: anywhere; }
+.kb-thread .bubble.victim { align-self: stretch; }
+.kb-thread .bubble.kb-kip { background: var(--mint-soft); border: 1px solid #BDEFC2; margin-right: 24px; }
+.kb-thread .bubble.err { background: var(--amber-soft); color: var(--amber-ink); margin-right: 24px; }
+.kb-thread .bubble .src { margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--brand-deep); }
+.kb-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.kb-tags .chip { font-size: 11px; }
+.chip-red { background: var(--red-soft); color: var(--red-ink); }
+.kb-empty { margin: auto 0; display: grid; gap: 10px; font-size: 13px; color: var(--muted); }
+.kb-empty p { margin: 0; }
+.kb-starters { display: grid; gap: 6px; }
+.kb-starter { padding: 9px 12px; border: 1px solid #E9EDF2; border-radius: 10px; background: var(--white); color: var(--ink); font: inherit; font-size: 13px; text-align: left; cursor: pointer; transition: border-color .15s; }
+.kb-starter:hover { border-color: var(--brand-deep); }
+.kb-starter:disabled { opacity: .5; cursor: default; }
+
+.kb-form { display: grid; gap: 6px; }
+.kb-composer { display: flex; align-items: flex-end; gap: 8px; padding: 8px 8px 8px 12px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--white); transition: border-color .15s, box-shadow .15s; }
+.kb-composer:focus-within { border-color: var(--brand-deep); box-shadow: 0 0 0 3px rgba(35,134,61,.15); }
+.kb-composer textarea { flex: 1; min-height: 40px; max-height: 180px; padding: 8px 0; border: 0; outline: 0; resize: none; background: transparent; font: inherit; font-size: 14px; line-height: 1.45; color: var(--ink); }
+.kb-composer textarea::placeholder { color: var(--faint); }
+.kb-send { flex: none; }
+.kb-form-foot { display: flex; justify-content: space-between; gap: 10px; font-size: 11px; color: var(--faint); }
+.kb-form-foot .over { color: var(--red); }
+
+/* What to do now */
+.kb-todo-title { font-size: 16px; font-weight: 500; line-height: 1.35; }
+.kb-todo-sum { margin-top: 4px; font-size: 13px; color: var(--muted); line-height: 1.45; }
+.kb-steps { display: grid; gap: 10px; margin: 14px 0; counter-reset: step; }
+.kb-steps li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 14px; line-height: 1.45; counter-increment: step; }
+.kb-steps li::before { content: counter(step); display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--brand-deep); color: var(--white); font-size: 12px; font-weight: 600; }
+.kb-todo .action-row { margin-bottom: 12px; }
+.kb-todo .note-bar b { font-weight: 600; }
+.kb-thinking { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px; font-size: 13px; color: var(--muted); }
+
+/* Risk states on the sidebar badge reuse .protected-badge.warn; medium gets amber */
+.protected-badge.mid { background: var(--amber-soft); border-color: #F2D98A; }
+.protected-badge.mid .protected-status { color: var(--amber-ink); }
+
+.kb-disclaimer { margin: 0; font-size: 11px; color: var(--faint); text-align: center; }
+
+/* How it works */
+.kb-h2 { margin: 8px 0 28px; font-size: clamp(32px, 4vw, 52px); font-weight: 500; letter-spacing: -.03em; line-height: 1.05; }
+.kb-how { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.kb-how .card { padding: 24px; gap: 10px; }
+.kb-how h3 { font-size: 20px; font-weight: 500; }
+.kb-how p { font-size: 15px; color: var(--muted); line-height: 1.55; }
+.kb-num { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--brand-deep); color: var(--white); font-weight: 600; }
+
+/* ---- Chat page (kinbot-chat.html): no hero, the app starts right under the nav ---- */
+.kb-chat-page { padding-top: 24px; padding-bottom: 48px; }
+
+/* ---- Info page (kinbot.html) ---- */
+.kb-sample { padding: clamp(24px, 4vw, 56px); border-radius: 14px; }
+.kb-sample-title { color: var(--white); font-size: clamp(26px, 3vw, 40px); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; text-shadow: 0 2px 12px rgba(0, 32, 64, .35); }
+.kb-sample .eyebrow { text-shadow: 0 1px 8px rgba(0, 32, 64, .4); }
+/* Sample check: a KinBot panel floating over a faded page in a browser window (structure from a
+   product-widget reference; colours and type are the site's own). */
+.kb-sample-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 24px; flex-wrap: wrap; margin-bottom: clamp(20px, 3vw, 32px); }
+.kb-sample-head .btn { box-shadow: 0 8px 20px rgba(0, 32, 64, .25); }
+
+.kb-browser { margin: 0; border-radius: 16px; overflow: hidden; background: var(--white); border: 1px solid rgba(255, 255, 255, .7); box-shadow: 0 30px 70px rgba(0, 32, 64, .35); }
+.kb-bar { display: flex; align-items: center; gap: 14px; padding: 10px 14px 0; background: #EEF1F5; }
+.kb-lights { display: flex; gap: 7px; padding-bottom: 10px; }
+.kb-lights i { width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; }
+.kb-lights i:nth-child(2) { background: #FEBC2E; }
+.kb-lights i:nth-child(3) { background: #28C840; }
+.kb-tab { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 10px 10px 0 0; background: var(--white); font-size: 13px; color: var(--ink-2); }
+.kb-tab .brand-mark { flex: none; }
+.kb-tab-add { padding-bottom: 10px; font-size: 18px; color: var(--faint); }
+.kb-addr { display: flex; align-items: center; gap: 14px; padding: 9px 14px; border-bottom: 1px solid var(--line); background: var(--white); color: var(--faint); }
+.kb-addr > .ms { font-size: 18px; }
+.kb-url { flex: 1; min-width: 0; padding: 6px 12px; border-radius: 8px; background: #F3F5F8; font-size: 13px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kb-url span { color: var(--faint); }
+.kb-ask { display: inline-flex; align-items: center; gap: 6px; flex: none; padding: 6px 12px 6px 6px; border-radius: 999px; background: var(--brand-deep); color: var(--white); font-size: 13px; font-weight: 600; }
+.kb-ask img { width: 20px; height: 20px; border-radius: 50%; background: var(--white); }
+
+.kb-viewport { position: relative; height: 700px; overflow: hidden; background: #FAFBFC; }
+/* faded placeholder page */
+.kb-skel { position: absolute; inset: 0; opacity: .9; }
+.kb-skel i { display: block; border-radius: 6px; background: #E9EDF2; }
+.kb-skel-top { display: flex; align-items: center; gap: 12px; height: 64px; padding: 0 22px; border-bottom: 1px solid #EEF1F5; }
+.kb-skel-top .sq { width: 32px; height: 32px; border-radius: 8px; }
+.kb-skel-top span { display: flex; gap: 24px; margin: 0 auto; }
+.kb-skel .ln { height: 12px; }
+.w64 { width: 64px; } .w80 { width: 80px; } .w160 { width: 160px; }
+.kb-skel-body { display: grid; grid-template-columns: 230px 1fr; height: calc(100% - 64px); }
+.kb-skel-side { display: grid; align-content: start; gap: 18px; padding: 20px 14px; border-right: 1px solid #EEF1F5; }
+.kb-skel-side .blk { height: 38px; border-radius: 10px; margin-bottom: 8px; }
+.kb-skel-side .row { height: 14px; width: 70%; margin-left: 28px; position: relative; }
+.kb-skel-side .row::before { content: ""; position: absolute; left: -28px; top: -1px; width: 16px; height: 16px; border-radius: 4px; background: #E9EDF2; }
+.kb-skel-main { display: grid; align-content: start; gap: 16px; padding: 24px 28px; max-width: 420px; }
+.kb-skel-main .card { height: 84px; border-radius: 12px; background: #F1F4F7; border: 1px solid #EEF1F5; }
+.kb-skel-main .panel { height: 300px; border-radius: 12px; background: #F1F4F7; border: 1px solid #EEF1F5; }
+
+/* the floating KinBot panel */
+.kb-widget {
+  position: absolute; right: 24px; top: 18px; bottom: 18px; width: 372px; display: flex; flex-direction: column;
+  border: 1px solid var(--line); border-radius: 22px; background: var(--white); box-shadow: 0 24px 60px rgba(0, 18, 36, .22); overflow: hidden;
+}
+.kb-w-close { position: absolute; left: 20px; top: 18px; display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 50%; font-size: 16px; color: var(--muted); }
+.kb-w-head { padding: 62px 24px 16px; border-bottom: 1px solid var(--line); }
+.kb-w-head h3 { font-size: 24px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; }
+.kb-w-head p { margin-top: 4px; font-size: 14px; color: var(--muted); }
+.kb-w-verdict { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 12px; color: var(--muted); }
+.kb-w-scroll { position: relative; flex: 1; min-height: 0; overflow: hidden; padding: 4px 22px 0; }
+.kb-w-scroll::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 56px; background: linear-gradient(transparent, var(--white)); pointer-events: none; }
+.kb-w-group { padding: 16px 0 6px; }
+.kb-w-group + .kb-w-group { border-top: 1px solid var(--line-soft, #EEF1F5); }
+.kb-w-k { margin-bottom: 12px; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+.kb-w-msg { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; padding: 10px 12px 0; border-bottom: 10px solid var(--paper); border-radius: 10px; background: var(--paper); font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+.kb-w-line { display: grid; gap: 16px; }
+.kb-w-line li { position: relative; display: grid; gap: 4px; padding-left: 26px; }
+.kb-w-line li::before { content: ""; position: absolute; left: 2px; top: 5px; width: 8px; height: 8px; border-radius: 50%; border: 2px solid var(--muted); background: var(--white); }
+.kb-w-line li:not(:last-child)::after { content: ""; position: absolute; left: 7px; top: 20px; bottom: -14px; border-left: 1px dashed var(--line-strong); }
+.kb-w-line li.strong::before { border-color: var(--red); }
+.kb-w-line.safe li::before { border-color: var(--brand-deep); }
+.kb-w-line b { font-size: 16px; font-weight: 500; line-height: 1.3; }
+.kb-w-line q { font-size: 13px; color: var(--muted); line-height: 1.45; }
+.kb-w-meta { display: flex; align-items: center; gap: 12px; margin-top: 2px; font-size: 11px; color: var(--faint); }
+.kb-w-meta em { font-style: normal; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--amber-ink); }
+.kb-w-line li.strong .kb-w-meta em { color: var(--red-ink); }
+.kb-w-line.safe .kb-w-meta em { color: var(--brand-deep); }
+.kb-w-tabs { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.kb-w-tabs > span { display: grid; justify-items: center; gap: 2px; padding: 10px 0 8px; font-size: 12px; color: var(--faint); }
+.kb-w-tabs .ms { font-size: 22px; }
+.kb-w-tabs .on { color: var(--brand-deep); font-weight: 600; }
+.kb-w-foot { padding: 10px; border-top: 1px solid var(--line); font-size: 12px; text-align: center; color: var(--muted); }
+.kb-w-foot b { color: var(--ink); }
+.kb-caption { margin-top: 12px; font-size: 13px; color: var(--faint); text-align: center; }
+.kb-lede { max-width: 640px; margin: -12px 0 28px; font-size: 17px; color: var(--muted); line-height: 1.55; }
+
+.kb-signs-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.kb-signs-grid li { gap: 8px; padding: 18px; }
+.kb-signs-grid li:first-child { background: var(--mint-soft); border-color: #BDEFC2; }
+.kb-signs-grid b { font-size: 16px; font-weight: 500; color: var(--red-ink); }
+.kb-signs-grid q { font-size: 14px; color: var(--ink-2); line-height: 1.45; }
+
+.kb-limits { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.kb-limits .card { padding: 22px; gap: 8px; }
+.kb-limits .ms { font-size: 28px; color: var(--brand-deep); }
+.kb-limits h3 { font-size: 18px; font-weight: 500; }
+.kb-limits p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+.tile.flash, .card-evidence.flash { box-shadow: 0 0 0 3px rgba(35,134,61,.3); }
+
+@media (max-width: 1000px) {
+  .kb-skel-body { grid-template-columns: 1fr; }
+  .kb-skel-side { display: none; }
+  /* a wide chip row must not stretch the 1fr grid track past the window */
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .app-side, .app-main { min-width: 0; }
+  /* styles.css hides .app-nav here; KinBot's examples become a swipeable chip row instead */
+  .kb-side-nav { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 4px -18px 0; padding: 0 18px 2px; }
+  .kb-side-nav::-webkit-scrollbar { display: none; }
+  .kb-side-nav li { flex: none; }
+  .kb-side-label { display: none; }
+  .kb-side-btn { width: auto; white-space: nowrap; border: 1px solid #BDEFC2; background: var(--brand-soft); color: var(--brand-ink); }
+  .kb-side-btn small { display: none; }
+  .app-side .phone-card { display: none; }
+  .kb-how { grid-template-columns: 1fr; }
+  .kb-signs-grid, .kb-limits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 820px) {
+  .kb-thread { height: 360px; }
+}
+@media (max-width: 560px) {
+  .kb-tab { max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .kb-addr > .ms:nth-child(-n+2), .kb-ask { display: none; }
+  .kb-viewport { height: 600px; }
+  .kb-skel { display: none; }
+  .kb-widget { left: 10px; right: 10px; top: 10px; bottom: 10px; width: auto; }
+  .kb-sample-head .btn { width: 100%; justify-content: center; }
+  .kb-signs-grid, .kb-limits { grid-template-columns: 1fr; }
+  .kb-chat-page { padding-top: 12px; }
+  .app-head .btn { display: none; }
+  .kb-hint-desktop { display: none; }
+}
+
+.kb-caption a { color: var(--brand-deep); font-weight: 600; }
+

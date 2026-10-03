@@ -1,0 +1,30 @@
+# Credentials and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Agent/AWS evidence is retained locally; it can contain account-specific details.
+docs/proof/
+docs/UPTIME-SPEND.md
+
+# Generated Python files and test output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+benchmark/results/
+eval/kinbot/results-*.jsonl
+
+# Android/Gradle build output and machine-local SDK path
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+*.apk
+
+# Public deployment artifacts and local editor/OS files
+web/src/downloads/
+.DS_Store
+.idea/
+.vscode/

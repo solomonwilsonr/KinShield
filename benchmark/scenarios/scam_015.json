@@ -1,0 +1,41 @@
+{
+  "id": "scam_015",
+  "label": "scam",
+  "title": "Grandchild -- DUI lawyer follow-up",
+  "sources": [
+    "IC3 PSA 231117 two-call attorney variant"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hello, I'm the attorney representing your granddaughter after her DUI arrest."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "She called crying earlier. Is she okay?"
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "She's fine but bail is $7,000 by wire within the hour, or she's held over the weekend."
+    },
+    {
+      "t": "00:18",
+      "speaker": "caller",
+      "text": "The judge ordered a gag on the case, so please don't call the court or tell relatives."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "secrecy",
+      "unusual_urgency"
+    ]
+  }
+}

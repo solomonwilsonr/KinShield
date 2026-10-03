@@ -1,0 +1,41 @@
+{
+  "id": "scam_029",
+  "label": "scam",
+  "title": "Retired nurse told her license is suspended, pay a 'bond' (medical-license impostor)",
+  "sources": [
+    "IC3 PSA 260917 (Sep 2026): law-enforcement/government impersonation, secrecy, arrest threats"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is Investigator Grant with the DEA. Prescriptions under your nursing license were linked to a trafficking case."
+    },
+    {
+      "t": "00:08",
+      "speaker": "victim",
+      "text": "I retired years ago, that can't be right."
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "Your license will be revoked and you will be charged unless you post a $5,000 bond today."
+    },
+    {
+      "t": "00:18",
+      "speaker": "caller",
+      "text": "Send it by bank wire to the escrow account I give you. This case is sealed, so don't discuss it with anyone."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency",
+      "secrecy"
+    ]
+  }
+}

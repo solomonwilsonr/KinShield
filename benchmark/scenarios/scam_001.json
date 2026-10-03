@@ -1,0 +1,20 @@
+{
+  "id": "scam_001",
+  "label": "scam",
+  "title": "Grandson in jail, bail via gift cards",
+  "sources": ["IC3 PSA 231117", "FTC 2023 AI family-emergency alert"],
+  "claimed_identity": "Daniel",
+  "voice_authenticity_assumed": "100% match, trusted contact caller ID",
+  "turns": [
+    {"t": "00:00", "speaker": "caller", "text": "Grandma? Grandma, it's me."},
+    {"t": "00:04", "speaker": "caller", "text": "I've been in an accident. I got arrested. Please don't tell Mom, she'll be furious."},
+    {"t": "00:14", "speaker": "victim", "text": "Oh my god, are you okay? What happened?"},
+    {"t": "00:18", "speaker": "caller", "text": "I'm okay but I need help right now. The lawyer says I can post bond if you send $4,000 today."},
+    {"t": "00:27", "speaker": "victim", "text": "Okay, okay, how do I do that?"},
+    {"t": "00:30", "speaker": "caller", "text": "Go to the store and buy four $1,000 Apple gift cards, then read me the codes on the back. Don't tell anyone, it could hurt my case."}
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": ["impersonation", "emergency", "secrecy", "financial_request", "payment_anomaly"]
+  }
+}

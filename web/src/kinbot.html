@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KinBot — ask Kip if it's a scam · KinShield</title>
+<meta name="description" content="KinBot is KinShield's free scam checker. Paste a text, share a screenshot or a voicemail, and it points to the exact words that look like a scam, checks the links, and tells you what to do next. No sign-up needed." />
+<link rel="icon" type="image/svg+xml" href="img/logo-mark.svg" />
+<meta property="og:title" content="KinBot — ask Kip if it's a scam" />
+<meta property="og:description" content="Paste a suspicious message. Kip shows the exact words that worry it, and what to do next." />
+<meta name="theme-color" content="#5EBE6A" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0&icon_names=add,arrow_back,arrow_forward,chat,chevron_left,chevron_right,close,expand_more,fact_check,ios_share,lock,refresh,school,science,verified_user&display=block" />
+<link rel="stylesheet" href="styles.css?v=20261003-5" />
+<link rel="stylesheet" href="chat.css?v=20261003-4" />
+<link rel="stylesheet" href="kinbot.css?v=20261003-2" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="./" aria-label="KinShield home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">KinShield</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="kinvoice.html">KinVoice</a>
+      <a href="kinbot.html" aria-current="page" class="is-current">KinBot</a>
+      <a href="kinmodel.html">KinModel</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-outline btn-sm" href="kinbot-chat.html?example=0">Try an example</a>
+      <a class="btn btn-dark btn-sm" href="kinbot-chat.html">Open KinBot</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ================= HERO ================= -->
+  <section class="hero kb-hero" aria-labelledby="hero-title">
+    <div class="wrap hero-intro">
+      <div class="hero-copy">
+        <ul class="laurels" aria-label="At a glance">
+          <li>7 scam signals</li>
+          <li>exact quotes, never a %</li>
+          <li>texts, screenshots, voicemails</li>
+        </ul>
+        <h1 id="hero-title" class="kip-title"><span class="sr-only">Strange message? Ask KinBot before you pay.</span><span aria-hidden="true">Strange <span class="hk-paren">(</span><span class="hk-kip"><img src="img/kip-confused.png?v=20261002-20" alt="" width="320" height="320" /><span class="hk-mark">?</span></span><span class="hk-paren">)</span><br />message?<br />Ask KinBot<br />before you pay.</span></h1>
+      </div>
+      <div class="hero-pitch">
+        <p>KinBot is KinShield's free scam checker. Paste a text or an email, drop in a <strong>screenshot</strong>, or share a <strong>voicemail</strong>. It points to the <strong>exact words</strong> that look like a scam, checks any links and phone numbers, then tells you <strong>what to do next</strong>.</p>
+        <div class="btn-row">
+          <a class="btn btn-blue" href="kinbot-chat.html">Open KinBot <span class="ms" aria-hidden="true">arrow_forward</span></a>
+          <a class="btn btn-outline" href="kinbot-chat.html?example=0">Try an example</a>
+        </div>
+        <p class="fine">Live on Amazon Bedrock · gpt-oss-20b, Qwen3-VL, Mistral Voxtral · no sign-up needed · your message is never stored</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SAMPLE CHECK (real KinBot screenshot in a Mac browser window) ================= -->
+  <section class="section" aria-labelledby="sample-title">
+    <div class="wrap">
+      <h2 id="sample-title" class="sr-only">What a check looks like</h2>
+      <figure class="kbs-mac">
+        <div class="kbs-mac-bar" aria-hidden="true">
+          <span class="kbs-mac-lights"><i></i><i></i><i></i></span>
+          <span class="kbs-mac-nav"><span class="ms">chevron_left</span><span class="ms">chevron_right</span></span>
+          <span class="kbs-mac-url"><span class="ms">lock</span>KinShield · KinBot</span>
+          <span class="kbs-mac-nav end"><span class="ms">ios_share</span><span class="ms">add</span></span>
+        </div>
+        <div class="kbs-mac-view" id="kbs-view">
+          <!-- The real chat page, frozen: ?preview=1 draws a saved result and makes no API calls. -->
+          <iframe src="kinbot-chat.html?preview=1" title="KinBot preview" tabindex="-1" aria-hidden="true" inert loading="lazy" scrolling="no"></iframe>
+        </div>
+        <figcaption class="sr-only">KinBot after checking a pasted text: HIGH RISK, a family-emergency scam, with four quoted warning signs and what to do now.</figcaption>
+      </figure>
+      <p class="kb-caption">A real result from the live app. <a href="kinbot-chat.html?example=0">Run this example yourself</a>; it takes a few seconds.</p>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section class="section" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <span class="eyebrow">How it works</span>
+      <h2 class="kb-h2" id="how-title">Four steps, a few seconds</h2>
+      <div class="kb-how">
+        <article class="card">
+          <span class="kb-num">1</span>
+          <h3>You share it</h3>
+          <p>Paste a text or email (up to 2,000 characters), add a screenshot, or share a voicemail. For screenshots, a vision model on Amazon Bedrock (Qwen3-VL) reads the words and looks at logos, links and QR codes. For voicemails, a speech model on Bedrock (Mistral Voxtral) writes down what was said; the audio isn't stored.</p>
+        </article>
+        <article class="card">
+          <span class="kb-num">2</span>
+          <h3>Kip quotes the warning signs</h3>
+          <p>KinShield's evidence detector (gpt-oss-20b on Amazon Bedrock) looks for seven fixed scam signs. It must quote the exact words, and KinBot drops any quote that isn't really in your message.</p>
+        </article>
+        <article class="card">
+          <span class="kb-num">3</span>
+          <h3>Kip investigates the links</h3>
+          <p>After every verdict, an agent (gpt-oss-20b with tools) checks how old a website is and whether it imitates a brand, looks it up in phishing feeds, opens the link safely as a plain static fetch with no browser, checks phone numbers, and pulls FTC-based advice.</p>
+        </article>
+        <article class="card">
+          <span class="kb-num">4</span>
+          <h3>You get a next step, then ask anything</h3>
+          <p>Plain steps, like calling back on a number you already have. Then ask follow-ups, like "but it came from his real number?"</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SEVEN SIGNS ================= -->
+  <section class="section" id="signs" aria-labelledby="signs-title">
+    <div class="wrap">
+      <span class="eyebrow">What Kip looks for</span>
+      <h2 class="kb-h2" id="signs-title">The seven warning signs</h2>
+      <p class="kb-lede">The same fixed list KinShield uses on phone calls. Kip can't invent new ones, and every sign it reports comes with the words that raised it.</p>
+      <ul class="kb-signs-grid">
+        <li class="card"><b>Pretending to be someone</b><q>Grandma, it's me.</q></li>
+        <li class="card"><b>Sudden emergency</b><q>I'm at the police station.</q></li>
+        <li class="card"><b>Asks for secrecy</b><q>Please don't tell Mom.</q></li>
+        <li class="card"><b>Asks for money</b><q>I need $2,000 today.</q></li>
+        <li class="card"><b>Unusual payment</b><q>Pay with gift cards or Bitcoin.</q></li>
+        <li class="card"><b>Official-sounding pressure</b><q>This is Officer Daniels with Social Security.</q></li>
+        <li class="card"><b>Rushing you</b><q>Your account locks in 30 minutes.</q></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= HONEST LIMITS ================= -->
+  <section class="section" aria-labelledby="limits-title">
+    <div class="wrap">
+      <span class="eyebrow">Privacy and honest limits</span>
+      <h2 class="kb-h2" id="limits-title">What KinBot is, and what it isn't</h2>
+      <div class="kb-limits">
+        <article class="card"><span class="ms" aria-hidden="true">lock</span><h3>Your message isn't kept</h3><p>Your message, screenshot or voicemail is checked and forgotten, and the conversation lives only in your browser tab. Signing in is optional. If you do, Kip saves the verdict and headline of each check (never the message itself) so you can see your history.</p></article>
+        <article class="card"><span class="ms" aria-hidden="true">verified_user</span><h3>It can be wrong</h3><p>KinBot is an AI demo. A LOW result doesn't prove a message is safe. If money is involved, call back on a number you already trust.</p></article>
+        <article class="card"><span class="ms" aria-hidden="true">science</span><h3>KinModel is experimental</h3><p><a href="kinmodel.html">KinModel</a>, our tiny keyword model, adds a second opinion. It's clearly labelled, and Kip's cited answer always comes first.</p></article>
+        <article class="card"><span class="ms" aria-hidden="true">chat</span><h3>It can't see your phone</h3><p>Kip only reads what you share with it. It never sees your calls, contacts or accounts, and it will never ask for a password or code.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq">
+      <div class="faq-head">
+        <h2 id="faq-title">FAQs</h2>
+        <p>Honest answers about what KinBot does, and what it doesn't.</p>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary>Is KinBot free?<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <p>Yes. No sign-up is needed. Signing in is optional. If you do, Kip saves the verdict and headline of each check (never the message itself) so you can see your history. KinShield is pre-launch, with no paying customers.</p>
+        </details>
+        <details>
+          <summary>What can I paste?<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <p>Text up to 2,000 characters (a text message, an email, or what a caller said), a screenshot, or a voicemail recording. Remove names and account details first.</p>
+        </details>
+        <details>
+          <summary>Which AI model does it use?<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <p>All on Amazon Bedrock. The evidence detector is the same one as the KinVoice call demo: OpenAI's open-weight gpt-oss-20b with a structured prompt and server-side checks. Screenshots are read by Qwen3-VL, voicemails are written down by Mistral Voxtral, and the link investigator is gpt-oss-20b with tools. The KinModel second opinion is a small TF-IDF + logistic-regression classifier that runs inside the same AWS Lambda.</p>
+        </details>
+        <details>
+          <summary>Does Kip open the links?<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <p>Only safely. The investigator fetches the page from AWS as plain static text (no browser, no scripts, no cookies, no forms), strips tracking codes from the link, and only keeps features like the page title and forms, never the page itself. It also checks the domain's age, brand look-alikes and public phishing feeds.</p>
+        </details>
+        <details>
+          <summary>What if I already sent money?<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <p>Call your bank or payment provider now, using its official app or the number on your card, and report it at reportfraud.ftc.gov or ic3.gov. Tell KinBot "I already sent money" for the full checklist.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="section cta-wrap" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta">
+        <h2 id="cta-title">Got a message<br />that feels off?</h2>
+        <p>Open KinBot, paste it or add a screenshot, and Kip will show you the exact words that worry it. No sign-up needed.</p>
+        <div class="btn-row center">
+          <a class="btn btn-blue" href="kinbot-chat.html">Open KinBot <span class="ms" aria-hidden="true">arrow_forward</span></a>
+          <a class="btn btn-outline" href="kinbot-chat.html?example=0">Try an example</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-cols">
+      <div><h4>Products</h4><a href="kinvoice.html">KinVoice</a><a href="kinbot.html">KinBot</a><a href="kinmodel.html">KinModel</a></div>
+      <div><h4>Get help</h4><a href="https://reportfraud.ftc.gov/" rel="noopener">Report to FTC ↗</a><a href="https://www.ic3.gov/" rel="noopener">Report to IC3 ↗</a><a href="tel:+18333728311">Elder Fraud Hotline 1-833-372-8311</a></div>
+    </div>
+    <p class="foot-privacy"><strong>Privacy:</strong> no sign-up needed. Messages and calls are checked and forgotten. Signing in is optional and saves only each check’s verdict, never the message.</p>
+    <div class="foot-bar">
+      <a class="brand" href="./"><span class="brand-mark sm" aria-hidden="true"></span><span class="brand-name">KinShield</span></a>
+      <span>Built on Amazon Bedrock and AWS Lambda · AWS “Zero to Shipped”</span>
+    </div>
+  </div>
+</footer>
+<script>
+  // Fit the embedded KinBot page: a 1280px desktop view scaled down on wide screens,
+  // and the app's own phone layout at real size on narrow ones.
+  (function () {
+    var view = document.getElementById("kbs-view");
+    if (!view) return;
+    var frame = view.querySelector("iframe");
+    function fit() {
+      var w = view.clientWidth, vw, vh, s;
+      if (w < 640) { vw = w; vh = 680; s = 1; } else { vw = 1280; vh = 800; s = w / 1280; }
+      frame.style.width = vw + "px";
+      frame.style.height = vh + "px";
+      frame.style.transform = "scale(" + s + ")";
+      view.style.height = Math.round(vh * s) + "px";
+    }
+    fit();
+    if ("ResizeObserver" in window) new ResizeObserver(fit).observe(view); else addEventListener("resize", fit);
+  })();
+</script>
+<script src="config.js"></script>
+<script src="chat.js?v=20261003-4"></script>
+</body>
+</html>

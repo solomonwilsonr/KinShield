@@ -1,0 +1,161 @@
+{
+ "note": "Saved live /detect output for kinvoice-app.html?preview=1 (scam_001). Re-fetch if the /detect response shape changes.",
+ "scenario": {
+  "id": "scam_001",
+  "label": "scam",
+  "title": "Grandson in jail, bail via gift cards",
+  "sources": [
+   "IC3 PSA 231117",
+   "FTC 2023 AI family-emergency alert"
+  ],
+  "claimed_identity": "Daniel",
+  "voice_authenticity_assumed": "100% match, trusted contact caller ID",
+  "turns": [
+   {
+    "t": "00:00",
+    "speaker": "caller",
+    "text": "Grandma? Grandma, it's me."
+   },
+   {
+    "t": "00:04",
+    "speaker": "caller",
+    "text": "I've been in an accident. I got arrested. Please don't tell Mom, she'll be furious."
+   },
+   {
+    "t": "00:14",
+    "speaker": "victim",
+    "text": "Oh my god, are you okay? What happened?"
+   },
+   {
+    "t": "00:18",
+    "speaker": "caller",
+    "text": "I'm okay but I need help right now. The lawyer says I can post bond if you send $4,000 today."
+   },
+   {
+    "t": "00:27",
+    "speaker": "victim",
+    "text": "Okay, okay, how do I do that?"
+   },
+   {
+    "t": "00:30",
+    "speaker": "caller",
+    "text": "Go to the store and buy four $1,000 Apple gift cards, then read me the codes on the back. Don't tell anyone, it could hurt my case."
+   }
+  ],
+  "expected": {
+   "risk_level": "HIGH",
+   "evidence_signals": [
+    "impersonation",
+    "emergency",
+    "secrecy",
+    "financial_request",
+    "payment_anomaly"
+   ]
+  }
+ },
+ "points": [
+  {
+   "i": 0,
+   "r": {
+    "risk_level": "LOW",
+    "risk_score": 0,
+    "evidence": [],
+    "recommended_action": "No signals detected. If anything felt wrong, it's still okay to verify independently.",
+    "latency_ms": 445
+   }
+  },
+  {
+   "i": 1,
+   "r": {
+    "risk_level": "MEDIUM",
+    "risk_score": 46,
+    "evidence": [
+     {
+      "t": "[00:04]",
+      "quote": "I've been in an accident. I got arrested.",
+      "signal": "emergency",
+      "weight": 18
+     },
+     {
+      "t": "[00:04]",
+      "quote": "Please don't tell Mom, she'll be furious.",
+      "signal": "secrecy",
+      "weight": 28
+     }
+    ],
+    "recommended_action": "End the call. Independently contact the family member using a number you already have saved -- not a number the caller gives you.",
+    "latency_ms": 1346
+   }
+  },
+  {
+   "i": 3,
+   "r": {
+    "risk_level": "MEDIUM",
+    "risk_score": 54,
+    "evidence": [
+     {
+      "t": "[00:04]",
+      "quote": "I've been in an accident. I got arrested.",
+      "signal": "emergency",
+      "weight": 18
+     },
+     {
+      "t": "[00:04]",
+      "quote": "Please don't tell Mom, she'll be furious.",
+      "signal": "secrecy",
+      "weight": 28
+     },
+     {
+      "t": "[00:18]",
+      "quote": "The lawyer says I can post bond if you send $4,000 today.",
+      "signal": "financial_request",
+      "weight": 8
+     }
+    ],
+    "recommended_action": "End the call. Independently contact the family member using a number you already have saved -- not a number the caller gives you.",
+    "latency_ms": 1552
+   }
+  },
+  {
+   "i": 5,
+   "r": {
+    "risk_level": "HIGH",
+    "risk_score": 114,
+    "evidence": [
+     {
+      "t": "[00:04]",
+      "quote": "I've been in an accident. I got arrested.",
+      "signal": "emergency",
+      "weight": 18
+     },
+     {
+      "t": "[00:04]",
+      "quote": "Please don't tell Mom, she'll be furious.",
+      "signal": "secrecy",
+      "weight": 30
+     },
+     {
+      "t": "[00:18]",
+      "quote": "The lawyer says I can post bond if you send $4,000 today.",
+      "signal": "financial_request",
+      "weight": 18
+     },
+     {
+      "t": "[00:30]",
+      "quote": "Go to the store and buy four $1,000 Apple gift cards, then read me the codes on the back.",
+      "signal": "payment_anomaly",
+      "weight": 30
+     },
+     {
+      "t": "[00:18]",
+      "quote": "I'm okay but I need help right now.",
+      "signal": "unusual_urgency",
+      "weight": 18
+     }
+    ],
+    "recommended_action": "End the call. Independently contact the family member using a number you already have saved -- not a number the caller gives you.",
+    "latency_ms": 2298
+   }
+  }
+ ]
+}

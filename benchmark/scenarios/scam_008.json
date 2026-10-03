@@ -1,0 +1,41 @@
+{
+  "id": "scam_008",
+  "label": "scam",
+  "title": "IRS -- arrest warrant, crypto payment",
+  "sources": [
+    "IC3 government-impersonation pattern",
+    "crypto-payment variant"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is the IRS Criminal Division. There is a warrant for your arrest over back taxes."
+    },
+    {
+      "t": "00:08",
+      "speaker": "victim",
+      "text": "A warrant? I always pay my taxes."
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "You can settle immediately by depositing $4,200 into this Bitcoin address to cancel the warrant."
+    },
+    {
+      "t": "00:19",
+      "speaker": "caller",
+      "text": "Stay on the line. Do not hang up or contact anyone or officers will be dispatched."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency",
+      "secrecy"
+    ]
+  }
+}

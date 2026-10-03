@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KinVoice — scam-call protection · KinShield</title>
+<meta name="description" content="KinVoice doesn't ask if a caller looks suspicious — it asks if a trusted conversation has turned dangerous. Delegated scam protection for the person who will never enable a setting themselves." />
+
+<link rel="icon" type="image/svg+xml" href="img/logo-mark.svg" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="KinVoice — delegated scam-call protection" />
+<meta property="og:description" content="A trusted conversation can still be dangerous. KinVoice listens for impersonation, secrecy, and payment escalation — and catches it even against a perfect voice clone." />
+<meta property="og:site_name" content="KinShield" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="KinVoice — delegated scam-call protection" />
+<meta name="twitter:description" content="Detects the behavior of a dangerous call, not the voice. Built for AWS Zero to Shipped." />
+<meta name="theme-color" content="#5EBE6A" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0&icon_names=add,arrow_back,arrow_downward,arrow_forward,arrow_upward,auto_awesome,call,call_end,check,check_circle,chevron_left,chevron_right,close,dashboard,expand_more,flag,format_quote,hearing,info,ios_share,language,lock,monitoring,near_me,notifications,notifications_active,search,settings,shield,verified,verified_user&display=block" />
+<link rel="stylesheet" href="styles.css?v=20261003-5" />
+<link rel="stylesheet" href="chat.css?v=20261003-4" />
+</head>
+<body>
+<a class="skip-link" href="#demo">Skip to the demo</a>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="./" aria-label="KinShield home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">KinShield</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="kinvoice.html" aria-current="page" class="is-current">KinVoice</a>
+      <a href="kinbot.html">KinBot</a>
+      <a href="kinmodel.html">KinModel</a>
+      <a href="#demo">Demo</a>
+      <a href="kinvoice-app.html">App</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-outline btn-sm" href="#demo">See the demo</a>
+      <a class="btn btn-dark btn-sm" href="kinvoice-app.html">Open the app</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ================= HERO ================= -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-intro">
+      <div class="hero-copy">
+        <ul class="laurels" aria-label="At a glance">
+          <li>63 scripted calls</li>
+          <li>7 scam signals</li>
+          <li>0 setup steps for Mom</li>
+        </ul>
+        <h1 id="hero-title" class="kip-title"><span class="sr-only">Trusted voice, untrusted ask. KinVoice hears both.</span><span aria-hidden="true">Trusted voice,<br />untrusted <span class="hk-paren">(</span><span class="hk-kip"><img src="img/kip-surprised.png?v=20261002-20" alt="" width="320" height="320" /><span class="hk-mark is-red">!</span></span><span class="hk-paren">)</span> ask.<br />KinVoice hears both.</span></h1>
+      </div>
+      <div class="hero-pitch">
+        <p>KinVoice listens for what a call is asking Mom to <strong>believe</strong> and <strong>do</strong>.
+          It flags impersonation, secrecy and payment pressure, even when the voice is a perfect clone of family.</p>
+        <div class="btn-row">
+          <a class="btn btn-blue" href="kinvoice-app.html?run=scam">Try scam call <span class="ms" aria-hidden="true">arrow_forward</span></a>
+          <a class="btn btn-outline" href="kinvoice-app.html?run=safe">Try safe call</a>
+        </div>
+        <p class="fine">Live on Amazon Bedrock · no sign-up · synthetic scripts grounded in published FTC and FBI IC3 scam patterns</p>
+      </div>
+    </div>
+
+    <div class="strip" aria-hidden="true">
+      <div class="hc hc-1 sky">
+        <div class="gcard mini-chart">
+          <span class="muted-sm">Calls checked this week</span>
+          <div class="row"><b class="num">24</b><span class="chip chip-mint">2 flagged</span></div>
+          <svg viewBox="0 0 214 70" class="bars"><rect x="0.0" y="60" width="3.4" height="10" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="7.2" y="12" width="3.4" height="58" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="14.4" y="48" width="3.4" height="22" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="21.6" y="6" width="3.4" height="64" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="28.8" y="36" width="3.4" height="34" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="36.0" y="22" width="3.4" height="48" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="43.2" y="26" width="3.4" height="44" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="50.4" y="30" width="3.4" height="40" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="57.6" y="19" width="3.4" height="51" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="64.8" y="41" width="3.4" height="29" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="72.0" y="4" width="3.4" height="66" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="79.2" y="53" width="3.4" height="17" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="86.4" y="12" width="3.4" height="58" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="93.6" y="55" width="3.4" height="15" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="100.8" y="13" width="3.4" height="57" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="108.0" y="43" width="3.4" height="27" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="115.2" y="18" width="3.4" height="52" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="122.4" y="22" width="3.4" height="48" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="129.6" y="25" width="3.4" height="45" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="136.8" y="23" width="3.4" height="47" rx="1.5" fill="#E5484D"/><rect x="144.0" y="35" width="3.4" height="35" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="151.2" y="16" width="3.4" height="54" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="158.4" y="46" width="3.4" height="24" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="165.6" y="13" width="3.4" height="57" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="172.8" y="48" width="3.4" height="22" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="180.0" y="12" width="3.4" height="58" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="187.2" y="50" width="3.4" height="20" rx="1.5" fill="#E5484D"/><rect x="194.4" y="15" width="3.4" height="55" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="201.6" y="38" width="3.4" height="32" rx="1.5" fill="#23863D" fill-opacity=".5"/><rect x="208.8" y="21" width="3.4" height="49" rx="1.5" fill="#23863D" fill-opacity=".5"/></svg>
+          <span class="tiny">Two calls crossed HIGH: both asked for gift cards.</span>
+        </div>
+      </div>
+      <div class="hc hc-2">
+        <svg class="blob" viewBox="0 0 300 300"><defs><linearGradient id="blobg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D4F4D8"/><stop offset="1" stop-color="#9FDCA8"/></linearGradient></defs><polygon points="150,30 254,90 254,210 150,270 46,210 46,90" fill="url(#blobg)" stroke="url(#blobg)" stroke-width="56" stroke-linejoin="round"/></svg>
+        <img class="kip" src="img/mascot-calm.png?v=20261002-20" alt="" width="800" height="800" />
+        <span class="round-badge"><span class="ms">shield</span></span>
+        <div class="tag-pink"><span>Call risk</span><div class="row"><b>84</b><span class="chip chip-white-red">HIGH</span></div></div>
+        <div class="tag-green"><span class="tag-ic"><span class="ms">call</span></span><div><b>Caller ID · Trusted</b><span>Saved family number</span></div></div>
+      </div>
+      <div class="hc hc-3 sky grass">
+        <div class="gcard ev-mini">
+          <div class="row who"><span class="who-av" aria-hidden="true">D</span><div><b>“Danny” (grandson?)</b><span>Calling Mom · 4:12 pm</span></div></div>
+          <hr />
+          <div class="row stats3"><div><span>Voice match</span><b>100%</b></div><div><span>Signals</span><b>5 / 7</b></div><div><span>Source</span><b>Saved</b></div></div>
+          <div class="insight"><span class="ins-k"><span class="ms">auto_awesome</span> Bedrock insight</span>Secrecy + gift cards right after an “emergency”. Classic grandparent-scam pattern.</div>
+        </div>
+      </div>
+      <div class="hc hc-4">
+        <div class="gcard push">
+          <span class="push-k"><i></i>Push alert · now</span>
+          <b>High-risk call on Mom’s phone</b>
+          <div class="q"><span>Secrecy</span>“Don’t tell Dad.”</div>
+          <div class="q"><span>Payment</span>“$2,000 in gift cards”</div>
+          <div class="q"><span>Urgency</span>“…today, right now”</div>
+          <span class="push-btn">Verify with family</span>
+        </div>
+      </div>
+      <div class="hc hc-5">
+        <img src="img/kinshield-family-photo.jpg" alt="" width="1536" height="1024" />
+        <span class="tag-protected"><i></i>Mom’s phone · Protected</span>
+        <div class="call-ctrls"><span class="ms">hearing</span><span class="ms">call</span><span class="ms">shield</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DEMO PREVIEW (static; the working app is kinvoice-app.html) ================= -->
+  <section class="section demo" id="demo" aria-labelledby="demo-title">
+    <div class="wrap">
+      <div class="split-head demo-head">
+        <div>
+          <span class="eyebrow">Demo · sample call</span>
+          <h2 id="demo-title">What a caregiver sees<br />when a call turns.</h2>
+        </div>
+        <div>
+          <p>A recorded example of one scam call. To run real calls through the live Bedrock detector, open the KinVoice app.</p>
+          <div class="btn-row">
+            <a class="btn btn-blue" href="kinvoice-app.html?run=scam">Open the KinVoice app <span class="ms" aria-hidden="true">arrow_forward</span></a>
+            <a class="btn btn-outline" href="kinvoice-app.html">Browse all 63 calls</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-sky sky demo-static">
+        <span class="demo-tag is-above"><span class="ms" aria-hidden="true">info</span>Preview · not interactive</span>
+        <figure class="kbs-mac">
+          <div class="kbs-mac-bar" aria-hidden="true">
+            <span class="kbs-mac-lights"><i></i><i></i><i></i></span>
+            <span class="kbs-mac-nav"><span class="ms">chevron_left</span><span class="ms">chevron_right</span></span>
+            <span class="kbs-mac-url"><span class="ms">lock</span>KinShield · KinVoice</span>
+            <span class="kbs-mac-nav end"><span class="ms">ios_share</span><span class="ms">add</span></span>
+          </div>
+          <div class="kbs-mac-view" id="kbs-view" data-h="860" data-ph="720">
+            <!-- The real KinVoice app, frozen: ?preview=1 draws a saved scored call and makes no API calls. -->
+            <iframe src="kinvoice-app.html?preview=1" title="KinVoice preview" tabindex="-1" aria-hidden="true" inert loading="lazy" scrolling="no"></iframe>
+          </div>
+          <figcaption class="sr-only">The KinVoice caregiver app after a scripted grandparent-scam call: HIGH risk, the risk climbing turn by turn, and each warning sign quoting the caller’s exact words.</figcaption>
+        </figure>
+        <a class="demo-open" href="kinvoice-app.html?run=scam"><span class="ms" aria-hidden="true">call</span>Run this call live in the KinVoice app<span class="ms" aria-hidden="true">arrow_forward</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GROUNDED IN ================= -->
+  <section class="sources" aria-label="Sources">
+    <div class="wrap">
+      <p>63 scripted calls (grandparent, bank, IRS/SSA, tech support, Medicare, gift cards, Hinglish, plus ordinary family chats), grounded in published fraud patterns from</p>
+      <ul>
+        <li>FTC Consumer Sentinel</li>
+        <li>FBI IC3 Elder Fraud</li>
+        <li class="aws">Live on AWS</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= PROBLEM ================= -->
+  <section class="section problem" aria-labelledby="problem-title">
+    <div class="wrap center-head">
+      <span class="eyebrow">The problem</span>
+      <h2 id="problem-title">A scam call shouldn’t<br />sound like family.</h2>
+      <p>Cloned voices beat the ear, and spoofed caller ID beats the phone. On-device scam detection skips saved
+        contacts, which are exactly the numbers a grandparent scam fakes.</p>
+    </div>
+    <div class="wrap">
+      <div class="pill-photo">
+        <img src="img/kinshield-family-photo.jpg" alt="An older mother on a phone call while her adult daughter checks the KinVoice shield on her own phone" width="1536" height="1024" loading="lazy" />
+        <ul class="sig-pills" aria-label="Signals KinVoice reads">
+          <li class="p1">Impersonation</li>
+          <li class="p2">Emergency</li>
+          <li class="p3">Payment anomaly</li>
+          <li class="p4">Secrecy</li>
+          <li class="p5">Authority pressure</li>
+          <li class="p6">Unusual urgency</li>
+          <li class="p7">Financial request</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section class="section" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="band sky-band">
+        <div class="band-head">
+          <div>
+            <span class="eyebrow on-blue">How it works</span>
+            <h2 id="how-title">From first ring to<br />a verified family.</h2>
+          </div>
+          <div class="band-guide"><p>One continuous flow. Mom does nothing; you hear about it the moment a call turns dangerous. In the demo, setup, alerts and FamilyVerify are simulated; the Bedrock scoring is real.</p></div>
+        </div>
+        <ol class="steps">
+          <li><span class="step-n" aria-hidden="true">01</span><span class="ms" aria-hidden="true">settings</span><h3>Set up once</h3><p>The caregiver installs it a single time. Mom has no app to open.</p></li>
+          <li><span class="step-n" aria-hidden="true">02</span><span class="ms" aria-hidden="true">hearing</span><h3>Listen</h3><p>Reads the call turn by turn on Amazon Bedrock.</p></li>
+          <li><span class="step-n" aria-hidden="true">03</span><span class="ms" aria-hidden="true">monitoring</span><h3>Score</h3><p>Tags 7 scam signals and quotes the exact line for each.</p></li>
+          <li><span class="step-n" aria-hidden="true">04</span><span class="ms" aria-hidden="true">notifications_active</span><h3>Alert</h3><p>Push alert the moment risk crosses HIGH.</p></li>
+          <li><span class="step-n" aria-hidden="true">05</span><span class="ms" aria-hidden="true">verified_user</span><h3>Verify</h3><p>FamilyVerify pings the real person on a channel the caller can’t touch.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq">
+      <div class="faq-head">
+        <h2 id="faq-title">FAQs</h2>
+        <p>Honest answers about what KinVoice does, and what it doesn’t.</p>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary>Does KinVoice detect fake or cloned voices?<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <p>No, on purpose. Voice-clone detection is an arms race that gets harder as clones improve. KinVoice
+            reads what a call is asking someone to believe and do, so it works even against a perfect clone.</p>
+        </details>
+        <details>
+          <summary>Do you have paying customers?<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <p>No. KinShield is pre-launch. The demo is real and live on AWS, but the product is not for sale and we
+            are not claiming any users.</p>
+        </details>
+        <details>
+          <summary>Is the location check real?<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <p>It's simulated in this demo. It compares a caller's stated location against a device the real person
+            chose to share. It never tracks the caller. It is illustrative, not a shipped feature.</p>
+        </details>
+        <details>
+          <summary>What about real phone calls?<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <p>The judge-reachable demo runs on scripted transcripts. Live-call handling (Amazon Chime SDK + Amazon
+            Transcribe) is architecturally scoped and on the roadmap, not yet the shipped path.</p>
+        </details>
+        <details>
+          <summary>What data do you store?<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <p>The call demo stores per-session risk events in DynamoDB and needs no sign-up. There's no phone
+            number or contact list involved. In KinBot, messages are checked and forgotten. Signing in is optional. If you do, Kip saves the verdict and headline of each check (never the message itself) so you can see your history.</p>
+        </details>
+        <details>
+          <summary>Is this medical, legal, or financial advice?<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <p>No. It's a fraud-signal tool and an educational demo. If you think you've been scammed, contact your
+            bank and report to the FTC (reportfraud.ftc.gov) or FBI IC3 (ic3.gov).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ROADMAP ================= -->
+  <section class="section" id="roadmap" aria-labelledby="road-title">
+    <div class="wrap">
+      <div class="split-head">
+        <div>
+          <span class="eyebrow">Where it’s headed</span>
+          <h2 id="road-title">The road from demo to real calls.</h2>
+        </div>
+        <p>What’s live today, and what comes next. Only the first stop is shipped.</p>
+      </div>
+      <ol class="road">
+        <li class="is-now"><span class="road-when">Now · live</span><strong>Live scripted demo</strong><p>Behavioral detection on Bedrock, caregiver dashboard, and cited evidence, reachable with no sign-up.</p></li>
+        <li><span class="road-when">Next</span><strong>Real calls</strong><p>Amazon Chime SDK PSTN + Amazon Transcribe feeding the same detector, plus live caregiver push.</p></li>
+        <li><span class="road-when">Then</span><strong><a href="kinmodel.html">KinModel</a> on-device</strong><p>A small, on-device classifier for the same signals: lower latency, better privacy, no per-call cloud cost.</p></li>
+        <li><span class="road-when">Later</span><strong>Beyond calls &amp; family plans</strong><p>WhatsApp/SMS monitoring, multi-parent family plans, and bank/government/tech-support scam coverage.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="section cta-wrap" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta">
+        <h2 id="cta-title">Watch a trusted call<br />turn dangerous.</h2>
+        <p>Open the app, press Try scam call, and KinVoice scores the conversation turn by turn on Amazon Bedrock.
+          Or try a safe call and watch it stay quiet. No sign-up.</p>
+        <div class="btn-row center">
+          <a class="btn btn-blue" href="kinvoice-app.html?run=scam">Try scam call <span class="ms" aria-hidden="true">arrow_forward</span></a>
+          <a class="btn btn-outline" href="kinvoice-app.html?run=safe">Try safe call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-cols">
+      <div><h4>Products</h4><a href="kinvoice.html">KinVoice</a><a href="kinbot.html">KinBot</a><a href="kinmodel.html">KinModel</a></div>
+      <div><h4>Get help</h4><a href="https://reportfraud.ftc.gov/" rel="noopener">Report to FTC ↗</a><a href="https://www.ic3.gov/" rel="noopener">Report to IC3 ↗</a><a href="tel:+18333728311">Elder Fraud Hotline 1-833-372-8311</a></div>
+    </div>
+    <p class="foot-privacy" id="privacy"><strong>Privacy:</strong> no sign-up needed. Messages and calls are checked and forgotten. Signing in is optional and saves only each check’s verdict, never the message.</p>
+    <div class="foot-bar">
+      <a class="brand" href="./"><span class="brand-mark sm" aria-hidden="true"></span><span class="brand-name">KinShield</span></a>
+      <span>Built on Amazon Bedrock and AWS Lambda · AWS “Zero to Shipped”</span>
+    </div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="ui.js?v=20261002-1"></script>
+<script>
+  // Fit the embedded KinVoice app: a 1280px desktop view scaled down on wide screens,
+  // and the app's own phone layout at real size on narrow ones.
+  (function () {
+    var view = document.getElementById("kbs-view");
+    if (!view) return;
+    var frame = view.querySelector("iframe");
+    var dh = +view.dataset.h || 800, ph = +view.dataset.ph || 680;
+    function fit() {
+      var w = view.clientWidth, vw, vh, s;
+      if (w < 640) { vw = w; vh = ph; s = 1; } else { vw = 1280; vh = dh; s = w / 1280; }
+      frame.style.width = vw + "px";
+      frame.style.height = vh + "px";
+      frame.style.transform = "scale(" + s + ")";
+      view.style.height = Math.round(vh * s) + "px";
+    }
+    fit();
+    if ("ResizeObserver" in window) new ResizeObserver(fit).observe(view); else addEventListener("resize", fit);
+  })();
+</script>
+<script src="chat.js?v=20261003-4"></script>
+</body>
+</html>

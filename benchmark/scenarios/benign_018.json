@@ -1,0 +1,29 @@
+{
+  "id": "benign_018",
+  "label": "benign",
+  "title": "Friend arranging a lunch",
+  "sources": [
+    "Ordinary social call"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "It's Helen! Want to do lunch at the diner Thursday?"
+    },
+    {
+      "t": "00:05",
+      "speaker": "victim",
+      "text": "I'd love that. Noon?"
+    },
+    {
+      "t": "00:08",
+      "speaker": "caller",
+      "text": "Noon it is."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "benign_006",
+  "label": "benign",
+  "title": "Pharmacy refill ready",
+  "sources": [
+    "Ordinary automated service call"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hello, this is Cedar Pharmacy. Your prescription is ready for pickup."
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Great, thank you. Until when are you open?"
+    },
+    {
+      "t": "00:09",
+      "speaker": "caller",
+      "text": "Until 8pm tonight, no rush."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

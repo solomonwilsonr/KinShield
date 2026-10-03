@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  KinShield CloudFront distribution layered over the EXISTING public S3 website
+  bucket (kinshield-site-${AWS::AccountId}). Deployed as a SEPARATE stack so the
+  live S3 website stays up untouched and keeps working as a fallback. CloudFront
+  uses the S3 *website* endpoint as a custom origin (not OAC/REST), which is why
+  the bucket can stay public and the plain S3 URL keeps serving.
+
+Parameters:
+  SiteBucketName:
+    Type: String
+    Description: Name of the existing public S3 website bucket to serve.
+    Default: ""
+
+Resources:
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Comment: KinShield HTTPS frontend over S3 website origin
+        DefaultRootObject: index.html
+        PriceClass: PriceClass_100
+        Origins:
+          - Id: s3website
+            # S3 website endpoints are HTTP-only, so CloudFront must talk to the
+            # origin over HTTP via a CustomOriginConfig (not an S3OriginConfig).
+            DomainName: !Sub "${SiteBucketName}.s3-website-us-east-1.amazonaws.com"
+            CustomOriginConfig:
+              OriginProtocolPolicy: http-only
+              HTTPPort: 80
+              HTTPSPort: 443
+              OriginSSLProtocols:
+                - TLSv1.2
+        DefaultCacheBehavior:
+          TargetOriginId: s3website
+          ViewerProtocolPolicy: redirect-to-https
+          # AWS managed CachingOptimized policy
+          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+          Compress: true
+        CustomErrorResponses:
+          - ErrorCode: 403
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+          - ErrorCode: 404
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+
+Outputs:
+  DistributionId:
+    Value: !Ref Distribution
+  CloudFrontUrl:
+    Value: !Sub "https://${Distribution.DomainName}"

@@ -1,0 +1,36 @@
+{
+  "id": "benign_026",
+  "label": "benign",
+  "title": "Son really travelling, calls from London (location matches)",
+  "sources": [
+    "Ordinary call; claimed location matches opted-in device (simulated)"
+  ],
+  "claimed_location": "London, UK",
+  "trusted_device": {
+    "person": "Daniel",
+    "location": "London, UK",
+    "opted_in": true,
+    "simulated": true
+  },
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hi Mom, it's Daniel. Just landed in London for the conference, all good."
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Wonderful, how was the flight?"
+    },
+    {
+      "t": "00:09",
+      "speaker": "caller",
+      "text": "Smooth. I'll text you photos of the hotel. Talk Sunday?"
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

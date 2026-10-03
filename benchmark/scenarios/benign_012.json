@@ -1,0 +1,24 @@
+{
+  "id": "benign_012",
+  "label": "benign",
+  "title": "Library book due reminder",
+  "sources": [
+    "Ordinary automated reminder"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is the county library. Two books are due back on Friday."
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Thanks, I'll drop them off tomorrow."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

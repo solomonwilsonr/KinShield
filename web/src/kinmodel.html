@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KinModel — our tiny scam-text model · KinShield</title>
+<meta name="description" content="KinModel is our own tiny scam-text classifier: TF-IDF features and logistic regression in 119 KB of int8 weights, running in AWS Lambda as a second opinion. Try it live next to the Bedrock detector." />
+<link rel="icon" type="image/svg+xml" href="img/logo-mark.svg" />
+<meta property="og:title" content="KinModel — our tiny scam-text model" />
+<meta property="og:description" content="119 KB of int8 weights, running in AWS Lambda. Try it live next to the Bedrock detector, with every caveat published." />
+<meta property="og:site_name" content="KinShield" />
+<meta name="theme-color" content="#5EBE6A" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,0,0&icon_names=arrow_forward,bolt,expand_more,lock,memory,science,smartphone,translate,warning&display=block" />
+<link rel="stylesheet" href="styles.css?v=20261003-5" />
+<link rel="stylesheet" href="chat.css?v=20261003-4" />
+<link rel="stylesheet" href="hub.css?v=20261002-2" />
+</head>
+<body>
+<a class="skip-link" href="#try">Skip to the live model</a>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="./" aria-label="KinShield home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">KinShield</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="kinvoice.html">KinVoice</a>
+      <a href="kinbot.html">KinBot</a>
+      <a href="kinmodel.html" aria-current="page" class="is-current">KinModel</a>
+      <a href="#results">Results</a>
+      <a href="#limits">Limits</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-outline btn-sm" href="#results">See results</a>
+      <a class="btn btn-dark btn-sm" href="#try">Try it live</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ================= HERO ================= -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-intro">
+      <div class="hero-copy">
+        <ul class="laurels" aria-label="At a glance">
+          <li>119 KB model</li>
+          <li>no GPU, no numpy</li>
+          <li>runs in AWS Lambda</li>
+        </ul>
+        <h1 id="hero-title" class="kip-title"><span class="sr-only">Small model. Fast second opinion.</span><span aria-hidden="true">Small <span class="hk-paren">(</span><span class="hk-kip"><img src="img/kip-wink.png?v=20261002-20" alt="" width="320" height="320" /><span class="hk-mark is-mint"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span></span><span class="hk-paren">)</span> model.<br />Fast second<br />opinion.</span></h1>
+      </div>
+      <div class="hero-pitch">
+        <p>KinModel (the code calls it KinShield-Lite) is our own tiny scam-text classifier. It turns words into <strong>TF-IDF features</strong>, scores them with <strong>logistic regression</strong>, and fits in 119 KB. Inside KinBot it sits next to the cited Bedrock check as a labelled second opinion.</p>
+        <div class="btn-row">
+          <a class="btn btn-blue" href="#try">Try it live <span class="ms" aria-hidden="true">arrow_forward</span></a>
+          <a class="btn btn-outline" href="#limits">Read the limits</a>
+        </div>
+        <p class="fine">Experimental · trained by us on synthetic data · not a fine-tuned LLM</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRY IT ================= -->
+  <section class="section" id="try" aria-labelledby="try-title" style="padding-top: 0">
+    <div class="wrap">
+      <div class="km-try sky">
+        <div class="km-try-head">
+          <div>
+            <span class="eyebrow on-blue">Live on AWS</span>
+            <h2 id="try-title">Score a message, two ways</h2>
+          </div>
+        </div>
+
+        <form class="km-panel" id="km-form" novalidate>
+          <div class="km-examples" role="group" aria-label="Examples">
+            <span>Try an example:</span>
+            <button type="button" class="km-ex" data-ex="0">Grandson in jail</button>
+            <button type="button" class="km-ex" data-ex="1">Fake USPS fee</button>
+            <button type="button" class="km-ex" data-ex="2">"Social Security officer"</button>
+            <button type="button" class="km-ex" data-ex="3">Real pharmacy text</button>
+          </div>
+          <label class="sr-only" for="km-text">Message to score</label>
+          <textarea id="km-text" class="km-input" maxlength="2000" placeholder="Paste a text, an email or what a caller said. Remove names and account numbers first."></textarea>
+          <div class="km-actions">
+            <span class="km-count" id="km-count">0 / 2,000</span>
+            <button class="btn btn-blue" id="km-go" type="submit">Score it <span class="ms" aria-hidden="true">arrow_forward</span></button>
+          </div>
+          <p class="km-status" id="km-status" role="status" aria-live="polite"></p>
+
+          <div class="km-results" id="km-results" hidden>
+            <div class="km-res">
+              <div class="km-res-k"><span>KinModel · TF-IDF + logistic regression</span><span class="chip chip-amber">Experimental</span></div>
+              <div class="km-big" id="km-prob">–</div>
+              <div class="km-meter" id="km-meter"><i></i></div>
+              <p class="km-note">Probability that the text reads like the scam examples it was trained on. 0.5 and above is "scam-like". It can't explain itself and it can't quote.</p>
+            </div>
+            <div class="km-res">
+              <div class="km-res-k"><span>Evidence detector · gpt-oss-20b on Amazon Bedrock</span><span class="risk-pill" id="km-level">–</span></div>
+              <div class="km-big" id="km-score">–</div>
+              <div class="km-quotes" id="km-quotes"></div>
+            </div>
+          </div>
+          <p class="km-agree" id="km-agree" hidden></p>
+          <p class="km-note">Your text is sent once to the KinBot check on AWS Lambda and then forgotten. Nothing is logged or stored.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section class="section" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <span class="eyebrow">How it works</span>
+      <h2 id="how-title">From words to a score in four steps</h2>
+      <ol class="km-pipe">
+        <li><b>1 · Features</b><p>Word 1–2-grams and character 3–5-grams, weighted with TF-IDF. Character grams catch spellings like “g1ft card”.</p></li>
+        <li><b>2 · Classifier</b><p>Logistic regression with balanced classes, calibrated with a sigmoid so the output reads as a probability.</p></li>
+        <li><b>3 · Squeeze</b><p>Weights quantised to int8 and exported as JSON: 119 KB, against 215 KB for the float model.</p></li>
+        <li><b>4 · Serve</b><p>A pure-Python scorer (<code>lite.py</code>) inside the KinBot Lambda. No numpy, no GPU. It matches the scikit-learn int8 model within 1e-9 on 52 test texts.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= RESULTS ================= -->
+  <section class="section" id="results" aria-labelledby="results-title">
+    <div class="wrap">
+      <span class="eyebrow">Results</span>
+      <h2 id="results-title">The numbers, and why to doubt them</h2>
+      <p class="hub-lede">Positive class is "scam". Copied from our generated <code>RESULTS.md</code>, seed 0. Please read the caveats before quoting any of it.</p>
+      <div class="km-table-wrap">
+        <table class="km-table">
+          <thead><tr><th scope="col">Experiment</th><th scope="col">n test</th><th scope="col">Accuracy</th><th scope="col">Precision</th><th scope="col">Recall</th><th scope="col">F1</th></tr></thead>
+          <tbody>
+            <tr><td>A. Train on 600 synthetic → test on 47 KinShield scenario scripts</td><td class="n">47</td><td class="n">0.979</td><td class="n">0.955</td><td class="n">1.000</td><td class="n">0.977</td></tr>
+            <tr><td>B. 5-fold cross-validation on the 47 scenario scripts</td><td class="n">47</td><td class="n">1.000</td><td class="n">1.000</td><td class="n">1.000</td><td class="n">1.000</td></tr>
+            <tr><td>C. Synthetic 80/20 hold-out (easy, same templates)</td><td class="n">120</td><td class="n">1.000</td><td class="n">1.000</td><td class="n">1.000</td><td class="n">1.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="km-caveats">
+        <li><span class="ms" aria-hidden="true">warning</span>Experiment A got one benign script wrong (a false alarm) and missed no scams. With only 47 scripts, one example moves accuracy by about 2 points.</li>
+        <li><span class="ms" aria-hidden="true">warning</span>The test scripts and the synthetic training phrases were written by the same team, so A is likely optimistic. Treat it as a smoke test, not proof it works on real scams.</li>
+        <li><span class="ms" aria-hidden="true">warning</span>C is template data and is expected to look perfect. It says nothing about real messages.</li>
+        <li><span class="ms" aria-hidden="true">warning</span>No real scam transcripts, real victims' data or third-party test sets were used.</li>
+      </ul>
+      <p class="km-src">Runtime: the float scikit-learn model took a median 1.27 ms per text on a laptop CPU. int8 and float agree on every scenario label (largest probability gap 0.10). The Lambda scorer's latency hasn't been measured separately.</p>
+    </div>
+  </section>
+
+  <!-- ================= FINE-TUNE RESEARCH ================= -->
+  <section class="section" id="finetune" aria-labelledby="finetune-title">
+    <div class="wrap">
+      <span class="eyebrow">Research</span>
+      <h2 id="finetune-title">We fine-tuned gpt-oss-20b, then shrank it again</h2>
+      <p class="hub-lede">Separate from KinModel above. Using an NVIDIA DGX Spark, we fine-tuned gpt-oss-20b (QLoRA, 90 minutes) on 1,201 synthetic calls labelled by gpt-oss-120b. We kept only the labels that matched what each call was written to be. The fine-tuned model then taught a 22M-parameter classifier, KinShield-Tiny v3. The live app still uses the stock model.</p>
+      <div class="km-table-wrap">
+        <table class="km-table">
+          <thead><tr><th scope="col">Model, on 63 hand-written test calls (31 scams, 32 safe)</th><th scope="col">Correct</th><th scope="col">Scams rated High</th><th scope="col">Safe calls flagged</th></tr></thead>
+          <tbody>
+            <tr><td>gpt-oss-20b, stock (what the app uses)</td><td class="n">61/63</td><td class="n">29/31</td><td class="n">0/32</td></tr>
+            <tr><td>gpt-oss-120b, stock (about 6× larger)</td><td class="n">62/63</td><td class="n">30/31</td><td class="n">0/32</td></tr>
+            <tr><td><strong>gpt-oss-20b, fine-tuned by us</strong></td><td class="n"><strong>62/63</strong></td><td class="n"><strong>30/31</strong></td><td class="n">0/32</td></tr>
+            <tr><td>KinShield-Tiny v2, taught by the stock 20b</td><td class="n">57/63</td><td class="n">25/31</td><td class="n">0/32</td></tr>
+            <tr><td><strong>KinShield-Tiny v3, taught by our fine-tune</strong></td><td class="n"><strong>60/63</strong></td><td class="n"><strong>28/31</strong></td><td class="n">0/32</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="km-caveats">
+        <li><span class="ms" aria-hidden="true">warning</span>The gains are small: one test call for the fine-tune and three for Tiny. With 63 calls, one call moves accuracy by about 1.6 points. Read it as "matches the 6× larger model", not "beats it".</li>
+        <li><span class="ms" aria-hidden="true">warning</span>All training calls were written and labelled by AI models, and the test calls were written by our team. None are real calls.</li>
+        <li><span class="ms" aria-hidden="true">warning</span>The fine-tuned 20b takes about 5 s per call on the DGX Spark and isn't hosted publicly. Tiny v3 runs on its own AWS Lambda in about 40–80 ms, but gives scores, not quotes.</li>
+      </ul>
+      <p class="km-src">Download: <a href="https://huggingface.co/Solomonwilsonr/kinshield-20b" rel="noopener">kinshield-20b</a> and <a href="https://huggingface.co/Solomonwilsonr/kinshield-tiny-v3" rel="noopener">kinshield-tiny-v3</a> on Hugging Face.</p>
+    </div>
+  </section>
+
+  <!-- ================= LIMITS ================= -->
+  <section class="section" id="limits" aria-labelledby="limits-title">
+    <div class="wrap">
+      <span class="eyebrow">Honest limits</span>
+      <h2 id="limits-title">Why KinModel is the second opinion, not the first</h2>
+      <div class="honest">
+        <article class="card"><span class="ms" aria-hidden="true">science</span><h3>Synthetic training data</h3><p>600 template-generated examples. It will miss scams that don't look like our templates.</p></article>
+        <article class="card"><span class="ms" aria-hidden="true">bolt</span><h3>Keyword-driven</h3><p>A real bank alert full of scary words can score high. That's why KinBot always shows the cited check first.</p></article>
+        <article class="card"><span class="ms" aria-hidden="true">translate</span><h3>English text only</h3><p>No audio, no other languages, and no sender details like the phone number or link.</p></article>
+        <article class="card"><span class="ms" aria-hidden="true">memory</span><h3>Not an LLM</h3><p>It's a small classifier we trained, not a fine-tuned language model. It gives a number, never a reason.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ROADMAP ================= -->
+  <section class="section" aria-labelledby="road-title">
+    <div class="wrap">
+      <span class="eyebrow">What's next</span>
+      <h2 id="road-title" style="margin-bottom: 32px">Where KinModel is going</h2>
+      <ol class="road">
+        <li class="is-now"><span class="road-when">Now</span><strong>Second opinion in KinBot</strong><p>Shown next to every cited check, clearly labelled experimental.</p></li>
+        <li><span class="road-when">Next</span><strong>Real, consented examples</strong><p>Retrain and re-test on messages people choose to share, with a held-out set we didn't write.</p></li>
+        <li><span class="road-when">Then</span><strong>On the phone</strong><p>Run the 119 KB model on-device: faster, more private, and no cloud cost per message.</p></li>
+        <li><span class="road-when">Later</span><strong>Pre-filter for KinVoice</strong><p>Score call turns cheaply, and only call Bedrock when the model is unsure.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="section cta-wrap" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta">
+        <h2 id="cta-title">Want the full answer<br />with quotes?</h2>
+        <p>KinBot shows KinModel's score next to the cited check, then helps with what to do next.</p>
+        <div class="btn-row center">
+          <a class="btn btn-blue" href="kinbot-chat.html">Open KinBot <span class="ms" aria-hidden="true">arrow_forward</span></a>
+          <a class="btn btn-outline" href="./">All KinShield tools</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-cols">
+      <div><h4>Products</h4><a href="kinvoice.html">KinVoice</a><a href="kinbot.html">KinBot</a><a href="kinmodel.html">KinModel</a></div>
+      <div><h4>Get help</h4><a href="https://reportfraud.ftc.gov/" rel="noopener">Report to FTC ↗</a><a href="https://www.ic3.gov/" rel="noopener">Report to IC3 ↗</a><a href="tel:+18333728311">Elder Fraud Hotline 1-833-372-8311</a></div>
+    </div>
+    <p class="foot-privacy"><strong>Privacy:</strong> no sign-up needed. Messages and calls are checked and forgotten. Signing in is optional and saves only each check’s verdict, never the message.</p>
+    <div class="foot-bar">
+      <a class="brand" href="./"><span class="brand-mark sm" aria-hidden="true"></span><span class="brand-name">KinShield</span></a>
+      <span>Built on Amazon Bedrock and AWS Lambda · AWS “Zero to Shipped”</span>
+    </div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="kinmodel.js?v=20261002-1"></script>
+<script src="chat.js?v=20261003-4"></script>
+</body>
+</html>

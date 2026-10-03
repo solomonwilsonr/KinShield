@@ -1,0 +1,29 @@
+{
+  "id": "benign_029",
+  "label": "benign",
+  "title": "Daughter: Dad fell, we're at the hospital, come when you can",
+  "sources": [
+    "Hard negative: a real family emergency with no money, payment, or secrecy request"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Mom, it's Maya. Dad slipped on the porch steps, we're at St. Mary's. He's okay, they think it's just a sprained wrist."
+    },
+    {
+      "t": "00:09",
+      "speaker": "victim",
+      "text": "Oh no. Should I come now?"
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "Come when you're ready, no rush. Bring his reading glasses, he keeps asking for them."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "scam_012",
+  "label": "scam",
+  "title": "Bank 'fraud dept' -- move money to safe account",
+  "sources": [
+    "FTC bank-impersonation / 'safe account' pattern"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is your bank's fraud team. Someone is draining your account right now."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "Oh no, what should I do?"
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "To protect it, transfer your balance to this secure holding account immediately."
+    },
+    {
+      "t": "00:17",
+      "speaker": "caller",
+      "text": "Don't tell the branch staff, they may be involved. Act in the next few minutes."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "authority_pressure",
+      "financial_request",
+      "secrecy",
+      "unusual_urgency"
+    ]
+  }
+}

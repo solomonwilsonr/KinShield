@@ -1,0 +1,24 @@
+{
+  "id": "benign_022",
+  "label": "benign",
+  "title": "School letting a grandparent know about early dismissal",
+  "sources": [
+    "Ordinary institutional notice"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hello, this is Lincoln Elementary. Early dismissal Friday at 1pm for staff training."
+    },
+    {
+      "t": "00:08",
+      "speaker": "victim",
+      "text": "Thanks, I'll pick him up at 1."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

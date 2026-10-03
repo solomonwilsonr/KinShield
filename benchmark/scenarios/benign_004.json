@@ -1,0 +1,39 @@
+{
+  "id": "benign_004",
+  "label": "benign",
+  "title": "Grandson asks to borrow $100 for a real plumber",
+  "sources": [
+    "Ambiguous benign: small legitimate money request, no other signals"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hey Grandma, it's me. Quick thing -- the plumber's here fixing the kitchen sink and I'm $100 short until payday."
+    },
+    {
+      "t": "00:09",
+      "speaker": "victim",
+      "text": "Oh no, is it bad?"
+    },
+    {
+      "t": "00:12",
+      "speaker": "caller",
+      "text": "Just a leaky valve, nothing serious. Can I swing by tomorrow and grab it, or I can Venmo you back Friday?"
+    },
+    {
+      "t": "00:20",
+      "speaker": "victim",
+      "text": "Of course, come by tomorrow and we'll have lunch."
+    },
+    {
+      "t": "00:24",
+      "speaker": "caller",
+      "text": "Perfect, thanks. Love you."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

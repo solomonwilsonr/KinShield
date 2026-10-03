@@ -1,0 +1,35 @@
+{
+  "id": "benign_028",
+  "label": "benign",
+  "title": "Grandson really got a new number, no request",
+  "sources": [
+    "Hard negative for the 'new number' scam: same opener, no money, emergency, or secrecy"
+  ],
+  "claimed_identity": "Leo",
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hi Grandpa, it's Leo! New phone, new number, can you save this one?"
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Got it. How's school?"
+    },
+    {
+      "t": "00:09",
+      "speaker": "caller",
+      "text": "Good, finals are done. Still on for pancakes Sunday?"
+    },
+    {
+      "t": "00:13",
+      "speaker": "victim",
+      "text": "Wouldn't miss it."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

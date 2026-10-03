@@ -1,0 +1,38 @@
+{
+  "id": "scam_014",
+  "label": "scam",
+  "title": "Amazon 'unauthorized order' -- refund scam",
+  "sources": [
+    "FTC refund/account-scam pattern"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is Amazon security. A $1,200 order was placed on your account."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "I didn't order anything!"
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "To reverse it we'll need remote access and a gift-card verification of your identity."
+    },
+    {
+      "t": "00:17",
+      "speaker": "caller",
+      "text": "Please stay on the line and don't hang up until it's resolved."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "authority_pressure",
+      "payment_anomaly",
+      "unusual_urgency"
+    ]
+  }
+}

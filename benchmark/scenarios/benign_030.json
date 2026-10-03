@@ -1,0 +1,29 @@
+{
+  "id": "benign_030",
+  "label": "benign",
+  "title": "Police non-emergency line: your wallet was turned in",
+  "sources": [
+    "Hard negative for law-enforcement impostors: a real officer, no threat, no payment"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hello, this is Officer Diaz at the Maple Street station. Someone turned in a wallet with your ID in it."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "Oh, thank goodness, I've been looking everywhere."
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "You can pick it up at the front desk any day this week. Just bring another form of ID."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

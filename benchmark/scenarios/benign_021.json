@@ -1,0 +1,29 @@
+{
+  "id": "benign_021",
+  "label": "benign",
+  "title": "Son asking to borrow the truck",
+  "sources": [
+    "Ambiguous benign: a request (not money), casual, no pressure"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hey Dad, could I borrow the truck Saturday to move a couch?"
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Sure, just fill the tank when you're done."
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "Deal, thanks."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

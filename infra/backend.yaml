@@ -1,0 +1,254 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: KinShield Tier-1 backend -- evidence-detector Lambda (HTTP API) + DynamoDB + optional sign-in history.
+
+Parameters:
+  BedrockSecretName:
+    Type: String
+    Default: kinshield/bedrock-api-key
+    Description: Secrets Manager secret name holding the Bedrock Mantle API key.
+  ModelId:
+    Type: String
+    Default: openai.gpt-oss-20b
+  MantleUrl:
+    Type: String
+    Default: https://bedrock-mantle.us-east-1.api.aws/v1/chat/completions
+  # Optional sign-in (stack kinshield-auth). Empty = no /history routes.
+  UserPoolId:
+    Type: String
+    Default: ""
+  UserPoolClientId:
+    Type: String
+    Default: ""
+
+Conditions:
+  HasAuth: !Not [!Equals [!Ref UserPoolId, ""]]
+
+Resources:
+  SessionTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: kinshield-sessions
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: session_id
+          AttributeType: S
+        - AttributeName: ts
+          AttributeType: N
+      KeySchema:
+        - AttributeName: session_id
+          KeyType: HASH
+        - AttributeName: ts
+          KeyType: RANGE
+
+  # Signed-in users' check history: verdict, headline, kind and date only -- never the message.
+  HistoryTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: kinshield-history
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: user_id
+          AttributeType: S
+        - AttributeName: ts
+          AttributeType: N
+      KeySchema:
+        - AttributeName: user_id
+          KeyType: HASH
+        - AttributeName: ts
+          KeyType: RANGE
+      TimeToLiveSpecification:
+        AttributeName: expires_at
+        Enabled: true
+
+  DetectorRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: kinshield-detector-role
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: kinshield-detector-inline
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                Resource:
+                  - !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${BedrockSecretName}-*"
+              - Effect: Allow
+                Action:
+                  - dynamodb:PutItem
+                  - dynamodb:Query
+                Resource: !GetAtt SessionTable.Arn
+              - Effect: Allow
+                Action:
+                  - dynamodb:PutItem
+                  - dynamodb:Query
+                  - dynamodb:BatchWriteItem
+                Resource: !GetAtt HistoryTable.Arn
+              # KinBot: read text from screenshots, read verdicts aloud, transcribe voicemails.
+              - Effect: Allow
+                Action:
+                  - textract:DetectDocumentText
+                  - polly:SynthesizeSpeech
+                  - transcribe:StartTranscriptionJob
+                  - transcribe:GetTranscriptionJob
+                  - transcribe:DeleteTranscriptionJob
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                  - s3:DeleteObject
+                Resource: !Sub "${VoicemailBucket.Arn}/*"
+
+  # Voicemails sit here only while Amazon Transcribe reads them; the Lambda deletes the audio and
+  # transcript as soon as the text is returned, and this rule removes anything left after 1 day.
+  VoicemailBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "kinshield-voicemail-${AWS::AccountId}"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      LifecycleConfiguration:
+        Rules:
+          - Id: expire-1-day
+            Status: Enabled
+            ExpirationInDays: 1
+
+  DetectorFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: kinshield-detector
+      Runtime: python3.12
+      Handler: handler.handler
+      Role: !GetAtt DetectorRole.Arn
+      Timeout: 40
+      MemorySize: 1024
+      Environment:
+        Variables:
+          MODEL_ID: !Ref ModelId
+          MANTLE_URL: !Ref MantleUrl
+          BEDROCK_KEY_SECRET_ID: !Ref BedrockSecretName
+          TABLE_NAME: !Ref SessionTable
+          VOICEMAIL_BUCKET: !Ref VoicemailBucket
+          HISTORY_TABLE: !Ref HistoryTable
+      Code:
+        ZipFile: |
+          # placeholder -- real code is uploaded via update-function-code after stack create
+          def handler(event, context):
+              return {"statusCode": 503, "body": "not yet deployed"}
+
+  HttpApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: kinshield-http-api
+      ProtocolType: HTTP
+      CorsConfiguration:
+        AllowOrigins: ["*"]
+        AllowMethods: ["GET", "POST", "DELETE", "OPTIONS"]
+        AllowHeaders: ["content-type", "authorization"]
+
+  HttpIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApi
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt DetectorFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  HttpRouteDefault:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: "$default"
+      Target: !Sub "integrations/${HttpIntegration}"
+
+  # /history requires a valid Cognito access token; API Gateway checks it before the Lambda runs.
+  JwtAuthorizer:
+    Type: AWS::ApiGatewayV2::Authorizer
+    Condition: HasAuth
+    Properties:
+      ApiId: !Ref HttpApi
+      Name: kinshield-cognito
+      AuthorizerType: JWT
+      IdentitySource: ["$request.header.Authorization"]
+      JwtConfiguration:
+        Audience: [!Ref UserPoolClientId]
+        Issuer: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPoolId}"
+
+  HistoryGetRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Condition: HasAuth
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: "GET /history"
+      AuthorizationType: JWT
+      AuthorizerId: !Ref JwtAuthorizer
+      Target: !Sub "integrations/${HttpIntegration}"
+
+  HistoryPostRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Condition: HasAuth
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: "POST /history"
+      AuthorizationType: JWT
+      AuthorizerId: !Ref JwtAuthorizer
+      Target: !Sub "integrations/${HttpIntegration}"
+
+  HistoryDeleteRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Condition: HasAuth
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: "DELETE /history"
+      AuthorizationType: JWT
+      AuthorizerId: !Ref JwtAuthorizer
+      Target: !Sub "integrations/${HttpIntegration}"
+
+  HttpStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref HttpApi
+      StageName: "$default"
+      AutoDeploy: true
+      # Caps Bedrock spend if the public API is hammered during judging. The account's Lambda
+      # concurrency limit is 10, so reserved concurrency isn't available; throttle at the edge.
+      DefaultRouteSettings:
+        ThrottlingRateLimit: 10
+        ThrottlingBurstLimit: 20
+
+  ApiInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DetectorFunction
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*"
+
+Outputs:
+  ApiUrl:
+    Description: Public HTTP API endpoint for the detector
+    Value: !GetAtt HttpApi.ApiEndpoint
+  TableName:
+    Value: !Ref SessionTable
+  HistoryTableName:
+    Value: !Ref HistoryTable
+  FunctionName:
+    Value: !Ref DetectorFunction

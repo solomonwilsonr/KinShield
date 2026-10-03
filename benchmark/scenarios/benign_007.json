@@ -1,0 +1,29 @@
+{
+  "id": "benign_007",
+  "label": "benign",
+  "title": "Doctor's office appointment reminder",
+  "sources": [
+    "Ordinary healthcare reminder"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hi, this is Dr. Alvarez's office reminding you of your checkup on Thursday at 10."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "Thursday at 10, got it."
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "If you need to reschedule just call us back. Have a good day."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

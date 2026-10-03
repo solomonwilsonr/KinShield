@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>KinVoice — scam-call protection · KinShield</title>
+<meta name="description" content="Run a scripted scam call, or test your own: KinVoice scores the conversation turn by turn on Amazon Bedrock, warns the caregiver the moment it turns HIGH, and quotes the exact line behind every signal. No sign-up." />
+<link rel="icon" type="image/svg+xml" href="img/logo-mark.svg" />
+<meta name="theme-color" content="#F6F7F5" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" />
+<link rel="stylesheet" href="kinbot-app.css?v=20261003-2" />
+<link rel="stylesheet" href="kinvoice-app.css?v=20261003-3" />
+<link rel="stylesheet" href="guide.css?v=20261003-1" />
+</head>
+<body>
+<a class="kb-skip" href="#main">Skip to the calls</a>
+
+<div class="kb-shell">
+  <!-- Same sidebar as KinBot; KinVoice demo is the current page -->
+  <aside class="kb-side" id="kb-side" aria-label="KinShield menu">
+    <div class="kb-side-head">
+      <a class="kb-brand" href="kinvoice.html" aria-label="About KinVoice">
+        <span class="kb-mark" aria-hidden="true"></span><span>KinVoice</span>
+      </a>
+      <button class="kb-icon kb-side-close" type="button" id="kb-side-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+    </div>
+
+    <nav class="kb-nav-group" aria-label="KinVoice">
+      <button class="kb-nav kb-nav-new" type="button" id="kv-new">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>New call
+      </button>
+      <button class="kb-nav" type="button" data-view="own">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" /></svg>Test your own call
+      </button>
+      <button class="kb-nav" type="button" id="kv-side-scam">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z" /><path d="M12 8v4M12 16h.01" /></svg>Random scam call
+      </button>
+      <button class="kb-nav" type="button" id="kv-side-safe">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z" /><path d="M8.5 12l2.5 2.5 4.5-5" /></svg>Random safe call
+      </button>
+      <button class="kb-nav" type="button" data-view="alerts">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" /><path d="M10 21h4" /></svg>Alerts<span class="kv-count" id="kv-alert-n" hidden></span>
+      </button>
+      <button class="kb-nav" type="button" id="kv-side-guide">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h11l5 5v9a1 1 0 0 1-1 1H4z" /><path d="M8 11l2 2 4-4" /></svg>Get started
+      </button>
+      <button class="kb-nav" type="button" id="kv-side-setup">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" /></svg>Family setup
+      </button>
+    </nav>
+    <hr class="kb-hr" />
+    <nav class="kb-nav-group" aria-label="KinShield">
+      <a class="kb-nav" href="kinbot-chat.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" /></svg>KinBot
+      </a>
+      <a class="kb-nav is-current" href="kinvoice-app.html" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z" /></svg>KinVoice demo
+      </a>
+      <a class="kb-nav" href="kinmodel.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" /><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" /></svg>KinModel
+      </a>
+      <a class="kb-nav" href="./">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z" /></svg>Home
+      </a>
+    </nav>
+    <hr class="kb-hr" />
+    <p class="kb-sec" id="hist-label">This visit</p>
+    <div class="kb-history" id="kv-history" role="list" aria-labelledby="hist-label">
+      <p class="kb-history-empty" id="kv-history-empty">Calls you play show here until you close the tab.</p>
+    </div>
+
+    <button class="kb-guest kv-protect" type="button" id="kv-protect" aria-label="Family setup">
+      <span class="kb-guest-av kv-mom" id="kv-mom-av" aria-hidden="true">M</span>
+      <span class="kb-guest-txt"><b id="kv-mom-t">Mom · Protected</b><small id="kv-mom-s">KinVoice is watching her calls</small></span>
+    </button>
+  </aside>
+  <div class="kb-scrim" id="kb-scrim" hidden></div>
+
+  <main class="kb-main" id="main">
+    <header class="kb-top">
+      <button class="kb-icon kb-menu" type="button" id="kb-menu" aria-label="Open menu" aria-controls="kb-side" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </button>
+      <div class="kb-tabs" role="tablist" aria-label="KinVoice views">
+        <button type="button" role="tab" class="kb-tab" data-view="calls" aria-selected="true">Calls</button>
+        <button type="button" role="tab" class="kb-tab" data-view="own" aria-selected="false">Your call</button>
+        <button type="button" role="tab" class="kb-tab" data-view="live" aria-selected="false">Live call</button>
+        <button type="button" role="tab" class="kb-tab" data-view="alerts" aria-selected="false">Alerts</button>
+      </div>
+      <button class="kb-icon kb-top-new" type="button" id="kv-top-new" aria-label="New call">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+      </button>
+    </header>
+
+    <!-- ============ CALLS ============ -->
+    <section class="kb-log kv-view" id="v-calls" aria-label="Calls">
+      <div class="kv-home">
+        <p class="kb-pill"><i aria-hidden="true"></i>Live detector on Amazon Bedrock <span aria-hidden="true">·</span> <b>No sign-up</b></p>
+        <h1 class="kv-h1"><img src="img/mascot-face.png?v=20261002-20" alt="" width="64" height="64" />Did that call really come from family?</h1>
+        <p class="kv-lede">KinVoice scores a call while it’s happening. The moment it turns dangerous, the caregiver gets an alert that quotes the exact words, before any money moves.</p>
+
+        <button class="kv-setup-card" type="button" id="kv-setup-card">
+          <span class="kv-setup-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z" /><path d="M8.5 12l2.5 2.5 4.5-5" /></svg></span>
+          <span class="kv-setup-t"><b id="kv-setup-t">Protect someone in one minute</b><small id="kv-setup-s">Add who you’re protecting, who Kip should check with, and a family safe word.</small></span>
+          <span class="kv-setup-go" id="kv-setup-go">Set up</span>
+        </button>
+
+        <div class="kv-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+          <label class="kb-sr" for="kv-q">Search calls</label>
+          <input id="kv-q" type="search" placeholder="Search 63 calls, e.g. gift cards, bank, Medicare" autocomplete="off" />
+          <div class="kv-seg" role="group" aria-label="Call type">
+            <button type="button" class="is-on" data-type="scam">Scam</button>
+            <button type="button" data-type="benign">Safe</button>
+            <button type="button" data-type="all">All</button>
+          </div>
+        </div>
+
+        <p class="kb-qs-label">Start here</p>
+        <div class="kb-cards" id="kv-cards">
+          <button class="kb-card-btn risk" type="button" data-id="scam_001"><span class="kb-card-ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z" /><path d="M12 10v4M12 17h.01" /></svg></span><span class="kb-card-txt"><b>Grandson in jail</b><small>“Please don’t tell Mom.” Bail in Apple gift cards, today.</small></span></button>
+          <button class="kb-card-btn" type="button" data-pick="benign"><span class="kb-card-ic"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span><span class="kb-card-txt"><b>An ordinary family call</b><small>Watch KinVoice stay quiet when nothing is wrong.</small></span></button>
+          <button class="kb-card-btn risk" type="button" data-find="bank"><span class="kb-card-ic"><svg viewBox="0 0 24 24"><path d="M3 10l9-6 9 6M5 10v8M19 10v8M9 10v8M15 10v8M3 20h18" /></svg></span><span class="kb-card-txt"><b>“Your bank’s fraud team”</b><small>Authority pressure plus a request to move money.</small></span></button>
+          <button class="kb-card-btn" type="button" data-view="own"><span class="kb-card-ic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" /></svg></span><span class="kb-card-txt"><b>Test your own call</b><small>Type it, say it, or paste it. Scored by the same live detector.</small></span></button>
+        </div>
+
+        <div class="kv-listcard">
+          <div class="kv-list-h"><b id="kv-list-t">Scam calls</b><span id="kv-list-n"></span></div>
+          <div class="kv-list" id="kv-list"><p class="kv-empty">Loading calls…</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ YOUR OWN CALL ============ -->
+    <section class="kb-log kv-view" id="v-own" aria-label="Test your own call" hidden>
+      <div class="kv-own">
+        <h2 class="kv-h2">Test your own call</h2>
+        <p class="kv-lede">Write the call a scammer might make, or the one you actually got. Add it line by line, by typing or speaking, or paste a whole conversation. KinVoice scores it turn by turn, live on Amazon Bedrock.</p>
+
+        <div class="kv-card kv-own-card">
+          <div class="kv-own-row">
+            <label class="kv-field">
+              <span>The caller says they are</span>
+              <input id="o-who" type="text" maxlength="40" placeholder="e.g. Daniel, your grandson · the bank · Medicare" autocomplete="off" />
+            </label>
+            <label class="kv-field">
+              <span>Start from a scripted call</span>
+              <select id="o-load"><option value="">Blank call</option></select>
+            </label>
+          </div>
+
+          <div class="kv-own-lines" id="o-lines" aria-live="polite"></div>
+
+          <div class="kv-compose">
+            <div class="kv-seg kv-who" role="group" aria-label="Who is speaking">
+              <button type="button" class="is-on" data-sp="caller">Caller</button>
+              <button type="button" data-sp="victim" id="o-sp-victim">Mom</button>
+            </div>
+            <label class="kb-sr" for="o-text">Next line</label>
+            <textarea id="o-text" rows="1" maxlength="400" placeholder="Type what the caller says, then press Enter"></textarea>
+            <button class="kv-icon-btn" type="button" id="o-mic" aria-label="Say the line instead of typing" aria-pressed="false" title="Say it">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" /></svg>
+            </button>
+            <button class="kv-btn" type="button" id="o-add">Add line</button>
+          </div>
+          <p class="kv-mic-note" id="o-mic-note" hidden></p>
+
+          <details class="kv-paste">
+            <summary>Paste a whole conversation</summary>
+            <label class="kb-sr" for="o-paste">Conversation</label>
+            <textarea id="o-paste" rows="5" maxlength="6000" placeholder="Caller: Grandma, it's me. I'm in trouble.&#10;Mom: Danny? What happened?&#10;Caller: Please don't tell Dad. I need $2,000 in gift cards today."></textarea>
+            <button class="kv-btn ghost" type="button" id="o-paste-go">Use this conversation</button>
+          </details>
+
+          <div class="kv-own-foot">
+            <p class="kv-muted">Your words go to Amazon Bedrock to be scored and aren’t stored. Leave out real names and account numbers.</p>
+            <div class="kv-own-btns">
+              <button class="kv-btn grey" type="button" id="o-clear">Clear</button>
+              <button class="kv-btn" type="button" id="o-run" disabled>Run through KinVoice</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LIVE CALL ============ -->
+    <section class="kb-log kv-view" id="v-live" aria-label="Live call" hidden>
+      <div class="kv-work">
+        <div class="kv-call-h">
+          <span class="kv-av" id="c-av">?</span>
+          <div class="kv-call-t">
+            <span class="kv-k" id="c-kind">Live call · scripted</span>
+            <h2 id="c-title">No call yet</h2>
+            <span class="kv-sub"><b id="c-name">Caller</b> · Trusted caller ID · voice match 100% (assumed clone)</span>
+          </div>
+          <div class="kv-call-btns">
+            <button class="kv-btn ghost" type="button" id="c-voice" aria-pressed="false" title="Read the call aloud"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" /><path class="kv-wave" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" /></svg><span id="c-voice-t">Voice off</span></button>
+            <button class="kv-btn ghost" type="button" id="c-replay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v6h6" /><path d="M5 15a7 7 0 1 0 2-7.5L4 10" /></svg>Replay</button>
+            <button class="kv-btn ghost" type="button" data-view="calls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>All calls</button>
+          </div>
+        </div>
+
+        <div class="kv-grid">
+          <div class="kv-card kv-transcript">
+            <div class="kv-card-h"><b>Transcript</b><span class="kv-live is-off" id="c-live"><i></i>Waiting</span></div>
+            <div class="kv-chat" id="c-chat" aria-live="polite"><p class="kv-empty">Pick a call from the Calls tab to start.</p></div>
+          </div>
+
+          <div class="kv-col">
+            <div class="kv-card kv-risk" id="c-riskcard">
+              <div class="kv-risk-top">
+                <div><span class="kv-k">Call risk <span class="kv-k-live" id="c-scored"></span></span><b class="kv-score" id="c-score">0</b></div>
+                <span class="kv-lvl" id="c-level">IDLE</span>
+              </div>
+              <div class="kv-tl" id="c-tl" aria-label="Risk over the call"></div>
+              <p class="kv-lead" id="c-lead" hidden></p>
+              <div class="kv-sigs" id="c-sigs" aria-label="Signals fired on this call">
+                <span data-sig="impersonation">Impersonation</span><span data-sig="emergency">Emergency</span><span data-sig="secrecy">Secrecy</span><span data-sig="financial_request">Financial request</span><span data-sig="payment_anomaly">Payment anomaly</span><span data-sig="authority_pressure">Authority pressure</span><span data-sig="unusual_urgency">Unusual urgency</span>
+              </div>
+            </div>
+
+            <div class="kv-kip" role="status" aria-live="polite">
+              <img id="c-kip" src="img/kip-happy.png?v=20261002-20" alt="" width="320" height="320" />
+              <p id="c-say">Pick a call and Kip will walk you through it.</p>
+            </div>
+
+            <div class="kv-card">
+              <div class="kv-card-h"><b>Evidence <span class="kv-muted" id="c-evn"></span></b><span class="kv-muted">Every signal quotes the exact line</span></div>
+              <div id="c-ev"><p class="kv-empty">Evidence appears once Bedrock has read the whole call.</p></div>
+              <div id="c-loc"></div>
+              <div class="kv-rec" id="c-rec" hidden></div>
+              <div class="kv-acts" id="c-act" hidden></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ALERTS ============ -->
+    <section class="kb-log kv-view" id="v-alerts" aria-label="Alerts" hidden>
+      <div class="kv-alerts">
+        <h2 class="kv-h2">Alerts</h2>
+        <p class="kv-lede">What a caregiver would be told about the calls you played on this visit. Kept only in this tab.</p>
+        <div class="kv-seg kv-seg-solo" role="group" aria-label="Filter alerts">
+          <button type="button" class="is-on" data-f="all">All</button>
+          <button type="button" data-f="HIGH">High</button>
+          <button type="button" data-f="MEDIUM">Medium</button>
+          <button type="button" data-f="LOW">Low</button>
+        </div>
+        <div class="kv-listcard" id="kv-feed"></div>
+      </div>
+    </section>
+
+    <!-- Mid-call push notification (fires when the score crosses the alert level) -->
+    <div class="kv-toast" id="kv-toast" role="alert" hidden></div>
+  </main>
+</div>
+
+<!-- Dialog (push alert / FamilyVerify / report / setup) -->
+<div class="kv-modal" id="kv-modal" hidden>
+  <div class="kv-modal-scrim" data-close></div>
+  <div class="kv-dialog" id="kv-dialog" role="dialog" aria-modal="true" aria-labelledby="kv-dialog-title"></div>
+</div>
+
+<div class="kb-sr" role="status" id="kv-status"></div>
+<script src="config.js"></script>
+<script src="guide.js?v=20261003-1"></script>
+<script src="kinvoice-app.js?v=20261003-3"></script>
+</body>
+</html>

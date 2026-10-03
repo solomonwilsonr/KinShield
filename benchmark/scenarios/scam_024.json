@@ -1,0 +1,42 @@
+{
+  "id": "scam_024",
+  "label": "scam",
+  "title": "Buy gold bars, a 'federal courier' will collect them (dollar-bill passcode)",
+  "sources": [
+    "IC3 PSA 240129: couriers collect cash or gold from seniors to 'protect' funds",
+    "FTC Data Spotlight Aug 2025: 'False alarm, real scam' -- accounts/SSN 'compromised'"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is Officer Reed, Treasury Department. To keep your savings safe from the identity thieves, you must convert it to gold."
+    },
+    {
+      "t": "00:09",
+      "speaker": "caller",
+      "text": "Withdraw the cash and buy gold bars at the dealer I name. A federal courier will come to your house tonight to secure them."
+    },
+    {
+      "t": "00:18",
+      "speaker": "victim",
+      "text": "Someone is coming to my house?"
+    },
+    {
+      "t": "00:21",
+      "speaker": "caller",
+      "text": "Yes. Give him the gold only after he reads you the serial number of the dollar bill I'm about to give you. Tell no one, not even your children."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "secrecy",
+      "unusual_urgency"
+    ]
+  }
+}

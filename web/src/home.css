@@ -1,0 +1,204 @@
+/* KinShield hub homepage — layout from a fintech landing reference, KinShield theme kept.
+   Loaded after styles.css + hub.css. Never name a class .kip (global rule in styles.css). */
+
+/* ---------- hero ---------- */
+.android-announcement { background: var(--ink); color: var(--white); }
+.android-announcement-inner { min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 14px; padding-top: 10px; padding-bottom: 10px; font-size: 14px; line-height: 1.35; }
+.android-announcement-kicker { color: var(--mint); font-weight: 650; white-space: nowrap; }
+.android-announcement-copy { color: rgba(255, 255, 255, .82); }
+.android-announcement-link { display: inline-flex; align-items: center; gap: 5px; color: var(--ink); background: var(--mint); border-radius: 999px; padding: 7px 13px; font-weight: 650; text-decoration: none; white-space: nowrap; }
+.android-announcement-link:hover { background: var(--white); }
+.android-announcement-link .ms { font-size: 17px; }
+
+.h2-hero-copy { text-align: center; display: grid; justify-items: center; gap: 22px; padding-top: clamp(48px, 6vw, 96px); padding-bottom: clamp(40px, 4.4vw, 64px); }
+.h2-hero-copy h1 { font-size: clamp(44px, 7.2vw, 104px); line-height: .96; letter-spacing: -.045em; max-width: 12ch; }
+.h2-hero-copy p { max-width: 520px; font-size: 18px; line-height: 1.5; color: var(--ink-2); }
+.h2-hero-copy strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- card strip ---------- */
+.h2-hero { overflow-x: clip; }
+.h2-strip { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 4.6fr) minmax(0, 1fr); gap: 14px; height: clamp(380px, 32vw, 470px); margin: 0 calc(-1 * clamp(40px, 6vw, 120px)); }
+.h2-card { position: relative; overflow: hidden; border-radius: 6px; text-decoration: none; color: var(--white); background: #3A8CCB url("img/kinshield-meadow.jpg") no-repeat center 78% / cover; }
+.h2-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 17, 35, .35), rgba(0, 17, 35, 0) 45%); }
+.h2-left { background: radial-gradient(120% 90% at 100% 40%, var(--mint) 0, var(--brand) 22%, var(--brand-deep) 46%, var(--ink) 88%); }
+.h2-right { background: radial-gradient(110% 90% at 0% 50%, var(--mint) 0, var(--brand) 20%, var(--brand-ink) 44%, var(--ink) 90%); }
+/* centre card: Kip on the train with Mom and Dad. Boards sit low so faces stay clear. */
+.h2-main { background: #1d3f8f url("img/kip-subway.jpg") no-repeat center 30% / cover; }
+.h2-main::before { background: linear-gradient(180deg, rgba(0, 17, 35, .55), rgba(0, 17, 35, 0) 30%); }
+.h2-main-title { position: absolute; top: 28px; left: 0; right: 0; text-align: center; font-size: clamp(20px, 1.8vw, 26px); font-weight: 600; letter-spacing: -.01em; z-index: 1; text-shadow: 0 2px 14px rgba(0, 17, 35, .35); }
+
+/* ---------- white mock boards ---------- */
+.dk { position: absolute; z-index: 1; background: rgba(255, 255, 255, .97); color: var(--ink); border: 1px solid rgba(0, 17, 35, .06); border-radius: 10px; padding: 14px 16px; box-shadow: var(--shadow-lg); display: grid; gap: 10px; font-size: 13px; }
+.dk-k { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+.dk q { line-height: 1.4; font-size: 14px; }
+.dk-row { display: flex; gap: 18px; font-size: 11px; color: var(--muted); }
+.dk-row span { display: grid; gap: 2px; }
+.dk-row b { color: var(--ink); font-weight: 500; font-size: 13px; }
+.dk i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); flex: none; }
+.dk i.r { background: var(--red); }
+.dk i.a { background: #E0A43A; }
+.dk-bar { height: 34px; border-radius: 6px; background: var(--line-soft); overflow: hidden; }
+.dk-bar i { display: block; width: auto; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--brand), #F2BF62 55%, var(--red)); }
+
+/* centre chart + overlapping score card */
+.dk-chart { left: 60%; right: 3%; top: 46%; bottom: -12px; padding-bottom: 28px; }
+.dk-chart svg { width: 100%; height: 100%; min-height: 0; }
+.dk-chart .grid line { stroke: var(--line-soft); }
+.dk-chart polyline { fill: none; stroke-width: 2.4; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.dk-chart .ok { stroke: var(--brand-deep); }
+.dk-chart .bad { stroke: var(--red); }
+.dk-chart .thr { stroke: var(--line-strong); stroke-dasharray: 4 5; vector-effect: non-scaling-stroke; }
+.dk-chart .dot { fill: var(--ink); }
+.dk-chart { grid-template-rows: auto minmax(0, 1fr) auto; }
+.dk-flag { position: absolute; left: 30%; top: 30%; background: var(--ink); color: var(--white); border-radius: 4px; padding: 3px 8px; font-size: 11px; font-weight: 600; }
+.dk-axis { display: flex; justify-content: space-between; font-size: 10px; color: var(--faint); padding: 0 2%; }
+.dk-score { left: 3%; width: min(270px, 24%); bottom: -14px; gap: 10px; }
+.dk-big { font-size: 56px; font-weight: 500; letter-spacing: -.03em; line-height: .95; }
+
+/* centre card: two small "all good" cards that leave the photo clear */
+.dk-good { grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 12px 16px 12px 12px; border-radius: 14px; animation: dk-float 5s ease-in-out infinite; }
+.dk-good b { display: block; font-size: 15px; font-weight: 600; }
+.dk-good div span { font-size: 12px; color: var(--muted); }
+.dk-tick { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--mint); color: var(--mint-ink); }
+.dk-tick .ms { font-size: 22px; font-variation-settings: "FILL" 1; }
+.dk-good-a { left: 4%; bottom: 8%; }
+.dk-good-b { right: 4%; bottom: 20%; grid-template-columns: auto minmax(0, 1fr); animation-delay: -2.5s; }
+.dk-good-b .dk-tick { background: #FFE3EA; color: #C2335A; }
+@keyframes dk-float { 50% { transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .dk-good { animation: none; } }
+
+/* side cards */
+.h2-side .dk { width: 290px; top: 50%; transform: translateY(-50%); }
+.h2-left .dk { right: 18px; }
+.h2-right .dk { left: 18px; }
+.dk-signs { display: grid; gap: 6px; }
+.dk-signs li, .dk-step { display: flex; align-items: center; gap: 8px; }
+.dk-li { display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid var(--line-soft); color: var(--muted); }
+.dk-li b { color: var(--ink); font-weight: 500; }
+
+/* ---------- split section heading ---------- */
+.h2-wrap { max-width: 1200px; }
+.h2-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; margin-bottom: 48px; }
+.h2-split h2 { font-size: clamp(34px, 3.4vw, 48px); line-height: 1.05; }
+.h2-split h2 span { display: block; color: #9AA3AD; }
+.h2-split-copy { display: grid; gap: 18px; font-size: 17px; line-height: 1.55; color: var(--ink-2); padding-top: 6px; }
+.h2-split-copy .btn-row { margin-top: 18px; }
+
+/* ---------- big image tiles ---------- */
+.h2-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.h2-tile { position: relative; overflow: hidden; border-radius: 6px; aspect-ratio: 1 / 1.02; color: var(--white); padding: 22px 24px; }
+.h2-tile h3 { position: relative; z-index: 1; font-size: clamp(22px, 2vw, 28px); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; }
+.h2-tile h3 span { display: block; color: rgba(255, 255, 255, .72); }
+.t-meadow { background: #3A8CCB url("img/kinshield-meadow.jpg") no-repeat 30% 82% / cover; }
+.t-meadow2 { background: #3A8CCB url("img/kinshield-meadow-soft.jpg") no-repeat 70% 60% / 260%; }
+.t-meadow::before, .t-meadow2::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 17, 35, .45), rgba(0, 17, 35, 0) 40%); }
+.t-orb { background: var(--ink); }
+.t-orb::after { content: ""; position: absolute; width: 78%; aspect-ratio: 1; left: 11%; top: 24%; border-radius: 50%; background: radial-gradient(circle at 50% 30%, rgba(162, 241, 169, .9) 0, var(--brand) 30%, var(--brand-deep) 58%, rgba(0, 17, 35, 0) 72%); opacity: .85; filter: blur(6px); }
+.t-orb::before { content: ""; position: absolute; inset: 0; background: radial-gradient(90% 70% at 20% 0%, rgba(94, 190, 106, .55), transparent 60%); }
+/* KinBot tile: the real app in a device frame that runs off the tile's edge */
+.t-device { color: var(--ink); background: radial-gradient(60% 50% at 0% 62%, rgba(94, 190, 106, .55), transparent 70%), radial-gradient(70% 45% at 70% 18%, rgba(162, 241, 169, .7), transparent 70%), linear-gradient(180deg, #F7FBF7, var(--white)); }
+.t-device h3 span { color: #9AA3AD; }
+.dv { position: absolute; left: 13%; top: 30%; width: 128%; aspect-ratio: 1600 / 1025; padding: 9px; border-radius: 30px 0 0 0; background: var(--ink); box-shadow: -34px 40px 60px rgba(0, 17, 35, .28), -8px 10px 18px rgba(0, 17, 35, .18); }
+.dv::before { content: ""; position: absolute; left: 50%; top: 3px; width: 5px; height: 5px; border-radius: 50%; background: #2A3A4A; }
+.dv-screen { width: 100%; height: 100%; overflow: hidden; border-radius: 22px 0 0 0; background: var(--white); }
+.dv-screen img { display: block; width: 100%; height: auto; }
+.h2-more.h2-more-dark { color: var(--white); background: var(--ink); border-color: var(--ink); }
+.h2-more.h2-more-dark:hover { background: var(--white); color: var(--ink); }
+.t-ink { background: radial-gradient(80% 60% at 80% 100%, rgba(162, 241, 169, .55), transparent 60%), radial-gradient(70% 60% at 0% 0%, rgba(94, 190, 106, .6), transparent 60%), var(--ink); }
+.h2-tile .dk { left: 50%; top: 52%; transform: translate(-50%, -50%); width: min(340px, 78%); }
+.dk-bub { background: var(--paper); border-radius: 10px 10px 10px 2px; padding: 8px 11px; font-size: 13px; justify-self: start; }
+.dk-step span { color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; }
+.dk-step b { margin-left: auto; font-weight: 500; text-align: right; }
+.dk-compare { grid-template-columns: 1fr 1fr; }
+.dk-compare .dk-k, .dk-compare .dk-agree { grid-column: 1 / -1; }
+.dk-col { display: grid; gap: 4px; background: var(--paper); border-radius: 8px; padding: 10px 12px; color: var(--muted); font-size: 12px; }
+.dk-col b { font-size: 34px; font-weight: 500; color: var(--ink); letter-spacing: -.02em; line-height: 1; }
+.dk-col b.red { color: var(--red); }
+.dk-agree { background: var(--mint); color: var(--mint-ink); border-radius: 6px; padding: 6px 10px; font-weight: 600; text-align: center; }
+.dk-chips ul { display: flex; flex-wrap: wrap; gap: 6px; }
+.dk-chips li { background: var(--paper); border-radius: 20px; padding: 5px 11px; font-size: 12.5px; }
+.h2-more { position: absolute; right: 20px; bottom: 20px; z-index: 2; color: var(--white); text-decoration: none; font-size: 14px; font-weight: 500; border: 1.2px solid rgba(255, 255, 255, .85); border-radius: 20px; padding: 7px 16px; background: rgba(0, 17, 35, .18); backdrop-filter: blur(6px); }
+.h2-more:hover { background: var(--white); color: var(--ink); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1000px) {
+  .android-announcement-inner { justify-content: flex-start; flex-wrap: wrap; gap: 6px 10px; }
+  .android-announcement-copy { flex-basis: 100%; order: 3; }
+  .h2-strip { grid-template-columns: minmax(0, 1fr); margin: 0 clamp(16px, 5.56vw, 80px); height: 460px; }
+  .h2-side { display: none; }
+  /* phones/tablets: centred photo, the two cards float near the bottom */
+  .h2-main { background-image: url("img/kip-subway-sm.jpg"); background-position: center 30%; }
+  .dk-good-a { left: 12px; right: auto; bottom: 14px; }
+  .dk-good-b { right: 12px; left: auto; bottom: 92px; }
+  .h2-split { grid-template-columns: 1fr; gap: 20px; margin-bottom: 28px; }
+  .h2-pair { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .android-announcement-inner { min-height: 0; justify-content: space-between; flex-wrap: nowrap; gap: 8px; padding-top: 8px; padding-bottom: 8px; }
+  .android-announcement-kicker { overflow: hidden; font-size: 11px; text-overflow: ellipsis; }
+  .android-announcement-copy { display: none; }
+  .android-announcement-link { flex: none; gap: 3px; padding: 6px 10px; font-size: 12px; }
+  .android-announcement-link .ms { font-size: 15px; }
+  .h2-hero-copy p { font-size: 17px; }
+  .h2-hero-copy .btn-row .btn, .h2-split-copy .btn-row .btn { flex: 1; }
+  .h2-main-title { font-size: 19px; padding: 0 16px; }
+  .h2-tile { aspect-ratio: auto; min-height: 440px; }
+  .h2-tile .dk { width: calc(100% - 32px); }
+  .dv { left: 10%; top: 26%; width: 170%; }
+  .dk-flag { display: none; }
+  .h2-strip { height: 440px; }
+  .dk-good { padding: 10px 12px 10px 10px; gap: 10px; }
+  .dk-good b { font-size: 14px; }
+  .dk-tick { width: 34px; height: 34px; }
+  .dk-good-a { right: 12px; }
+  /* phones: buttons stack full width so labels never wrap */
+  .h2-hero-copy .btn-row { flex-direction: column; align-self: stretch; width: 100%; }
+  .h2-hero-copy .btn-row .btn { width: 100%; white-space: nowrap; }
+  /* phones: photo on top, title + cards below it so nothing covers Kip */
+  .h2-strip { height: auto; }
+  .h2-main { display: flex; flex-direction: column; gap: 10px; padding: 290px 12px 12px; background: #0B1F3A url("img/kip-subway-sm.jpg") no-repeat center top / auto 300px; }
+  .h2-main::before { background: linear-gradient(180deg, rgba(11, 31, 58, 0) 200px, #0B1F3A 300px); }
+  .h2-main-title { position: relative; top: auto; text-align: left; padding: 0 4px 4px; font-size: 20px; line-height: 1.2; }
+  .h2-main .dk-good { position: relative; left: auto; right: auto; bottom: auto; animation: none; }
+}
+
+/* hero headline: keep ( Kip ) watch. */
+.h2-hero-copy h1.h2-kip-title { max-width: none; }
+
+/* ---------- under the hood (judges) ---------- */
+.uh-flow { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 30px; margin: 28px 0 0; padding: 0; }
+.uh-flow li { position: relative; padding: 8px 14px; border-radius: 999px; background: var(--paper); font-size: 15px; font-weight: 500; }
+.uh-flow li + li::before { content: "→"; position: absolute; left: -22px; top: 50%; transform: translateY(-50%); color: var(--brand-deep); font-weight: 600; }
+.uh-lede { max-width: 820px; margin-top: 18px; font-size: 17px; line-height: 1.55; color: var(--ink-2); }
+.uh-lede strong { color: var(--ink); font-weight: 600; }
+.uh-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+.uh-grid .card { padding: 20px; gap: 10px; }
+.uh-grid h3 { display: flex; align-items: center; gap: 8px; font-size: 19px; font-weight: 500; }
+.uh-grid h3 .ms { color: var(--brand-deep); font-size: 24px; }
+.uh-grid ul { display: grid; gap: 8px; margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.45; color: var(--ink-2); }
+.uh-note { margin-top: 18px; font-size: 14px; color: var(--muted); }
+@media (max-width: 640px) {
+  .uh-grid { grid-template-columns: minmax(0, 1fr); }
+  .uh-flow { gap: 8px; }
+  .uh-flow li + li::before { position: static; transform: none; margin-right: 6px; }
+}
+
+/* ---------- pricing: one plan for KinVoice + KinBot ---------- */
+.price-one { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px; }
+.price-main { padding: 36px; gap: 20px; }
+.price-main h3 { font-size: 24px; }
+.price-main p { font-size: 16px; line-height: 1.5; }
+.price-cta { justify-self: start; background: var(--white); color: var(--brand-deep); }
+.price-incl { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-content: start; }
+.price-col { background: var(--paper-2); border-radius: 8px; padding: 28px; }
+.price-col h3 { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 500; margin-bottom: 18px; }
+.price-col h3 .ms { color: var(--brand-deep); }
+.price-col ul { display: grid; gap: 12px; }
+.price-col li { display: flex; gap: 10px; font-size: 15px; line-height: 1.4; }
+.price-col li .ms { color: var(--brand-deep); font-size: 18px; }
+.price-later { grid-column: 1 / -1; margin: 0; padding: 18px 22px; border: 1px dashed var(--line); border-radius: 8px; font-size: 14px; color: var(--muted); }
+.price-later b { color: var(--ink); font-weight: 600; }
+@media (max-width: 900px) {
+  .price-one, .price-incl { grid-template-columns: 1fr; }
+  .price-main { padding: 28px; }
+}

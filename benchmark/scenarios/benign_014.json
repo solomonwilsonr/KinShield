@@ -1,0 +1,29 @@
+{
+  "id": "benign_014",
+  "label": "benign",
+  "title": "Insurance agent annual review, no payment",
+  "sources": [
+    "Ambiguous benign: financial-adjacent call, but no request for money or urgency"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hello, this is your State Mutual agent. It's time for your annual policy review."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "Sure, is my premium changing?"
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "It's staying the same. No action needed, I just wanted to confirm your coverage still fits."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

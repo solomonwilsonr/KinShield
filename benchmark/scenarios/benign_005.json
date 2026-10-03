@@ -1,0 +1,34 @@
+{
+  "id": "benign_005",
+  "label": "benign",
+  "title": "Daughter keeps a birthday surprise secret",
+  "sources": [
+    "Ambiguous benign: a secrecy phrase with a wholesome reason, no money/urgency"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hi Mom, don't tell Dad, but I'm throwing him a surprise party for his 70th."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "Oh how fun! My lips are sealed."
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "Can you keep him busy Saturday afternoon so I can set up?"
+    },
+    {
+      "t": "00:15",
+      "speaker": "victim",
+      "text": "I'll take him to the garden center, he loves that."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

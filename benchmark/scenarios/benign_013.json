@@ -1,0 +1,29 @@
+{
+  "id": "benign_013",
+  "label": "benign",
+  "title": "Church volunteer scheduling",
+  "sources": [
+    "Ordinary community call"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hi, it's Marge from the parish. Can you help with the bake sale Sunday?"
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Of course, what should I bring?"
+    },
+    {
+      "t": "00:09",
+      "speaker": "caller",
+      "text": "Your famous lemon bars would be perfect."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

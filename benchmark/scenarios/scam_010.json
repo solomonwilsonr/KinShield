@@ -1,0 +1,39 @@
+{
+  "id": "scam_010",
+  "label": "scam",
+  "title": "Romance -- overseas emergency wire",
+  "sources": [
+    "FTC romance-scam pattern"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Darling, it's David. My project overseas hit a snag and customs is holding my equipment."
+    },
+    {
+      "t": "00:08",
+      "speaker": "victim",
+      "text": "Oh dear, what can I do?"
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "If you could wire $5,000 to release it I'll pay you back the moment I fly home to you."
+    },
+    {
+      "t": "00:19",
+      "speaker": "caller",
+      "text": "Please keep this between us, I don't want your kids thinking less of me."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "financial_request",
+      "payment_anomaly",
+      "secrecy",
+      "emergency"
+    ]
+  }
+}

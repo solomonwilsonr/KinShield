@@ -1,0 +1,15 @@
+{
+  "id": "benign_002",
+  "label": "benign",
+  "title": "Pharmacy prescription reminder",
+  "sources": [],
+  "turns": [
+    {"t": "00:00", "speaker": "caller", "text": "Hi, this is Riverside Pharmacy calling to let you know your prescription refill is ready for pickup."},
+    {"t": "00:07", "speaker": "victim", "text": "Oh good, thank you. What are your hours today?"},
+    {"t": "00:10", "speaker": "caller", "text": "We're open until 7pm. No rush, it'll be here whenever you're able to stop by."}
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

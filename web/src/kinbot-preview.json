@@ -1,0 +1,84 @@
+{
+ "text": "Grandma it's me, I got in a car accident and I'm at the police station. Please don't tell Mom. I need $2,000 for bail today. Can you get Target gift cards and read me the numbers?",
+ "check": {
+  "kind": "check",
+  "risk_level": "HIGH",
+  "risk_score": 114,
+  "headline": "This looks like a family-emergency scam.",
+  "summary": "I wouldn't act on it yet. A real emergency can wait the two minutes it takes to check. These are the exact words that worry me:",
+  "signs": [
+   {
+    "signal": "secrecy",
+    "label": "Asks for secrecy",
+    "quote": "Please don't tell Mom.",
+    "weight": 28
+   },
+   {
+    "signal": "financial_request",
+    "label": "Asks for money",
+    "quote": "I need $2,000 for bail today.",
+    "weight": 28
+   },
+   {
+    "signal": "payment_anomaly",
+    "label": "Unusual payment",
+    "quote": "Can you get Target gift cards and read me the numbers?",
+    "weight": 28
+   },
+   {
+    "signal": "emergency",
+    "label": "Sudden emergency",
+    "quote": "Grandma it's me, I got in a car accident and I'm at the police station.",
+    "weight": 18
+   }
+  ],
+  "steps": [
+   "Don't send money, gift cards, or codes yet.",
+   "Hang up and call the person back on a number you already have saved.",
+   "Tell someone you trust, even if the message asked you not to."
+  ],
+  "recommended_action": "End the call. Independently contact the family member using a number you already have saved -- not a number the caller gives you.",
+  "lite": {
+   "score": 0.984,
+   "label": "scam-like"
+  },
+  "latency_ms": 1705
+ },
+ "investigation": {
+  "kind": "investigation",
+  "level": "info",
+  "steps": [
+   {
+    "tool": "lookup_guidance",
+    "label": "Looked up scam advice",
+    "target": "gift card scam",
+    "ms": 0,
+    "findings": [
+     {
+      "level": "info",
+      "text": "Gift card payment: Only scammers ask to be paid with gift cards. Real businesses and agencies never do. If you already gave the numbers, call the card company now; sometimes the money can be frozen."
+     },
+     {
+      "level": "info",
+      "text": "Grandparent / family emergency: Hang up and call your relative, or another family member, on the number you already have. Ask a question only the real person would know. Real emergencies can wait two minutes."
+     }
+    ],
+    "level": "info"
+   }
+  ],
+  "summary": "The message is a high\u2011risk gift\u2011card scam. The sender is asking for $2,000 in Target gift cards to pay bail. No links, phone numbers, emails or crypto wallets were found. The guidance confirms that real agencies never request gift\u2011card payments and that you should not provide any card numbers.",
+  "next_step": "Do not send any gift\u2011card numbers; instead, call your grandmother or another trusted family member to verify the situation.",
+  "targets": {
+   "links": [],
+   "phones": [],
+   "emails": [],
+   "wallets": []
+  },
+  "tool_calls": 1,
+  "model_turns": 2,
+  "fallback": false,
+  "browser": "static-fetch",
+  "total_ms": 1087,
+  "latency_ms": 1087
+ }
+}

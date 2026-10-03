@@ -1,0 +1,41 @@
+{
+  "id": "scam_027",
+  "label": "scam",
+  "title": "Fake FTC 'agent' with a badge number offers to recover lost money -- for a fee",
+  "sources": [
+    "FTC Consumer Alerts 2025-05, 2026-06, 2026-08: fake FTC 'agents' offering paid scam recovery"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Good afternoon, I'm Agent Miller with the Federal Trade Commission, badge number 4471. You lost money to an online scam last year, correct?"
+    },
+    {
+      "t": "00:10",
+      "speaker": "victim",
+      "text": "Yes, about six thousand dollars."
+    },
+    {
+      "t": "00:13",
+      "speaker": "caller",
+      "text": "We recovered your funds. To release them, you just pay a processing fee of $499 with gift cards today."
+    },
+    {
+      "t": "00:20",
+      "speaker": "caller",
+      "text": "The offer closes at the end of business. Please keep this confidential, it's an active investigation."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency",
+      "secrecy"
+    ]
+  }
+}

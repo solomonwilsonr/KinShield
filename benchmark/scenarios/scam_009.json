@@ -1,0 +1,39 @@
+{
+  "id": "scam_009",
+  "label": "scam",
+  "title": "Utility shutoff -- immediate prepaid card",
+  "sources": [
+    "FTC utility-scam pattern"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is City Power. Your bill is overdue and power will be shut off in 30 minutes."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "But I paid last week!"
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "Our system shows otherwise. Pay $210 now with a prepaid card to avoid disconnection."
+    },
+    {
+      "t": "00:17",
+      "speaker": "caller",
+      "text": "Go to the store now and call me back with the card number, the truck is already en route."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency"
+    ]
+  }
+}

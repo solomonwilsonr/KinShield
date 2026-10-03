@@ -1,0 +1,47 @@
+{
+  "id": "scam_019",
+  "label": "scam",
+  "language": "hinglish",
+  "title": "[Hinglish] Beta in trouble, UPI transfer",
+  "sources": [
+    "FTC/IC3 family-emergency pattern, code-mixed Hindi-English variant"
+  ],
+  "claimed_identity": "Rohan",
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Nani, main Rohan bol raha hoon. Please suno, main badi problem mein hoon."
+    },
+    {
+      "t": "00:06",
+      "speaker": "caller",
+      "text": "Mera accident ho gaya hai aur police ne mujhe pakad liya hai."
+    },
+    {
+      "t": "00:12",
+      "speaker": "victim",
+      "text": "Hai Ram! Kya hua beta?"
+    },
+    {
+      "t": "00:15",
+      "speaker": "caller",
+      "text": "Mummy ko mat batana, woh ghabra jayegi. Abhi 50,000 rupaye UPI se bhejne padenge warna FIR ho jayegi."
+    },
+    {
+      "t": "00:24",
+      "speaker": "caller",
+      "text": "Jaldi karo, 10 minute mein bhejna hai. Main ek number de raha hoon, us par bhej do."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "emergency",
+      "secrecy",
+      "financial_request",
+      "unusual_urgency"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "benign_010",
+  "label": "benign",
+  "title": "Neighbor asking to water plants",
+  "sources": [
+    "Ordinary neighborly call"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hi, it's Dave from next door. We're away this week -- could you water the ferns?"
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "Happy to. Spare key still under the mat?"
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "Yep. Thanks so much, we'll bring you something back."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

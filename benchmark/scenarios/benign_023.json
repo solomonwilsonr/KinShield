@@ -1,0 +1,29 @@
+{
+  "id": "benign_023",
+  "label": "benign",
+  "title": "Daughter confirming holiday travel",
+  "sources": [
+    "Ordinary family logistics"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Mom, our flight lands at 6 on the 23rd. Can Dad grab us?"
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "He'll be there with the big car for the luggage."
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "Perfect, see you soon!"
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "benign_015",
+  "label": "benign",
+  "title": "Grandchild venting about a rough day",
+  "sources": [
+    "Ordinary emotional-but-benign family call"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Grandpa, I had the worst day, I bombed my exam."
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Oh sweetheart, one exam won't define you."
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "Thanks for listening. I just needed to hear a friendly voice."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

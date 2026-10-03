@@ -1,0 +1,29 @@
+{
+  "id": "benign_017",
+  "label": "benign",
+  "title": "Utility scheduled-maintenance notice",
+  "sources": [
+    "Ordinary utility notice (matches the seed benign_003 pattern family)"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Automated notice from Valley Water: hydrant flushing in your area Thursday morning."
+    },
+    {
+      "t": "00:08",
+      "speaker": "victim",
+      "text": "Alright, good to know."
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "No action needed. Details at valleywater.example.gov."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

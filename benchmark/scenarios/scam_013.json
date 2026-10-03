@@ -1,0 +1,40 @@
+{
+  "id": "scam_013",
+  "label": "scam",
+  "title": "Arrest-for-missed-jury-duty -- courier",
+  "sources": [
+    "IC3 government-impersonation / jury-duty variant"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is Deputy Harris. You missed federal jury duty and a bench warrant was issued."
+    },
+    {
+      "t": "00:08",
+      "speaker": "victim",
+      "text": "I never got a summons!"
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "You can clear it with a $1,500 fine. A courier will collect it, or buy gift cards to pay now."
+    },
+    {
+      "t": "00:19",
+      "speaker": "caller",
+      "text": "Do not discuss this with family; it could be seen as evading arrest."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "secrecy",
+      "unusual_urgency"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "scam_006",
+  "label": "scam",
+  "title": "Tech support -- remote access and payment",
+  "sources": [
+    "FTC tech-support scam pattern"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Ma'am, this is Microsoft Support. We detected a virus sending your banking data to hackers."
+    },
+    {
+      "t": "00:08",
+      "speaker": "victim",
+      "text": "Oh no, what do I do?"
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "Let me connect to your computer remotely, and you'll need to pay a $299 fee to remove it."
+    },
+    {
+      "t": "00:18",
+      "speaker": "caller",
+      "text": "Please buy a prepaid card at the pharmacy and read me the number, quickly, before more data leaks."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency"
+    ]
+  }
+}

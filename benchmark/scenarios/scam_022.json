@@ -1,0 +1,45 @@
+{
+  "id": "scam_022",
+  "label": "scam",
+  "title": "'Microsoft' says your bank was hacked, hands you to the 'bank' (Phantom Hacker)",
+  "sources": [
+    "IC3 PSA 230929: 'Phantom Hacker' layered tech-support/bank/government impostors"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hello, this is Kevin from Microsoft Security. Your computer sent us an alert that hackers are inside your online banking."
+    },
+    {
+      "t": "00:09",
+      "speaker": "victim",
+      "text": "Oh my goodness, what do I do?"
+    },
+    {
+      "t": "00:12",
+      "speaker": "caller",
+      "text": "I'm transferring you to the fraud team at your bank right now. Stay on the line and do not hang up."
+    },
+    {
+      "t": "00:19",
+      "speaker": "caller",
+      "text": "This is Linda, bank fraud department. The hackers are draining your savings. You need to move all of it today, before 5 p.m."
+    },
+    {
+      "t": "00:29",
+      "speaker": "caller",
+      "text": "Do not tell the teller why. If they ask, say it is for a home renovation. The hacker may be someone who works at the branch."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "authority_pressure",
+      "unusual_urgency",
+      "financial_request",
+      "secrecy"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "scam_007",
+  "label": "scam",
+  "title": "Fake grandchild -- hospital, courier cash pickup",
+  "sources": [
+    "IC3 PSA 231117",
+    "courier cash-pickup variant"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Grandma? It's your grandson. I'm hurt, I'm in the hospital."
+    },
+    {
+      "t": "00:06",
+      "speaker": "caller",
+      "text": "Please don't tell Mom, I don't want her to worry."
+    },
+    {
+      "t": "00:10",
+      "speaker": "victim",
+      "text": "Are you okay?? What happened?"
+    },
+    {
+      "t": "00:13",
+      "speaker": "caller",
+      "text": "I need $2,000 for the treatment. A courier will come to your door to pick up the cash in an hour."
+    },
+    {
+      "t": "00:21",
+      "speaker": "caller",
+      "text": "Have it ready and don't mention this to anyone."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "emergency",
+      "secrecy",
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency"
+    ]
+  }
+}

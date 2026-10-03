@@ -1,0 +1,16 @@
+{
+  "id": "benign_001",
+  "label": "benign",
+  "title": "Grandson confirming dinner plans",
+  "sources": [],
+  "turns": [
+    {"t": "00:00", "speaker": "caller", "text": "Hi Grandma, it's me. I'll pick you up around six tonight."},
+    {"t": "00:05", "speaker": "victim", "text": "Sounds great, do you want to eat at the usual place?"},
+    {"t": "00:09", "speaker": "caller", "text": "Sure, or we could try that new Italian place if you're up for it. Do you need anything from the store on my way?"},
+    {"t": "00:16", "speaker": "victim", "text": "Could you grab some milk? Thank you, sweetheart."}
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "id": "benign_009",
+  "label": "benign",
+  "title": "Bank fraud department genuine verification (inbound the user initiated)",
+  "sources": [
+    "Ambiguous benign: legitimate bank call about a charge, no payment demand"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hi, this is Meridian Bank returning your call about the charge you flagged."
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Yes, I didn't recognize a $60 charge from an online store."
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "We've removed it and are reissuing your card. You don't need to do anything or pay anything."
+    },
+    {
+      "t": "00:18",
+      "speaker": "victim",
+      "text": "Wonderful, thank you."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

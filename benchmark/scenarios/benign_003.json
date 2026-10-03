@@ -1,0 +1,15 @@
+{
+  "id": "benign_003",
+  "label": "benign",
+  "title": "Utility company real outage notice",
+  "sources": [],
+  "turns": [
+    {"t": "00:00", "speaker": "caller", "text": "This is an automated message from City Power to let you know about a scheduled maintenance outage in your area tomorrow from 9am to noon."},
+    {"t": "00:10", "speaker": "victim", "text": "Okay, thanks for the heads up."},
+    {"t": "00:12", "speaker": "caller", "text": "No action is needed on your part. Visit citypower.example.gov if you have questions."}
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

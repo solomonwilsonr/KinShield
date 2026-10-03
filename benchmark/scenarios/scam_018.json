@@ -1,0 +1,40 @@
+{
+  "id": "scam_018",
+  "label": "scam",
+  "title": "Debt collector -- threat of arrest",
+  "sources": [
+    "FTC fake-debt-collector pattern"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is a legal collections office regarding a payday loan in default."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "I don't have any payday loans."
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "Our records disagree. Pay $900 today by wire or we'll send officers to your home."
+    },
+    {
+      "t": "00:17",
+      "speaker": "caller",
+      "text": "Handle this now and quietly, before it goes on your permanent record."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency",
+      "secrecy"
+    ]
+  }
+}

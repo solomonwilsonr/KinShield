@@ -1,0 +1,34 @@
+{
+  "id": "scam_016",
+  "label": "scam",
+  "title": "Medicare -- new card, pay to activate",
+  "sources": [
+    "FTC Medicare-scam pattern"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is Medicare. Your benefits will lapse unless we issue a new card today."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "I didn't know it was expiring."
+    },
+    {
+      "t": "00:10",
+      "speaker": "caller",
+      "text": "There's a $150 activation fee -- a prepaid card works. We must process it in the next few minutes."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency"
+    ]
+  }
+}

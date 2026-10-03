@@ -1,0 +1,41 @@
+{
+  "id": "scam_005",
+  "label": "scam",
+  "title": "SSA impersonation -- suspended number, gift cards",
+  "sources": [
+    "IC3 government-impersonation pattern",
+    "FTC SSA-impersonation alerts"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is the Social Security Administration. Your number has been suspended due to suspicious activity."
+    },
+    {
+      "t": "00:08",
+      "speaker": "victim",
+      "text": "Suspended? How is that possible?"
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "To reactivate it and avoid arrest you must verify funds by purchasing $500 in gift cards today."
+    },
+    {
+      "t": "00:19",
+      "speaker": "caller",
+      "text": "Do not discuss this with anyone, it is a federal matter."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "authority_pressure",
+      "payment_anomaly",
+      "financial_request",
+      "secrecy",
+      "unusual_urgency"
+    ]
+  }
+}

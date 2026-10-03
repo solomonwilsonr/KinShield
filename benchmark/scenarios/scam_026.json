@@ -1,0 +1,42 @@
+{
+  "id": "scam_026",
+  "label": "scam",
+  "title": "AI-cloned granddaughter crying, then a 'kidnapper' demands ransom (virtual kidnapping)",
+  "sources": [
+    "FBI 'Virtual Kidnapping' warnings + FBI SF warning on AI voice cloning of family members"
+  ],
+  "claimed_identity": "Emma",
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Grandma! Grandma, it's Emma, please help me, they took me, I'm so scared --"
+    },
+    {
+      "t": "00:06",
+      "speaker": "caller",
+      "text": "Listen carefully. We have your granddaughter. If you hang up or call the police, you will never see her again."
+    },
+    {
+      "t": "00:14",
+      "speaker": "victim",
+      "text": "Please don't hurt her! What do you want?"
+    },
+    {
+      "t": "00:17",
+      "speaker": "caller",
+      "text": "Eight thousand dollars, by wire, in the next thirty minutes. Stay on this line the whole time. I'll give you the account."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "emergency",
+      "secrecy",
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency"
+    ]
+  }
+}

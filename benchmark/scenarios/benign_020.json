@@ -1,0 +1,24 @@
+{
+  "id": "benign_020",
+  "label": "benign",
+  "title": "Vet reminding about pet vaccination",
+  "sources": [
+    "Ordinary reminder"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Hi, this is Parkside Vet. Bella is due for her rabies shot this month."
+    },
+    {
+      "t": "00:07",
+      "speaker": "victim",
+      "text": "Thanks, I'll book a time online."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

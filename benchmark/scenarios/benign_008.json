@@ -1,0 +1,29 @@
+{
+  "id": "benign_008",
+  "label": "benign",
+  "title": "Grandson confirming weekend visit",
+  "sources": [
+    "Ordinary family logistics"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Grandma it's me, still good for me to come up Saturday?"
+    },
+    {
+      "t": "00:05",
+      "speaker": "victim",
+      "text": "Yes please! Will you stay for dinner?"
+    },
+    {
+      "t": "00:08",
+      "speaker": "caller",
+      "text": "Definitely. I'll bring the dog too if that's okay."
+    }
+  ],
+  "expected": {
+    "risk_level": "LOW",
+    "evidence_signals": []
+  }
+}

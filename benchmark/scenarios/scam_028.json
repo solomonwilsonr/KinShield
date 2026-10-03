@@ -1,0 +1,41 @@
+{
+  "id": "scam_028",
+  "label": "scam",
+  "title": "'FBI agent' collecting on a legal judgment, arrest unless you pay now",
+  "sources": [
+    "IC3 PSA 260917 (Sep 2026): law-enforcement/government impersonation, secrecy, arrest threats"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is Special Agent Hughes, FBI. A court entered a legal judgment against you, and there is a warrant for your arrest."
+    },
+    {
+      "t": "00:09",
+      "speaker": "victim",
+      "text": "A judgment? For what?"
+    },
+    {
+      "t": "00:11",
+      "speaker": "caller",
+      "text": "You can clear it today with a payment of $3,200. If you don't, officers will be at your door this evening."
+    },
+    {
+      "t": "00:19",
+      "speaker": "caller",
+      "text": "I can only speak with you, so do not put anyone else on the phone. We accept prepaid cards or cryptocurrency."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency",
+      "secrecy"
+    ]
+  }
+}

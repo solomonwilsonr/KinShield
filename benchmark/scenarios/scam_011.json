@@ -1,0 +1,39 @@
+{
+  "id": "scam_011",
+  "label": "scam",
+  "title": "Lottery -- pay fees to claim prize",
+  "sources": [
+    "FTC prize/lottery-scam pattern"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Congratulations! You've won $50,000 in the state sweepstakes!"
+    },
+    {
+      "t": "00:06",
+      "speaker": "victim",
+      "text": "Really? I don't remember entering."
+    },
+    {
+      "t": "00:09",
+      "speaker": "caller",
+      "text": "To release the funds we just need a $600 processing fee in gift cards today."
+    },
+    {
+      "t": "00:16",
+      "speaker": "caller",
+      "text": "This offer expires at midnight, so act now and keep it confidential until you're paid."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency",
+      "secrecy"
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: KinShield optional sign-in -- Cognito user pool (email + optional Google) with the hosted login page.
+
+Parameters:
+  DomainPrefix:
+    Type: String
+    Default: kinshield-kip
+    Description: Hosted login page prefix (https://<prefix>.auth.us-east-1.amazoncognito.com).
+  AppUrl:
+    Type: String
+    Default: https://zx9d4nrkni.execute-api.us-east-1.amazonaws.com/kinbot-chat.html
+    Description: The KinBot chat page (HTTPS). Cognito sends people back here after sign-in and sign-out.
+  GoogleClientId:
+    Type: String
+    Default: ""
+    Description: Google OAuth client ID. Leave empty to offer email sign-in only.
+  GoogleClientSecret:
+    Type: String
+    Default: ""
+    NoEcho: true
+
+Conditions:
+  HasGoogle: !Not [!Equals [!Ref GoogleClientId, ""]]
+
+Resources:
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: kinshield-users
+      UsernameAttributes: [email]
+      AutoVerifiedAttributes: [email]
+      Schema:
+        - Name: email
+          Required: true
+          Mutable: true
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: false
+          RequireUppercase: false
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: verified_email
+            Priority: 1
+      VerificationMessageTemplate:
+        DefaultEmailOption: CONFIRM_WITH_CODE
+        EmailSubject: Your KinShield verification code
+        EmailMessage: "Your KinShield verification code is {####}"
+
+  UserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: !Ref DomainPrefix
+      UserPoolId: !Ref UserPool
+
+  GoogleIdp:
+    Type: AWS::Cognito::UserPoolIdentityProvider
+    Condition: HasGoogle
+    Properties:
+      UserPoolId: !Ref UserPool
+      ProviderName: Google
+      ProviderType: Google
+      ProviderDetails:
+        client_id: !Ref GoogleClientId
+        client_secret: !Ref GoogleClientSecret
+        authorize_scopes: openid email profile
+      AttributeMapping:
+        email: email
+        name: name
+
+  # Public client for the browser: authorization code + PKCE, no client secret.
+  WebClient:
+    Type: AWS::Cognito::UserPoolClient
+    DependsOn: UserPoolDomain
+    Properties:
+      ClientName: kinshield-web
+      UserPoolId: !Ref UserPool
+      GenerateSecret: false
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthFlows: [code]
+      AllowedOAuthScopes: [openid, email, profile]
+      CallbackURLs:
+        - !Ref AppUrl
+        - http://localhost:8080/kinbot-chat.html
+      LogoutURLs:
+        - !Ref AppUrl
+        - http://localhost:8080/kinbot-chat.html
+      SupportedIdentityProviders: !If
+        - HasGoogle
+        - [COGNITO, !Ref GoogleIdp]
+        - [COGNITO]
+      ExplicitAuthFlows: [ALLOW_REFRESH_TOKEN_AUTH]
+      PreventUserExistenceErrors: ENABLED
+      EnableTokenRevocation: true
+      RefreshTokenValidity: 30
+      TokenValidityUnits:
+        RefreshToken: days
+
+Outputs:
+  UserPoolId:
+    Value: !Ref UserPool
+  ClientId:
+    Value: !Ref WebClient
+  LoginDomain:
+    Value: !Sub "https://${DomainPrefix}.auth.${AWS::Region}.amazoncognito.com"
+  GoogleRedirectUri:
+    Description: Paste this into the Google OAuth client's "Authorized redirect URIs".
+    Value: !Sub "https://${DomainPrefix}.auth.${AWS::Region}.amazoncognito.com/oauth2/idpresponse"
+  GoogleEnabled:
+    Value: !If [HasGoogle, "true", "false"]

@@ -1,0 +1,47 @@
+{
+  "id": "scam_004",
+  "label": "scam",
+  "title": "Grandparent scam -- wire transfer for bail",
+  "sources": [
+    "IC3 PSA 231117",
+    "FTC grandparent-scam pattern"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Grandma, it's me, please don't be mad."
+    },
+    {
+      "t": "00:04",
+      "speaker": "caller",
+      "text": "I got in a car wreck and I'm in jail. Don't tell Dad, he'll kill me."
+    },
+    {
+      "t": "00:11",
+      "speaker": "victim",
+      "text": "Oh my goodness, what do you need?"
+    },
+    {
+      "t": "00:14",
+      "speaker": "caller",
+      "text": "My lawyer needs $3,500 wired to post bail in the next hour or I stay the weekend."
+    },
+    {
+      "t": "00:22",
+      "speaker": "caller",
+      "text": "Please, just wire it to this account and don't tell anyone, it's embarrassing."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "emergency",
+      "secrecy",
+      "financial_request",
+      "payment_anomaly",
+      "unusual_urgency"
+    ]
+  }
+}

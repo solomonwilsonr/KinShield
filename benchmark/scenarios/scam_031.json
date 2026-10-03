@@ -1,0 +1,41 @@
+{
+  "id": "scam_031",
+  "label": "scam",
+  "title": "'Amazon' says someone is using your account, refund via Bitcoin ATM",
+  "sources": [
+    "FTC Data Spotlight Aug 2025: 'False alarm, real scam' -- accounts/SSN 'compromised'",
+    "FTC Data Spotlight Sep 2024: Bitcoin ATMs as a payment portal for scammers"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "This is Amazon account security. Someone in another state just used your account to buy a $1,400 laptop."
+    },
+    {
+      "t": "00:08",
+      "speaker": "caller",
+      "text": "The hacker also has access to your bank. We need you to move your money into a secure wallet before they empty it."
+    },
+    {
+      "t": "00:16",
+      "speaker": "victim",
+      "text": "How do I do that?"
+    },
+    {
+      "t": "00:18",
+      "speaker": "caller",
+      "text": "Take out cash and feed it into the Bitcoin machine at the pharmacy. Do it now, and don't tell the bank, they may be compromised."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "impersonation",
+      "unusual_urgency",
+      "financial_request",
+      "payment_anomaly",
+      "secrecy"
+    ]
+  }
+}

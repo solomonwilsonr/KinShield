@@ -1,0 +1,41 @@
+{
+  "id": "scam_020",
+  "label": "scam",
+  "language": "hinglish",
+  "title": "[Hinglish] Fake customs/CBI officer, pay to avoid arrest",
+  "sources": [
+    "FTC/IC3 government-impersonation pattern, code-mixed Hindi-English variant"
+  ],
+  "turns": [
+    {
+      "t": "00:00",
+      "speaker": "caller",
+      "text": "Main CBI officer bol raha hoon. Aapke naam se ek parcel pakda gaya hai jisme illegal saman hai."
+    },
+    {
+      "t": "00:08",
+      "speaker": "victim",
+      "text": "Par maine toh koi parcel nahi bheja."
+    },
+    {
+      "t": "00:12",
+      "speaker": "caller",
+      "text": "Case darj ho chuka hai. Aapko abhi 75,000 rupaye jama karne honge, gift card ya crypto se, warna arrest."
+    },
+    {
+      "t": "00:21",
+      "speaker": "caller",
+      "text": "Yeh baat kisi ko mat batana aur phone mat katna, nahi toh case aur badh jayega."
+    }
+  ],
+  "expected": {
+    "risk_level": "HIGH",
+    "evidence_signals": [
+      "authority_pressure",
+      "financial_request",
+      "payment_anomaly",
+      "secrecy",
+      "unusual_urgency"
+    ]
+  }
+}
