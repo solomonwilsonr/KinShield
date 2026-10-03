@@ -1,0 +1,25 @@
+===== Day 0 capture 2026-09-28T18:24:24Z =====
+
+### sts get-caller-identity (redacted) ###
+{
+    "UserId": "<IAM_USER_ID>",
+    "Account": "<ACCOUNT_ID>",
+    "Arn": "arn:aws:iam::<ACCOUNT_ID>:user/kiro"
+}
+
+### organizations describe-organization ###
+
+aws: [ERROR]: An error occurred (AWSOrganizationsNotInUseException) when calling the DescribeOrganization operation: Your account is not a member of an organization.
+
+### bedrock-runtime Converse (BLOCKED path) ###
+
+aws: [ERROR]: An error occurred (ValidationException) when calling the Converse operation: Operation not allowed
+
+Additional error details:
+message: Operation not allowed
+
+### Mantle /v1/chat/completions (WORKING path) ###
+{"choices":[{"finish_reason":"stop","index":0,"logprobs":null,"message":{"content":"KINSHIELD_OK","reasoning":"The user asks: \"Say exactly the token KINSHIELD_OK and nothing else.\" So we must output exactly \"KINSHIELD_OK\". No extra spaces, no punctuation, no formatting. Just that token. Ensure no extra whitespace or newline? Usually a newline is okay but they said nothing else. Probably just the token. We'll output exactly that.","refusal":null,"role":"assistant"}}],"created":1790619870,"id":"chatcmpl-a4c74113-c9af-4c27-acc9-ee82293250f1","model":"openai.gpt-oss-120b","object":"chat.completion","service_tier":"default","usage":{"completion_tokens":85,"prompt_tokens":80,"total_tokens":165}}
+[http=200]
+
+===== end capture =====

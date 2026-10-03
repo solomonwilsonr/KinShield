@@ -1,0 +1,36 @@
+# Day 4 UX-fix + logo redeploy verification
+# captured 2026-09-30T17:34:09Z (UTC)
+
+=== who / where (agent-driven, redacted) ===
+{
+    "UserId": "<IAM_USER_ID>",
+    "Account": "<ACCOUNT_ID>",
+    "Arn": "arn:aws:iam::<ACCOUNT_ID>:user/kiro"
+}
+
+=== served index.html carries the new cache-buster + logo + score tooltip ===
+Evidence-weighted score
+app.js?v=20260930-4
+ks-shield
+styles.css?v=20260930-4
+
+=== served app.js carries the analyzing-state + pacing + label changes ===
+Analyzing the conversation
+press a button below to start
+showAnalyzing
+
+=== served styles.css carries the analyzing/spinner styles ===
+ev-spinner
+evidence-analyzing
+
+=== /health ===
+{"status": "ok", "service": "kinshield-detector", "model": "openai.gpt-oss-20b"}
+[http=200]
+
+=== /detect scam_001 (expect HIGH, cited evidence) ===
+[http=200 latency=4.441186s]
+risk_level: HIGH score: 126 evidence: 6
+
+=== /detect benign_005 (birthday-surprise secret; expect LOW, no false positive) ===
+[http=200 latency=1.796040s]
+risk_level: LOW score: 0 evidence: 0

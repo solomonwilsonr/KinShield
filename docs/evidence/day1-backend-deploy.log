@@ -1,0 +1,60 @@
+===== Day 1 backend deploy proof 2026-09-29T10:21:37Z =====
+
+### CloudFormation stack status ###
+------------------------------------------------------------------------------
+|                               DescribeStacks                               |
++-------------------+-------------------+------------------------------------+
+|       Name        |      Status       |              Updated               |
++-------------------+-------------------+------------------------------------+
+|  kinshield-backend|  UPDATE_COMPLETE  |  2026-09-29T10:20:08.864000+00:00  |
++-------------------+-------------------+------------------------------------+
+
+### stack resources ###
+------------------------------------------------------------------------------
+|                           DescribeStackResources                           |
++---------------------+-------------------+----------------------------------+
+|       Logical       |      Status       |              Type                |
++---------------------+-------------------+----------------------------------+
+|  ApiInvokePermission|  CREATE_COMPLETE  |  AWS::Lambda::Permission         |
+|  DetectorFunction   |  CREATE_COMPLETE  |  AWS::Lambda::Function           |
+|  DetectorRole       |  CREATE_COMPLETE  |  AWS::IAM::Role                  |
+|  HttpApi            |  CREATE_COMPLETE  |  AWS::ApiGatewayV2::Api          |
+|  HttpIntegration    |  CREATE_COMPLETE  |  AWS::ApiGatewayV2::Integration  |
+|  HttpRouteDefault   |  CREATE_COMPLETE  |  AWS::ApiGatewayV2::Route        |
+|  HttpStage          |  CREATE_COMPLETE  |  AWS::ApiGatewayV2::Stage        |
+|  SessionTable       |  CREATE_COMPLETE  |  AWS::DynamoDB::Table            |
++---------------------+-------------------+----------------------------------+
+
+### public API health ###
+{"status": "ok", "service": "kinshield-detector", "model": "openai.gpt-oss-120b"}
+[http=200]
+
+### live detect: scam_001 (HIGH) ###
+{"risk_level": "HIGH", "risk_score": 120, "evidence": [{"t": "00:04", "quote": "I've been in an accident. I got arrested. Please don't tell Mom, she'll be furious.", "signal": "emergency", "weight": 18}, {"t": "00:04", "quote": "I've been in an accident. I got arrested. Please don't tell Mom, she'll be furious.", "signal": "secrecy", "weight": 27}, {"t": "00:18", "quote": "I'm okay but I need help right now. The lawyer says I can post bond if you send $4,000 today.", "signal": "financial_request", "weight": 10}, {"t": "00:18", "quote": "I'm okay but I need help right now. The lawyer says I can post bond if you send $4,000 today.", "signal": "unusual_urgency", "weight": 10}, {"t": "00:30", "quote": "Go to the store and buy four $1,000 Apple gift cards, then read me the codes on the back. Don't tell anyone, it could hurt my case.", "signal": "payment_anomaly", "weight": 28}, {"t": "00:30", "quote": "Go to the store and buy four $1,000 Apple gift cards, then read me the codes on the back. Don't tell anyone, it could hurt my case.", "signal": "secrecy", "weight": 27}], "recommended_action": "End the call. Independently contact the family member using a number you already have saved -- not a number the caller gives you.", "latency_ms": 10688}
+### live detect: benign_001 (LOW, zero evidence) ###
+{"risk_level": "LOW", "risk_score": 0, "evidence": [], "recommended_action": "No signals detected. If anything felt wrong, it's still okay to verify independently.", "latency_ms": 730}
+PUBLIC_API=https://zx9d4nrkni.execute-api.us-east-1.amazonaws.com
+===== end =====
+
+
+===== Deployed-pipeline benchmark (6 seed scenarios via public API) 2026-09-29 =====
+Ran benchmark/run_deployed.sh against https://zx9d4nrkni.execute-api.us-east-1.amazonaws.com
+after bumping Lambda to 1024MB and hardening the detector retry (3 attempts, HTTP/URL errors +
+malformed JSON, backoff).
+
+benign_001   label=benign exp=LOW  got=LOW  score=0   ev=0  lat=1674ms OK
+benign_002   label=benign exp=LOW  got=LOW  score=0   ev=0  lat=1440ms OK
+benign_003   label=benign exp=LOW  got=LOW  score=0   ev=0  lat=887ms  OK
+scam_001     label=scam   exp=HIGH got=HIGH score=102 ev=5  lat=13487ms OK
+scam_002     label=scam   exp=HIGH got=HIGH score=99  ev=6  lat=9100ms  OK
+scam_003     label=scam   exp=HIGH got=HIGH score=85  ev=5  lat=8637ms  OK
+
+6 passed, 0 failed.
+
+Note: a first rapid sequential run showed 2 transient scam failures (no risk_level in body);
+individual re-calls returned correct HIGH. Root cause was a transient Mantle error/timeout not
+absorbed by the original single retry. Fix: detector now retries up to 3x covering HTTPError/
+URLError/TimeoutError with backoff, and the urlopen timeout was tightened to 16s so a hung call
+fails fast enough to retry inside the 40s Lambda budget. Re-run after the fix: 6/6 clean.
+Latency: benign ~1s, scam ~8-13s (gpt-oss generates full reasoning + evidence). Frontend animates
+the transcript (~5s) in parallel to mask detector latency.

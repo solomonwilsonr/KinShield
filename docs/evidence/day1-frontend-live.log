@@ -1,0 +1,15 @@
+===== Day 1 frontend live proof 2026-09-29T13:53:49Z =====
+PUBLIC SITE (S3 website): http://kinshield-site-<ACCOUNT_ID>.s3-website-us-east-1.amazonaws.com
+PUBLIC API (API Gateway): https://zx9d4nrkni.execute-api.us-east-1.amazonaws.com
+
+### frontend stack status ###
+CREATE_COMPLETE
+
+### site index http status ###
+index.html http=200
+
+### CloudFront note ###
+CloudFront blocked: account not yet verified for CloudFront ('Your account must be
+verified before you can add new CloudFront resources'). Serving via S3 static website
+for now; swap to CloudFront (frontend.yaml) once AWS Support verifies the account.
+===== end =====

@@ -62,7 +62,7 @@ Nothing users send is logged or stored, except voicemail audio, which sits in S3
 - **Backend:** one Lambda (Python 3.12) + API Gateway HTTP API; DynamoDB `kinshield-sessions`; Secrets Manager for the Bedrock API key; S3 voicemail bucket; Textract/Polly/Transcribe permissions for `media.py`.
 - **Frontend:** S3 static website (`kinshield-frontend` stack). CloudFront is blocked until the account is verified; `infra/frontend.yaml` is ready for when it is.
 - **IaC:** CloudFormation (`infra/backend.yaml`, `infra/frontend-s3.yaml`), deployed with `infra/deploy_backend.sh` and `infra/deploy_frontend_s3.sh`.
-- **Coding agents:** Kiro (spec in `.kiro/specs/kinshield/`, Day 0–2) and Claude Code (Day 4 onward), both running the AWS CLI as IAM user `kiro`. No AWS MCP Server evidence exists yet; see `docs/proof/PROOF-CHECKLIST.md`.
+- **Coding agents:** Kiro (spec in `.kiro/specs/kinshield/`, Day 0–2) and Claude Code (Day 4 onward), both running the AWS CLI as IAM user `kiro`. They didn't use the AWS MCP Server. Redacted deploy logs, live checks and a CloudTrail summary are in [`docs/evidence/`](docs/evidence/).
 
 ## Not built
 Real phone calls (Chime SDK PSTN), live audio transcription of calls, caregiver push notifications, real family verification, accounts or sign-in (the KinBot welcome popup's sign-in buttons are placeholders), and messaging-app monitoring.
@@ -79,7 +79,7 @@ lambda/evidence-detector/
 infra/            CloudFormation templates + deploy scripts
 web/src/          index, kinvoice, kinbot, kinbot-chat, kinmodel pages; app.js, chat.js, kinbot-app.js, kinmodel.js, ui.js; styles
 eval/kinbot/      46-message KinBot eval set + runner (only a 2-item smoke run so far)
-docs/             WRITEUP.md, UPTIME-SPEND.md, proof/
+docs/             WRITEUP.md, evidence/ (redacted agent + AWS evidence)
 .kiro/specs/      Kiro requirements / design / tasks
 ```
 

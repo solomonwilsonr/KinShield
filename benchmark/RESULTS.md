@@ -4,11 +4,21 @@ Run against the **live deployed API** (`/detect` on API Gateway → Lambda → B
 `openai.gpt-oss-20b` with `reasoning_effort: low` since Day 2; the first runs used `gpt-oss-120b`), temperature 0. Reproduce with `python3 benchmark/run_benchmark.py`; raw
 data in `benchmark/results/benchmark-latest.json`.
 
-> **Status 2026-10-02:** the scenario set is now **63** (31 scam, 32 benign; `scam_022`–`031` and
-> `benign_027`–`032` added 2026-10-02). The latest measured run is the **47-scenario** run
-> (21 scam / 26 benign: recall 100%, alarm FP 0%, signal recall 82.1%, latency median 650 ms /
-> p90 2,376 ms; see `../PROGRESS.md` §9d). The 41-scenario table further down is older. The full 63
-> have **not** been benchmarked yet; re-run with `benchmark/run_deployed.sh`.
+> **Latest run: all 63 scenarios** (31 scam, 32 benign) against `https://kinshield.site`,
+> 2026-10-03 05:30 UTC (2026-10-02 22:30 PT):
+>
+> | Metric | Value |
+> |---|---|
+> | Recall (scams flagged MEDIUM/HIGH) | **93.5% (29/31)** |
+> | Alarm-level false positives (benign MEDIUM/HIGH) | **0% (0/32)** |
+> | Benign with zero evidence | 96.9% (31/32; `benign_030` carried one low-weight signal and still scored LOW) |
+> | Evidence signal recall (mean over scams) | 75.6% |
+> | Latency median / p90 / max | 798 ms / 2,999 ms / 5,644 ms |
+>
+> Misses: `scam_010` (score 24, just under the MEDIUM line at 25; emergency and gift-card signals
+> not tagged) and `scam_024` (score 18; only authority pressure and secrecy tagged). The raw output
+> (`benchmark/results/benchmark-latest.json`) is kept locally and isn't committed. The 47- and
+> 41-scenario results below are older runs, kept for history.
 
 ## Current set: 41 scenarios (18 scam, 23 benign)
 All scenarios are grounded synthetic scripts built from cited FTC / FBI IC3 patterns

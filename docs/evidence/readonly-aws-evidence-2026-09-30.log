@@ -1,0 +1,33 @@
+# Read-only evidence captured 2026-09-30T18:11:49Z (account redacted)
+## sts get-caller-identity
+{
+    "UserId": "<IAM_USER_ID>",
+    "Account": "<ACCOUNT_ID>",
+    "Arn": "arn:aws:iam::<ACCOUNT_ID>:user/kiro"
+}
+## kinshield-backend
+{
+    "Name": "kinshield-backend",
+    "Status": "UPDATE_COMPLETE",
+    "Created": "2026-09-29T09:53:32.506000+00:00",
+    "Updated": "2026-09-30T16:57:00.980000+00:00"
+}
+## kinshield-frontend
+{
+    "Name": "kinshield-frontend",
+    "Status": "CREATE_COMPLETE",
+    "Created": "2026-09-29T11:48:58.526000+00:00",
+    "Updated": "2026-09-29T11:49:04.893000+00:00"
+}
+## function
+{
+    "Runtime": "python3.12",
+    "Memory": 1024,
+    "Timeout": 40,
+    "LastModified": "2026-09-30T18:06:15.000+0000",
+    "State": "Active"
+}
+## cloudtrail lookup-events (Username=kiro, latest 50, us-east-1) summary by client
+43 events userAgent aws-cli/2.34.3 (AWS CLI, run from the agent's shell)
+ 7 events userAgent lambda.amazonaws.com (service-initiated)
+ 0 events with userAgent/sourceIPAddress aws-mcp.amazonaws.com  -> NO AWS MCP Server evidence yet
