@@ -9,7 +9,8 @@ Scam protection a caregiver sets up once, for a parent who does nothing.</p>
   <a href="docs/guides/kinvoice.md">KinVoice guide</a> ·
   <a href="docs/guides/kinbot.md">KinBot guide</a> ·
   <a href="docs/guides/kinmodel.md">KinModel guide</a> ·
-  <a href="docs/guides/ask-kip.md">Ask Kip guide</a>
+  <a href="docs/guides/ask-kip.md">Ask Kip guide</a> ·
+  <a href="#-our-models-on-hugging-face">🤗 Our models on Hugging Face</a>
 </p>
 <p align="center">
   <img alt="Live on AWS" src="https://img.shields.io/badge/live%20on-AWS-23863D">
@@ -17,6 +18,10 @@ Scam protection a caregiver sets up once, for a parent who does nothing.</p>
   <img alt="No login needed" src="https://img.shields.io/badge/login-not%20needed-5EBE6A">
   <img alt="Category" src="https://img.shields.io/badge/category-daily--life--enhancement-001123">
   <img alt="Lane" src="https://img.shields.io/badge/lane-startup-001123">
+</p>
+<p align="center">
+  <a href="https://huggingface.co/Solomonwilsonr/kinshield-20b"><img alt="Hugging Face: kinshield-20b" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-kinshield--20b-FFD21E"></a>
+  <a href="https://huggingface.co/Solomonwilsonr/kinshield-tiny-v3"><img alt="Hugging Face: kinshield-tiny-v3" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-kinshield--tiny--v3-FFD21E"></a>
 </p>
 
 ![KinShield home page: One family. Two ways to keep watch.](docs/screenshots/hub-hero.jpg)
@@ -27,7 +32,7 @@ Scam protection a caregiver sets up once, for a parent who does nothing.</p>
 
 _Last updated 2026-10-06. Full history: [PROGRESS.md](PROGRESS.md). Long-form write-up: [docs/WRITEUP.md](docs/WRITEUP.md). Coding-agent evidence: [docs/evidence/](docs/evidence/)._
 
-**Contents:** [The gap](#the-gap) · [The products](#the-products) · [How to use KinShield](#how-to-use-kinshield) · [Results](#results-measured-on-the-live-api) · [Architecture](#architecture-and-decisions) · [Proof the coding agents operated AWS](#proof-the-coding-agents-operated-aws) · [Debugging stories](#debugging-stories) · [Who it's for](#who-its-for-and-the-business-model) · [Honest limits](#honest-limits) · [API](#api-kinshield-detector-lambda-behind-api-gateway-http-api) · [Layout and deploy](#layout)
+**Contents:** [The gap](#the-gap) · [The products](#the-products) · [Our models on Hugging Face](#-our-models-on-hugging-face) · [How to use KinShield](#how-to-use-kinshield) · [Results](#results-measured-on-the-live-api) · [Architecture](#architecture-and-decisions) · [Proof the coding agents operated AWS](#proof-the-coding-agents-operated-aws) · [Debugging stories](#debugging-stories) · [Who it's for](#who-its-for-and-the-business-model) · [Honest limits](#honest-limits) · [API](#api-kinshield-detector-lambda-behind-api-gateway-http-api) · [Layout and deploy](#layout)
 
 ## The gap
 Elder fraud is large and growing. FBI IC3's 2025 report counts more than 201,000 complaints from people over 60 and more than $7.7B lost, up 59%. The grandparent scam follows a known script: a panicked "relative" claims an arrest or accident, asks for secrecy, then asks for payment by wire or gift cards.
@@ -46,6 +51,7 @@ KinShield is the umbrella brand. All products share the same seven warning signs
 | 💬 | **KinBot** | Checks a text, email, **screenshot** or **voicemail**, quotes the warning signs from *your* message, then an **investigator agent** checks every link and phone number. Ask follow-up questions. | [Open](https://kinshield.site/kinbot-chat.html?example=0) | [KinBot guide](docs/guides/kinbot.md) |
 | ⚡ | **KinModel** | Our own 119 KB scam model, running inside the Lambda, scores a message next to the Bedrock detector so you can see when they agree. | [Open](https://kinshield.site/kinmodel.html) | [KinModel guide](docs/guides/kinmodel.md) |
 | 🙋 | **Ask Kip** | A help widget on the info pages that answers only from a written knowledge base and cites its source. | [Open](https://kinshield.site/) | [Ask Kip guide](docs/guides/ask-kip.md) |
+| 🤗 | **Our models** | A QLoRA fine-tune of gpt-oss-20b and a 22.9 MB distilled scam classifier, trained by us and published on Hugging Face. | [kinshield-20b](https://huggingface.co/Solomonwilsonr/kinshield-20b) · [kinshield-tiny-v3](https://huggingface.co/Solomonwilsonr/kinshield-tiny-v3) | [Below](#-our-models-on-hugging-face) |
 | 📱 | **Android beta** | KinBot and the KinVoice demo as a native app (sideloaded APK, built after the hackathon deadline). | [Download](https://kinshield.site/#android) | [Below](#android-beta) |
 
 **URLs**
@@ -54,6 +60,63 @@ KinShield is the umbrella brand. All products share the same seven warning signs
 - Separate experiment, not used by the site: KinShield-Tiny v3 (a distilled MiniLM-L6, int8 ONNX) on its own stack `kinshield-tiny-ml`. See `../kinshield-tiny/`.
 
 ---
+
+## 🤗 Our models on Hugging Face
+
+We trained two models for KinShield and published both, with model cards, results and usage code. They're research models: **the live app still uses stock gpt-oss-20b on Amazon Bedrock**, for the reasons below.
+
+| Model | What it is | Size | Score on 63 held-out calls | Safe calls flagged |
+|---|---|---|---|---|
+| **[Solomonwilsonr/kinshield-20b](https://huggingface.co/Solomonwilsonr/kinshield-20b)** | QLoRA adapter on gpt-oss-20b, fine-tuned on an NVIDIA DGX Spark to answer with KinShield's evidence JSON | LoRA rank 16 adapter | **62/63** (stock 20b: 61/63, stock 120b: 62/63) | 0/32 |
+| **[Solomonwilsonr/kinshield-tiny-v3](https://huggingface.co/Solomonwilsonr/kinshield-tiny-v3)** | MiniLM-L6 classifier distilled from kinshield-20b: a 0–1 score for each of the 7 warning signs plus High risk | 22M parameters, 22.9 MB int8 ONNX, CPU only | **60/63** (v2, taught by stock 20b: 57/63) | 0/32 |
+
+**How they were made**
+
+```
+1,565 synthetic calls (English + Hinglish)          gpt-oss-120b on Bedrock relabels them
+written by gpt-oss-20b on Amazon Bedrock    ──▶     + intent filter → 1,201 train / 213 val
+                                                                   │
+                                                                   ▼
+kinshield-tiny-v3 (MiniLM-L6, int8 ONNX)    ◀──     kinshield-20b: QLoRA on gpt-oss-20b
+distilled from the fine-tuned teacher               (DGX Spark, 2 epochs, 90 min, val loss 0.049 → 0.035)
+```
+
+1. **Data.** gpt-oss-20b on Amazon Bedrock wrote 1,565 synthetic calls: scams, ordinary calls and hard negatives such as "don't tell Dad, it's a surprise party". Near-duplicates of the test calls were removed.
+2. **Better labels.** gpt-oss-120b relabelled every call with the live detector prompt. A label was kept only if it matched what the call was written to be (scams MEDIUM or HIGH, safe calls LOW), leaving 1,201 calls for training and 213 for validation.
+3. **Fine-tune.** QLoRA on `unsloth/gpt-oss-20b-unsloth-bnb-4bit` (rank 16 on attention and all expert projections, 2 epochs, learning rate 2e-4), with the loss on the answer only.
+4. **Distil.** The fine-tuned 20b relabelled the calls, and MiniLM-L6 was trained on those labels. A better teacher lifted the small model from 57/63 to 60/63.
+
+**Try kinshield-tiny-v3 live.** It runs on its own AWS Lambda stack (`kinshield-tiny-ml`, throttled so it can't affect the main app) and answers in about 20 ms when warm:
+
+```bash
+curl -s -X POST https://1zuklu0if8.execute-api.us-east-1.amazonaws.com/predict \
+  -H 'content-type: application/json' \
+  -d '{"transcript":"caller: Grandma, it is me. I got arrested, please do not tell Mom.\ncaller: Buy $2,000 in gift cards and read me the codes."}'
+# {"risk_level": "HIGH", "risk_score": 100, "signals": {"impersonation": 0.91, "emergency": 1.0, "secrecy": 0.99, ...}, "latency_ms": 19.85}
+```
+
+Or run it yourself (from the [model card](https://huggingface.co/Solomonwilsonr/kinshield-tiny-v3)):
+
+```python
+import numpy as np, onnxruntime as ort
+from huggingface_hub import hf_hub_download
+from tokenizers import Tokenizer
+
+repo = "Solomonwilsonr/kinshield-tiny-v3"
+sess = ort.InferenceSession(hf_hub_download(repo, "model.int8.onnx"), providers=["CPUExecutionProvider"])
+tok = Tokenizer.from_file(hf_hub_download(repo, "tokenizer.json")); tok.enable_truncation(max_length=256); tok.no_padding()
+
+e = tok.encode("caller: Grandma, it's me. I got arrested, please don't tell Mom.\ncaller: Buy $2,000 in gift cards.")
+logits = sess.run(["logits"], {"input_ids": np.array([e.ids], dtype=np.int64),
+                               "attention_mask": np.array([e.attention_mask], dtype=np.int64)})[0][0]
+print("p_high", float(1 / (1 + np.exp(-logits[7]))))
+```
+
+**Why the live app doesn't use them yet**
+- kinshield-20b takes about 5 s per call on the Spark, while Bedrock answers in under 1 s, and this AWS account has no GPU quota to host it.
+- kinshield-tiny-v3 gives scores, not quoted evidence, and KinShield's rule is to always show the exact words.
+
+**Read the numbers honestly.** The 63 test calls were written by us, and every training label came from an LLM, so the small models learn their teachers' mistakes too. One call is about 1.6 points, so a one-call gap is suggestive, not proof. Full method and raw outputs: `kinshield-tiny/finetune/RESULTS.md` and the two model cards. The in-app **KinModel** is a separate, even smaller model (119 KB TF-IDF + logistic regression) that isn't on Hugging Face.
 
 ## How to use KinShield
 

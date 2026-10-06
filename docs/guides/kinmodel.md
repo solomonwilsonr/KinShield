@@ -28,6 +28,16 @@ Go to **https://kinshield.site/kinmodel.html**. Press **Try it live**, or scroll
 - **We fine-tuned gpt-oss-20b, then shrank it again:** our QLoRA fine-tune on an NVIDIA DGX Spark and the distilled KinShield-Tiny v3. Both are research and aren't used by the live app. They're published on Hugging Face: [kinshield-20b](https://huggingface.co/Solomonwilsonr/kinshield-20b) and [kinshield-tiny-v3](https://huggingface.co/Solomonwilsonr/kinshield-tiny-v3).
 - **Honest limits** and **Where KinModel is going**.
 
+## 🤗 Our models on Hugging Face
+Beyond the in-app KinModel, we trained two bigger models and published them:
+
+| Model | What it is | Score on 63 held-out calls |
+|---|---|---|
+| [**kinshield-20b**](https://huggingface.co/Solomonwilsonr/kinshield-20b) | QLoRA fine-tune of gpt-oss-20b on an NVIDIA DGX Spark | 62/63, no safe call flagged (stock 20b: 61/63) |
+| [**kinshield-tiny-v3**](https://huggingface.co/Solomonwilsonr/kinshield-tiny-v3) | 22.9 MB int8 MiniLM-L6, distilled from kinshield-20b, CPU only | 60/63, no safe call flagged |
+
+Each model card has the training method, results and code to run it. kinshield-tiny-v3 is also live on its own AWS endpoint (about 20 ms per call). See [the README section](../../README.md#-our-models-on-hugging-face) for a `curl` example. The live KinShield app still uses stock gpt-oss-20b on Amazon Bedrock.
+
 ## Limits
 - English text only, and keyword-driven: it can be fooled by unusual wording.
 - Trained on 600 synthetic texts we generated, so its benchmark score is optimistic.
