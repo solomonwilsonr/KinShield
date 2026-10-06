@@ -255,7 +255,7 @@ Signal taxonomy (fixed; each signal is cited to an FTC/IC3 pattern in `benchmark
 ## Architecture and decisions
 
 ### System overview
-Everything a user touches runs in one AWS Region (us-east-1) behind **one HTTPS origin, kinshield.site**. Route 53 and ACM front an API Gateway HTTP API. A single Lambda, `kinshield-detector`, serves both the web pages and the API, so there's no CORS and no second hosting service to break. The Lambda calls three models on Amazon Bedrock, plus Polly, Secrets Manager, DynamoDB and CloudWatch, and runs KinModel-Lite in-process. Everything is deployed with CloudFormation by the coding agents through the AWS CLI.
+Everything a user touches runs in one AWS Region (us-east-1) behind **one HTTPS origin, kinshield.site**. Route 53 and ACM front an API Gateway HTTP API. A single Lambda, `kinshield-detector`, serves both the web pages and the API, so there's no CORS and no second hosting service to break. The Lambda calls three models on Amazon Bedrock, plus Polly, Secrets Manager, DynamoDB and CloudWatch, and runs KinModel-Lite in-process. The coding agents deployed it through the AWS CLI: the app's stacks are CloudFormation templates, and the custom domain was added with CLI commands.
 
 ![KinShield architecture on AWS: users, Route 53, ACM, API Gateway, the kinshield-detector Lambda, Bedrock, Secrets Manager, Polly, DynamoDB, CloudWatch, Cognito, the Tiny v3 experiment stack, the legacy S3 site, CloudFormation, Budgets, the read-only internet tools and the build and research tools](docs/architecture/architecture-overview.jpg)
 
@@ -268,7 +268,7 @@ Everything a user touches runs in one AWS Region (us-east-1) behind **one HTTPS 
 | Data | Amazon DynamoDB `kinshield-sessions`, `kinshield-history` | Demo events; opt-in check history with a 90-day TTL |
 | Identity | Amazon Cognito user pool + API Gateway JWT authorizer | Optional sign-in; only `/history` needs it |
 | Secrets & ops | AWS Secrets Manager, Amazon CloudWatch Logs, AWS Budgets | Bedrock API key; logs; a $100/month budget |
-| IaC | AWS CloudFormation: `kinshield-backend`, `kinshield-auth`, `kinshield-frontend`, `kinshield-tiny-ml` | Every resource is in a template under `infra/` |
+| IaC | AWS CloudFormation: `kinshield-backend`, `kinshield-auth`, `kinshield-frontend`, `kinshield-tiny-ml` | The app's templates are in `infra/`. The Tiny experiment's stack lives with its research code, and the custom domain (Route 53, ACM, API Gateway domain) was set up with the AWS CLI. |
 
 ### KinVoice: scoring a call turn by turn
 After each caller line, the browser sends the whole call so far to `POST /detect` (at most 6 scores per call). Bedrock returns evidence; the Lambda's `_normalise()` recomputes the score and level in code, so the model's arithmetic is never trusted. When the score crosses the caregiver's alert level, the browser shows a push alert mid-call.

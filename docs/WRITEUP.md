@@ -74,15 +74,71 @@ An LLM that "investigates a link" can easily invent a finding. We built the agen
 
 In local runs, a fake-Chase text came back as *danger* (impersonation, unregistered domain), and the grandparent text pointed to the gift-card guidance. A real pharmacy text came back *ok* ("real website, 31 years old") and was not called a scam. We built a 46-message eval set (`eval/kinbot/`) but have only run a 2-item smoke test, so we quote no rates for the agent.
 
-## KinModel: a tiny second opinion, with caveats
+## How we trained the models
 
-Every detector call is a live Bedrock invocation, so we wanted a cheap second opinion. **KinShield-Lite** is TF-IDF with logistic regression, exported as int8 weights (119 KB JSON). It runs in pure Python inside the same Lambda; `lite.py` needs no numpy and matches the sklearn model within 1e-9 on 52 texts. It was trained on 600 template-generated synthetic texts. On the 47 benchmark scripts it got 46 right (one false positive, `benign_019`). That number is **optimistic**: we wrote the training phrase banks after reading the benchmark, and with n=47 one example moves accuracy by 2 points. KinModel shows it beside the LLM to flag disagreement, not to replace the LLM.
+The live detector is **stock gpt-oss-20b on Amazon Bedrock**. We did not fine-tune it. Everything below is either a small model running beside it or a research experiment. None of the training data comes from real calls: every transcript was written either by us or by an LLM.
 
-As a separate experiment, we also distilled the detector into a 22M-parameter **MiniLM-L6** (KinShield-Tiny v2). Bedrock generated and labelled 1,565 transcripts, and the result was exported to int8 ONNX on its own arm64 Lambda stack. On the 47 scripts, which it never trained on, it got 44/47 right, with precision 1.00 and recall 0.86. It flagged no benign call and missed a Hinglish UPI scam. The site does not use it.
+| Model | What it is | Trained on | Where it runs |
+|---|---|---|---|
+| KinShield-Lite (shown as KinModel) | TF-IDF + logistic regression, int8 | 600 template texts | Inside the live Lambda |
+| KinShield-Tiny v2 | MiniLM-L6 (22M), distilled from stock 20b | 1,565 LLM-written transcripts | Its own Lambda stack, not used by the site |
+| kinshield-20b (LoRA) | QLoRA adapter on gpt-oss-20b | 1,201 filtered transcripts | DGX Spark only, not hosted |
+| KinShield-Tiny v3 | MiniLM-L6, distilled from the LoRA 20b | Same 1,565 transcripts, relabelled | Its own Lambda stack, not used by the site |
 
-### A smaller-model experiment
+**Test set for all of them:** hand-written benchmark calls that no model trained on. That's 47 calls for Lite and v2, and 63 calls (31 scams, 32 safe) once we added 16 more.
 
-We also trained a QLoRA adapter for gpt-oss-20b on 1,201 filtered synthetic transcripts, then distilled it into KinShield-Tiny v3. On 63 held-out hand-written calls, stock 20b scored 61/63, the adapter 62/63, and Tiny v3 60/63; all three flagged 0/32 safe calls. These results are optimistic because the data is synthetic and written by us. The live app uses stock 20b because Bedrock is faster and returns evidence quotes; the small model returns scores only. The raw method and outputs are in `kinshield-tiny/finetune/RESULTS.md`, with models published as [kinshield-20b](https://huggingface.co/Solomonwilsonr/kinshield-20b) and [kinshield-tiny-v3](https://huggingface.co/Solomonwilsonr/kinshield-tiny-v3).
+### 1. KinShield-Lite: a cheap second opinion
+
+Every detector call is a live Bedrock invocation, so we wanted a check that costs nothing.
+
+- **Data:** 600 synthetic texts (300 scam, 300 safe), built from phrase banks with a fixed seed.
+- **Features:** word 1–2-grams plus character 3–5-grams (`char_wb`), both TF-IDF with sublinear term frequency.
+- **Classifier:** logistic regression with balanced classes. We chose C=2 from a sweep of 0.5–8, then added sigmoid (Platt) calibration.
+- **Export:** weights quantised to int8 (one scale factor, ±127) in a 119 KB JSON file. `lite.py` reimplements both analyzers in pure Python, needs no numpy, and matches sklearn within 1e-9 on 52 texts.
+- **Result:** 46 of 47 benchmark calls right, with one false positive (`benign_019`). This number is **optimistic**: we wrote the phrase banks after reading the benchmark. KinModel shows Lite beside the LLM to flag disagreement, never to override it.
+
+### 2. KinShield-Tiny v2: distilling the detector
+
+- **Generate:** gpt-oss-20b on Bedrock wrote 1,568 calls of 2–14 turns in English and Hinglish: scams, ordinary calls, and "hard negatives" (for example "don't tell Dad, it's a surprise party").
+- **Clean:** we removed 3 near-duplicates (char-n-gram cosine ≥ 0.6). We also checked that no transcript came within 0.45 cosine of a test call; the closest was 0.40.
+- **Label:** the live detector prompt labelled every call (LOW 941, MEDIUM 319, HIGH 305).
+- **Train:** `all-MiniLM-L6-v2` with 8 sigmoid heads (7 warning signs plus HIGH risk), mean pooling, 256 tokens, 15 epochs at learning rate 8e-5. Model and epoch selection used the validation split (15%) only.
+- **A second round:** round 1 learned almost nothing about secrecy, because only 17 training rows had it. We generated a targeted batch of secrecy scams with matching secrecy hard negatives. Validation score went from 1.29 to 1.55. Because the test result prompted that round, treat v2's test numbers as slightly optimistic.
+- **Ship:** exported to int8 ONNX (22.9 MB) on an arm64 Lambda. Warm calls take about 75 ms.
+- **Result:** 44/47, precision 1.00, recall 0.86, with no safe call flagged. It missed a Hinglish UPI scam.
+
+### 3. Fine-tuning gpt-oss-20b on a DGX Spark
+
+- **Better labels:** gpt-oss-120b on Bedrock (reasoning medium) relabelled all 1,565 transcripts with the live detector prompt.
+- **Intent filter:** we kept a label only if it agreed with what the call was written to be (scams MEDIUM or HIGH, safe calls LOW). It used the 120b label first and the 20b label as a fallback. We dropped the 151 calls where neither model agreed, leaving 1,201 for training and 213 for validation.
+- **QLoRA:** `unsloth/gpt-oss-20b-unsloth-bnb-4bit` on an NVIDIA DGX Spark (GB10, about 19 GB used).
+  - LoRA rank 16 on attention and all expert projections
+  - 2 epochs, learning rate 2e-4, cosine schedule
+  - loss on the answer only, written straight to the harmony `final` channel with no reasoning text
+
+  It took 90 minutes, and validation loss went 0.049 → 0.035.
+- **Distil again:** the fine-tuned 20b relabelled the transcripts, and we retrained MiniLM on those labels with v2's settings to get **Tiny v3**.
+
+| Model (63 held-out calls) | Correct | Safe calls flagged |
+|---|---|---|
+| gpt-oss-20b, stock (live) | 61/63 | 0/32 |
+| gpt-oss-120b, stock | 62/63 | 0/32 |
+| **gpt-oss-20b + KinShield LoRA** | **62/63** | 0/32 |
+| Tiny v2 | 57/63 | 0/32 |
+| **Tiny v3** | **60/63** | 0/32 |
+
+Distilling from the better teacher lifted the small model from 57 to 60.
+
+**Why the app still uses stock 20b:**
+- The LoRA model takes about 5 s per call on the Spark. Bedrock answers in under 1 s.
+- This account has 0 GPU quota on EC2 and SageMaker, so the LoRA model can't be hosted on AWS.
+- Tiny outputs scores, not quoted evidence, which breaks our "cite the exact words" rule.
+
+**Limits:**
+- The test set is small and was written by us. One call is about 1.6 points of accuracy, so a 1-call gap is suggestive, not proof.
+- The labels come from LLMs, so the small models learn the teachers' mistakes too.
+
+Method and raw outputs are in `kinshield-tiny/finetune/RESULTS.md` and `kinshield-tiny/distill/RESULTS.md`. The models are published as [kinshield-20b](https://huggingface.co/Solomonwilsonr/kinshield-20b) and [kinshield-tiny-v3](https://huggingface.co/Solomonwilsonr/kinshield-tiny-v3).
 
 ## Architecture and decisions
 
