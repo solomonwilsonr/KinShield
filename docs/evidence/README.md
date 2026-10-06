@@ -1,11 +1,12 @@
 # Coding-agent evidence
 
-Every file here was captured before the 2026-10-02 23:59 PT deadline. This folder shows the coding agents operating the AWS account that runs https://kinshield.site, not just writing code. Everything is plain text except one screenshot. Account IDs and IAM user IDs are replaced with `<ACCOUNT_ID>` and `<IAM_USER_ID>`.
+Every file here was captured before the 2026-10-02 23:59 PT deadline, except `cloudtrail-summary.md`/`.csv`, which were exported on 2026-10-07 from CloudTrail's own event history and cover Sep 28 to the deadline. This folder shows the coding agents operating the AWS account that runs https://kinshield.site, not just writing code. Everything is plain text except one screenshot. Account IDs and IAM user IDs are replaced with `<ACCOUNT_ID>` and `<IAM_USER_ID>`.
 
 ## How the agents connected
 
 - **Kiro** (Sep 28–30) and **Claude Code** (Sep 30–Oct 2) drove the AWS CLI as IAM user `kiro`. They didn't use the AWS MCP Server.
 - CloudTrail confirms this. On 2026-09-30, the latest 50 events for `kiro` had the user agent `aws-cli/2.34.3` (43) or `lambda.amazonaws.com` (7), and none were from `aws-mcp.amazonaws.com`. See [`readonly-aws-evidence-2026-09-30.log`](readonly-aws-evidence-2026-09-30.log).
+- **Full CloudTrail count, Sep 28 to the deadline:** 2,714 API calls by `kiro` across 24 services, 276 of them changes. 247 are tagged `app/kiro-ide` (Kiro), 1,374 came from the AWS CLI in the developer terminal where Claude Code ran, and 0 came through the AWS MCP Server. See [`cloudtrail-summary.md`](cloudtrail-summary.md).
 - The spec trail Kiro wrote is in [`../../.kiro/specs/kinshield/`](../../.kiro/specs/kinshield/) (requirements, design, tasks).
 
 ## Timeline

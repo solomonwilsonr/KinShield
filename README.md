@@ -297,6 +297,19 @@ Guests get every feature. Signing in uses the Cognito hosted UI (email + one-tim
 
 **Kiro** drove Days 0–2 (Sep 28–30): the spec in [`.kiro/specs/kinshield/`](.kiro/specs/kinshield/) (requirements, design, tasks), account discovery, the first CloudFormation deploys and the first benchmark. **Claude Code** did everything from Sep 30 on: KinBot and its agent, screenshots and voicemail, KinModel, the hub, sign-in, the custom domain, every redeploy, and live checks with Playwright at three screen widths after each deploy. Both ran the AWS CLI as IAM user `kiro`. The full index is [docs/evidence/README.md](docs/evidence/README.md). Account IDs are redacted.
 
+**CloudTrail, start to deadline** ([`cloudtrail-summary.md`](docs/evidence/cloudtrail-summary.md), counts in [`cloudtrail-summary.csv`](docs/evidence/cloudtrail-summary.csv)). AWS wrote these timestamps, so they show the agents operating the account before the deadline even though the summary was added afterwards:
+
+| Sep 28 → Oct 2 (PT), IAM user `kiro` | |
+|---|---:|
+| API calls | **2,714** across 24 services |
+| Calls that changed something | **276** |
+| Calls tagged `app/kiro-ide` by the AWS CLI (Kiro) | **247** |
+| AWS CLI calls from the developer terminal, where Claude Code ran | **1,374** |
+| Calls CloudFormation made while applying the agents' deploys | **866** |
+| Stack deploys applied (`ExecuteChangeSet`) | **16** (Kiro 6, terminal 10) |
+| Lambda code updates (`UpdateFunctionCode`) | **42** (Kiro 11, terminal 31) |
+| Calls through the AWS MCP Server | **0** |
+
 **1. Identity, checked by the agent** ([`readonly-aws-evidence-2026-09-30.log`](docs/evidence/readonly-aws-evidence-2026-09-30.log)):
 ```
 ## sts get-caller-identity
@@ -333,7 +346,7 @@ An error occurred (ValidationException) when calling the Converse operation: Ope
 {"risk_level": "LOW", "risk_score": 0, "evidence": []}
 ```
 
-**4. CloudTrail: which client made the calls** (same log, 2026-09-30, latest 50 events for user `kiro`):
+**4. CloudTrail: an early snapshot** (same log, 2026-09-30, latest 50 events for user `kiro`; the full count is in the table above):
 ```
 43 events userAgent aws-cli/2.34.3 (AWS CLI, run from the agent's shell)
  7 events userAgent lambda.amazonaws.com (service-initiated)
@@ -367,16 +380,34 @@ risk_level: LOW score: 0 evidence: 0
 - **Our own deploy once published test screenshots.** The frontend sync uploads everything in `web/src/`. The agent deleted them from S3, and test runs now write to a scratch folder.
 
 ## Who it's for and the business model
-- **The user is the caregiver, not the parent.** An adult child sets KinShield up once for a parent who changes nothing about their day. That is a different buyer from a device owner protecting themselves, which is who the built-in phone features serve.
-- **Planned price:** one plan, **KinShield Family, $5–10 a month per protected person**, covering KinVoice and KinBot. It is labelled "planned · not live" on the site ([kinshield.site/#pricing](https://kinshield.site/#pricing)). Later: a plan for several protected people, and plans for organisations that serve older adults.
-- **Where it stands:** pre-launch. No users, no revenue, and no caregiver interviews yet. We make no market-size claim; the claim is the gap above.
-- **First users:** a small, consent-based pilot with caregivers of older adults, measuring false alarms, time to the first HIGH alert, and whether the quoted evidence helps a family decide what to do.
-- **Roadmap:**
-  1. Live calls: a real number through the Amazon Chime SDK, with live transcription feeding the same detector.
-  2. Real caregiver push alerts and real family verification (both simulated today).
-  3. Better text-scam coverage, since KinBot's 69% recall is the weakest number above.
-  4. Evaluation on data we didn't write.
-  5. KinModel as an on-device pre-filter or offline fallback, once validated.
+
+**The buyer is the caregiver, not the parent.** An adult child sets KinShield up once for a parent who changes nothing about their day. The phone makers' built-in scam detection serves a different buyer: the device owner protecting themselves.
+
+| | Built-in phone scam detection (Google, Samsung) | KinShield |
+|---|---|---|
+| Who turns it on | The phone's owner. It's opt-in and off by default, according to their own documentation | A caregiver, once, on the parent's behalf |
+| Calls from saved contacts | Not checked, according to their documentation | The core case: a trusted name or a cloned voice asking for money |
+| What the family sees | Nothing. The warning stays on the owner's phone | An alert with the exact words that raised it, plus "Verify with family" |
+| Texts, screenshots, voicemails | Varies by phone and app | KinBot checks all three, with the same seven warning signs |
+
+KinShield's live calls aren't built yet: today KinVoice scores scripted or typed calls (roadmap step 1 below).
+
+**Why it could be a business**
+- **The problem is large and growing.** FBI IC3's 2025 report: more than 201,000 complaints from people over 60 and more than $7.7B lost, up 59%. One prevented scam is worth years of the subscription: the scam calls in our benchmark, built from FTC and IC3 patterns, ask for as much as $6,500 in gift cards, wires or crypto.
+- **Planned price: one plan, KinShield Family, $5–10 a month per protected person**, covering KinVoice and KinBot. It's shown on the site as "Planned pricing · not live" ([kinshield.site/#pricing](https://kinshield.site/#pricing)). Later: a plan for several protected people, and plans for organisations that serve older adults (home-care agencies, senior living, credit unions).
+- **The cost to serve is low.** Each check is one short call to gpt-oss-20b on Amazon Bedrock (median 798 ms), and the investigator adds a few more. KinModel scores in the Lambda at no model cost and could pre-filter obvious cases. Everything runs serverless, so there is no idle cost.
+- **The evidence is the product.** Families act on "he said *don't tell Mom* and *buy gift cards*", not on "82% risk". Every alert quotes the exact words, and that's hard for a generic spam filter to copy.
+
+**Where it stands, honestly:** pre-launch. No users, no revenue and no caregiver interviews yet. We make no market-size claim beyond the IC3 figures.
+
+**First users:** a small, consent-based pilot with caregivers of older adults, measuring false alarms, time to the first HIGH alert, and whether the quoted evidence helps a family decide what to do.
+
+**Roadmap**
+1. Live calls: a real number through the Amazon Chime SDK, with live transcription feeding the same detector.
+2. Real caregiver push alerts and real family verification (both simulated today).
+3. Better text-scam coverage, since KinBot's 69% recall is the weakest number in [Results](#results-measured-on-the-live-api).
+4. Evaluation on data we didn't write, starting with the pilot.
+5. KinModel as an on-device pre-filter or offline fallback, once validated. The [Android beta](#android-beta) is the first step.
 
 ## Honest limits
 - The test scenarios and KinBot messages were written by us, and the prompt was tuned on the same family of scripts.

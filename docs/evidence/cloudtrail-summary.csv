@@ -1,0 +1,480 @@
+day_pt,client,service,event_name,read_only,error,count,before_deadline
+2026-09-28,"AWS CLI from the developer terminal, where Claude Code ran",organizations,DescribeOrganization,True,AWSOrganizationsNotInUseException,1,True
+2026-09-28,"AWS CLI from the developer terminal, where Claude Code ran",sts,GetCallerIdentity,True,,1,True
+2026-09-28,AWS service on our behalf (secretsmanager),kms,GenerateDataKey,True,,1,True
+2026-09-28,"Kiro (AWS CLI, tagged app/kiro-ide)",bedrock,Converse,True,ValidationException,1,True
+2026-09-28,"Kiro (AWS CLI, tagged app/kiro-ide)",ce,GetCostAndUsage,True,,2,True
+2026-09-28,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,ListStacks,True,,1,True
+2026-09-28,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,ListFunctions20150331,True,,1,True
+2026-09-28,"Kiro (AWS CLI, tagged app/kiro-ide)",organizations,DescribeOrganization,True,AWSOrganizationsNotInUseException,1,True
+2026-09-28,"Kiro (AWS CLI, tagged app/kiro-ide)",s3,ListBuckets,True,,1,True
+2026-09-28,"Kiro (AWS CLI, tagged app/kiro-ide)",secretsmanager,CreateSecret,False,,1,True
+2026-09-28,"Kiro (AWS CLI, tagged app/kiro-ide)",secretsmanager,DescribeSecret,True,ResourceNotFoundException,1,True
+2026-09-28,"Kiro (AWS CLI, tagged app/kiro-ide)",sts,GetCallerIdentity,True,,5,True
+2026-09-29,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,CreateChangeSet,False,,2,True
+2026-09-29,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeChangeSet,True,,2,True
+2026-09-29,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeStacks,True,,9,True
+2026-09-29,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,GetTemplateSummary,True,,2,True
+2026-09-29,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,ListStacks,True,,1,True
+2026-09-29,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetFunctionConfiguration20150331v2,True,,1,True
+2026-09-29,"AWS CLI from the developer terminal, where Claude Code ran",lambda,UpdateFunctionCode20150331v2,False,,1,True
+2026-09-29,"AWS CLI from the developer terminal, where Claude Code ran",sts,GetCallerIdentity,True,,1,True
+2026-09-29,AWS service on our behalf (apigateway),iam,CreateServiceLinkedRole,False,,1,True
+2026-09-29,AWS service on our behalf (lambda),kms,Decrypt,True,,38,True
+2026-09-29,AWS service on our behalf (lambda),kms,DescribeKey,True,,2,True
+2026-09-29,AWS service on our behalf (lambda),kms,Encrypt,True,,2,True
+2026-09-29,"CloudFormation, acting for a stack deploy",apigateway,CreateApi,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",apigateway,CreateIntegration,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",apigateway,CreateRoute,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",apigateway,CreateStage,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",apigateway,GetApi,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",apigateway,GetIntegration,True,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",apigateway,GetRoute,True,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",apigateway,GetStage,True,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",cloudfront,CreateDistributionWithTags,False,AccessDenied,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",cloudfront,CreateOriginAccessControl,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",cloudfront,DeleteOriginAccessControl,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",cloudfront,GetOriginAccessControl,True,,2,True
+2026-09-29,"CloudFormation, acting for a stack deploy",cloudfront,GetOriginAccessControl,True,NoSuchOriginAccessControl,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",dynamodb,CreateTable,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",dynamodb,DescribeContinuousBackups,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",dynamodb,DescribeContributorInsights,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",dynamodb,DescribeKinesisStreamingDestination,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",dynamodb,DescribeTable,True,,7,True
+2026-09-29,"CloudFormation, acting for a stack deploy",dynamodb,DescribeTable,True,ResourceNotFoundException,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",dynamodb,DescribeTimeToLive,True,,4,True
+2026-09-29,"CloudFormation, acting for a stack deploy",dynamodb,DescribeTimeToLive,True,ValidationException,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",dynamodb,GetResourcePolicy,True,PolicyNotFoundException,4,True
+2026-09-29,"CloudFormation, acting for a stack deploy",dynamodb,ListTagsOfResource,True,,4,True
+2026-09-29,"CloudFormation, acting for a stack deploy",dynamodb,ListTagsOfResource,True,ResourceNotFoundException,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,AttachRolePolicy,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,CreateRole,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,GetAccountSummary,True,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,GetPolicy,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,GetPolicyVersion,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,GetRole,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,GetRole,True,NoSuchEntityException,2,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,GetRolePolicy,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,GetRolePolicy,True,NoSuchEntityException,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,ListAttachedRolePolicies,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,ListAttachedUserPolicies,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,ListGroupsForUser,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,ListPoliciesGrantingServiceAccess,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,ListRolePolicies,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,ListUserPolicies,True,,5,True
+2026-09-29,"CloudFormation, acting for a stack deploy",iam,PutRolePolicy,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,AddPermission20150331v2,False,,2,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,CreateFunction20150331,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,CreateFunctionUrlConfig,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,DeleteFunctionUrlConfig,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,GetAccountSettings20160819,True,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,GetFunction20150331v2,True,,9,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,GetFunction20150331v2,True,ResourceNotFoundException,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,GetFunctionCodeSigningConfig,True,,4,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,GetFunctionRecursionConfig,True,,4,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,GetFunctionUrlConfig,True,,2,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,GetFunctionUrlConfig,True,ResourceNotFoundException,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,GetPolicy20150331v2,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,GetRuntimeManagementConfig,True,,4,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,RemovePermission20150331v2,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",lambda,UpdateFunctionConfiguration20150331v2,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,CreateBucket,False,,2,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,DeleteBucket,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetAccelerateConfiguration,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketAbac,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketAnalyticsConfiguration,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketCors,True,NoSuchCORSConfiguration,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketEncryption,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketIntelligentTieringConfiguration,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketInventoryConfiguration,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketLifecycle,True,NoSuchLifecycleConfiguration,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketLogging,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketMetadataConfiguration,True,MetadataConfigurationNotFound,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketMetadataTableConfiguration,True,V1APIsNotAllowed,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketMetricsConfiguration,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketNotification,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketObjectLockConfiguration,True,ObjectLockConfigurationNotFoundError,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketOwnershipControls,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketPolicy,True,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketPolicy,True,NoSuchBucketPolicy,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketPublicAccessBlock,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketReplication,True,ReplicationConfigurationNotFoundError,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketVersioning,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketWebsite,True,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,GetBucketWebsite,True,NoSuchWebsiteConfiguration,2,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,ListTagsForResource,True,,3,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,PutBucketPolicy,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,PutBucketPublicAccessBlock,False,,2,True
+2026-09-29,"CloudFormation, acting for a stack deploy",s3,PutBucketWebsite,False,,1,True
+2026-09-29,"CloudFormation, acting for a stack deploy",sts,GetCallerIdentity,True,,5,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",ce,GetCostAndUsage,True,,3,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",ce,GetCostForecast,True,ValidationException,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,CreateChangeSet,False,,12,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DeleteStack,False,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DescribeChangeSet,True,,18,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DescribeStackEvents,True,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DescribeStackResources,True,,2,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DescribeStacks,True,,66,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DescribeStacks,True,ValidationException,4,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,ExecuteChangeSet,False,,5,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,GetTemplateSummary,True,,9,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,ListStacks,True,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",dynamodb,ListTables,True,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,AddPermission20150331v2,False,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,GetFunction20150331v2,True,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,GetFunctionConfiguration20150331v2,True,,11,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,GetFunctionUrlConfig,True,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,GetPolicy20150331v2,True,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,ListFunctions20150331,True,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,UpdateFunctionCode20150331v2,False,,9,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,UpdateFunctionConfiguration20150331v2,False,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,UpdateFunctionUrlConfig,False,,2,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",logs,DescribeLogGroups,True,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",s3,ListBuckets,True,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",secretsmanager,ListSecrets,True,,1,True
+2026-09-29,"Kiro (AWS CLI, tagged app/kiro-ide)",sts,GetCallerIdentity,True,,1,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetApis,True,,1,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetRoutes,True,,1,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetStage,True,,1,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",budgets,DescribeBudgets,True,,2,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",ce,GetCostAndUsage,True,,1,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,CreateChangeSet,False,,6,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeChangeSet,True,,8,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeStacks,True,,24,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,ExecuteChangeSet,False,,1,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,GetTemplateSummary,True,,6,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",cloudtrail,LookupEvents,True,,2,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetAccountSettings20160819,True,,1,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetFunctionConcurrency,True,,1,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetFunctionConfiguration20150331v2,True,,6,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",lambda,ListFunctionUrlConfigs,True,,1,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",lambda,UpdateFunctionCode20150331v2,False,,5,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",logs,DescribeLogGroups,True,,1,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",monitoring,DescribeAlarms,True,,2,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",secretsmanager,DescribeSecret,True,,1,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",servicequotas,ListServiceQuotas,True,,133,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",sts,GetCallerIdentity,True,,4,True
+2026-09-30,"AWS CLI from the developer terminal, where Claude Code ran",wafv2,ListWebACLs,True,,1,True
+2026-09-30,AWS service on our behalf (lambda),kms,Decrypt,True,,23,True
+2026-09-30,"CloudFormation, acting for a stack deploy",apigateway,GetApi,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",dynamodb,DescribeContinuousBackups,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",dynamodb,DescribeContributorInsights,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",dynamodb,DescribeKinesisStreamingDestination,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",dynamodb,DescribeTable,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",dynamodb,DescribeTimeToLive,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",dynamodb,GetResourcePolicy,True,PolicyNotFoundException,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",dynamodb,ListTagsOfResource,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",iam,GetPolicy,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",iam,GetPolicyVersion,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",iam,GetRole,True,,3,True
+2026-09-30,"CloudFormation, acting for a stack deploy",iam,GetRolePolicy,True,,3,True
+2026-09-30,"CloudFormation, acting for a stack deploy",iam,ListAttachedRolePolicies,True,,3,True
+2026-09-30,"CloudFormation, acting for a stack deploy",iam,ListAttachedUserPolicies,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",iam,ListGroupsForUser,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",iam,ListPoliciesGrantingServiceAccess,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",iam,ListRolePolicies,True,,3,True
+2026-09-30,"CloudFormation, acting for a stack deploy",iam,ListUserPolicies,True,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",lambda,GetFunction20150331v2,True,,5,True
+2026-09-30,"CloudFormation, acting for a stack deploy",lambda,GetFunctionCodeSigningConfig,True,,2,True
+2026-09-30,"CloudFormation, acting for a stack deploy",lambda,GetFunctionRecursionConfig,True,,2,True
+2026-09-30,"CloudFormation, acting for a stack deploy",lambda,GetRuntimeManagementConfig,True,,2,True
+2026-09-30,"CloudFormation, acting for a stack deploy",lambda,UpdateFunctionConfiguration20150331v2,False,,1,True
+2026-09-30,"CloudFormation, acting for a stack deploy",sts,GetCallerIdentity,True,,1,True
+2026-09-30,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,CreateChangeSet,False,,6,True
+2026-09-30,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DescribeChangeSet,True,,6,True
+2026-09-30,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DescribeStacks,True,,32,True
+2026-09-30,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,GetTemplateSummary,True,,6,True
+2026-09-30,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,GetFunctionConfiguration20150331v2,True,,3,True
+2026-09-30,"Kiro (AWS CLI, tagged app/kiro-ide)",lambda,UpdateFunctionCode20150331v2,False,,2,True
+2026-09-30,"Kiro (AWS CLI, tagged app/kiro-ide)",sts,GetCallerIdentity,True,,3,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetStages,True,,3,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",budgets,DescribeBudgets,True,,4,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",ce,GetCostAndUsage,True,,2,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,CreateChangeSet,False,,28,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DeleteStack,False,,1,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeChangeSet,True,,38,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeStackEvents,True,,2,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeStacks,True,,151,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeStacks,True,ValidationException,3,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,ExecuteChangeSet,False,,6,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,GetTemplateSummary,True,,26,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,ListStacks,True,,1,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,ValidateTemplate,True,,8,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",cloudfront,ListDistributions,True,,1,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetAccountSettings20160819,True,,3,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetFunction20150331v2,True,,3,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetFunctionConcurrency,True,,1,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetFunctionConfiguration20150331v2,True,,12,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",lambda,UpdateFunctionCode20150331v2,False,,8,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",logs,DescribeLogGroups,True,,1,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",logs,FilterLogEvents,True,,6,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",monitoring,DescribeAlarms,True,,3,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",s3,ListBuckets,True,,7,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",secretsmanager,GetSecretValue,True,,3,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",servicequotas,GetServiceQuota,True,,1,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",servicequotas,ListServiceQuotas,True,,173,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",servicequotas,RequestServiceQuotaIncrease,False,IllegalArgumentException,1,True
+2026-10-01,"AWS CLI from the developer terminal, where Claude Code ran",sts,GetCallerIdentity,True,,28,True
+2026-10-01,AWS service on our behalf (apigateway),iam,CreateServiceLinkedRole,False,InvalidInputException,1,True
+2026-10-01,AWS service on our behalf (lambda),kms,Decrypt,True,,57,True
+2026-10-01,AWS service on our behalf (lambda),kms,DescribeKey,True,,4,True
+2026-10-01,AWS service on our behalf (lambda),kms,Encrypt,True,,4,True
+2026-10-01,AWS service on our behalf (secretsmanager),kms,Decrypt,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",apigateway,CreateApi,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",apigateway,CreateIntegration,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",apigateway,CreateRoute,False,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",apigateway,CreateStage,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",apigateway,GetApi,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",apigateway,GetIntegration,True,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",apigateway,GetRoute,True,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",apigateway,GetStage,True,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",apigateway,TagResource,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",apigateway,UpdateStage,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",cloudfront,CreateDistributionWithTags,False,AccessDenied,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",dynamodb,DescribeContinuousBackups,True,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",dynamodb,DescribeContributorInsights,True,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",dynamodb,DescribeKinesisStreamingDestination,True,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",dynamodb,DescribeTable,True,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",dynamodb,DescribeTimeToLive,True,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",dynamodb,GetResourcePolicy,True,PolicyNotFoundException,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",dynamodb,ListTagsOfResource,True,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,CreateRole,False,,2,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,DeleteRole,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,DeleteRolePolicy,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,GetAccountSummary,True,,2,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,GetPolicy,True,,7,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,GetPolicyVersion,True,,7,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,GetRole,True,,15,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,GetRole,True,NoSuchEntityException,5,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,GetRolePolicy,True,,14,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,GetRolePolicy,True,NoSuchEntityException,2,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,ListAttachedRolePolicies,True,,15,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,ListAttachedUserPolicies,True,,7,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,ListGroupsForUser,True,,7,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,ListPoliciesGrantingServiceAccess,True,,7,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,ListRolePolicies,True,,15,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,ListUserPolicies,True,,7,True
+2026-10-01,"CloudFormation, acting for a stack deploy",iam,PutRolePolicy,False,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,AddPermission20150331v2,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,CreateFunction20150331,False,,2,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,DeleteFunction20150331,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,GetAccountSettings20160819,True,,2,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,GetFunction20150331v2,True,,27,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,GetFunction20150331v2,True,ResourceNotFoundException,5,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,GetFunctionCodeSigningConfig,True,,8,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,GetFunctionRecursionConfig,True,,8,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,GetPolicy20150331v2,True,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,GetRuntimeManagementConfig,True,,8,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,PutFunctionConcurrency20171031,False,InvalidParameterValueException,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,UpdateFunctionCode20150331v2,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",lambda,UpdateFunctionConfiguration20150331v2,False,,2,True
+2026-10-01,"CloudFormation, acting for a stack deploy",logs,CreateLogGroup,False,,2,True
+2026-10-01,"CloudFormation, acting for a stack deploy",logs,DeleteLogGroup,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",logs,DescribeIndexPolicies,True,,5,True
+2026-10-01,"CloudFormation, acting for a stack deploy",logs,DescribeLogGroups,True,,10,True
+2026-10-01,"CloudFormation, acting for a stack deploy",logs,DescribeResourcePolicies,True,,5,True
+2026-10-01,"CloudFormation, acting for a stack deploy",logs,ListTagsForResource,True,,5,True
+2026-10-01,"CloudFormation, acting for a stack deploy",logs,PutRetentionPolicy,False,,2,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,CreateBucket,False,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,DeleteBucket,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetAccelerateConfiguration,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketAbac,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketAnalyticsConfiguration,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketCors,True,NoSuchCORSConfiguration,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketEncryption,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketIntelligentTieringConfiguration,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketInventoryConfiguration,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketLifecycle,True,,2,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketLifecycle,True,NoSuchLifecycleConfiguration,4,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketLogging,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketMetadataConfiguration,True,MetadataConfigurationNotFound,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketMetadataTableConfiguration,True,V1APIsNotAllowed,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketMetricsConfiguration,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketNotification,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketObjectLockConfiguration,True,ObjectLockConfigurationNotFoundError,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketOwnershipControls,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketPublicAccessBlock,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketReplication,True,ReplicationConfigurationNotFoundError,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketVersioning,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,GetBucketWebsite,True,NoSuchWebsiteConfiguration,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,ListTagsForResource,True,,6,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,PutBucketEncryption,False,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,PutBucketLifecycle,False,,1,True
+2026-10-01,"CloudFormation, acting for a stack deploy",s3,PutBucketPublicAccessBlock,False,,3,True
+2026-10-01,"CloudFormation, acting for a stack deploy",sts,GetCallerIdentity,True,,7,True
+2026-10-01,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,CreateChangeSet,False,,1,True
+2026-10-01,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DeleteStack,False,,1,True
+2026-10-01,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DescribeChangeSet,True,,2,True
+2026-10-01,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DescribeStackEvents,True,,1,True
+2026-10-01,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DescribeStacks,True,,8,True
+2026-10-01,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,DescribeStacks,True,ValidationException,1,True
+2026-10-01,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudformation,ExecuteChangeSet,False,,1,True
+2026-10-01,"Kiro (AWS CLI, tagged app/kiro-ide)",cloudfront,ListDistributions,True,,1,True
+2026-10-01,"Kiro (AWS CLI, tagged app/kiro-ide)",s3,GetBucketLocation,True,,1,True
+2026-10-01,Python SDK script (boto3),polly,SynthesizeSpeech,True,,1,True
+2026-10-01,Python SDK script (boto3),secretsmanager,GetSecretValue,True,,3,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",acm,DescribeCertificate,True,,19,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",acm,ListCertificates,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",acm,RequestCertificate,False,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,CreateApiMapping,False,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,CreateApiMapping,False,ConflictException,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,CreateApiMapping,False,NotFoundException,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,CreateDomainName,False,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,CreateDomainName,False,TooManyRequestsException,6,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetApi,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetApis,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetDomainName,True,,3,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetDomainName,True,NotFoundException,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetDomainNames,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetRestApis,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetRoutes,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetStages,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",bedrock,Converse,True,ValidationException,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",budgets,DescribeBudgets,True,,10,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",ce,GetCostAndUsage,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,CreateChangeSet,False,,38,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeChangeSet,True,,43,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeStacks,True,,215,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeStacks,True,ValidationException,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,ExecuteChangeSet,False,,3,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,GetTemplateSummary,True,,37,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,ValidateTemplate,True,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cloudfront,ListDistributions,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cloudtrail,LookupEvents,True,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cognito-idp,AdminCreateUser,False,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cognito-idp,AdminDeleteUser,False,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cognito-idp,AdminSetUserPassword,False,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cognito-idp,DescribeUserPoolDomain,True,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cognito-idp,GetUICustomization,True,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cognito-idp,ListUserPools,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",cognito-idp,SetUICustomization,False,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",dynamodb,DescribeTable,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",iam,ListAttachedUserPolicies,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",iam,ListGroupsForUser,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",iam,ListServiceSpecificCredentials,True,,21,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",iam,ListUserPolicies,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",iam,ListUsers,True,,6,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetFunction20150331v2,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetFunctionConfiguration20150331v2,True,,29,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",lambda,UpdateFunctionCode20150331v2,False,,17,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",lambda,UpdateFunctionConfiguration20150331v2,False,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",logs,FilterLogEvents,True,,38,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",monitoring,DescribeAlarms,True,,9,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",route53,ChangeResourceRecordSets,False,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",route53,ChangeResourceRecordSets,False,InvalidChangeBatch,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",route53,CreateHostedZone,False,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",route53,GetChange,True,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",route53,GetHostedZone,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",route53,ListHostedZones,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",route53domains,CheckDomainAvailability,True,,15,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",route53domains,CheckDomainAvailability,True,ThrottlingException,4,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",route53domains,ListDomains,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",route53domains,ListPrices,True,,10,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",s3,ListBuckets,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",secretsmanager,DescribeSecret,True,,4,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",secretsmanager,GetSecretValue,True,,4,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",secretsmanager,ListSecretVersionIds,True,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",secretsmanager,ListSecrets,True,,1,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",secretsmanager,PutSecretValue,False,,2,True
+2026-10-02,"AWS CLI from the developer terminal, where Claude Code ran",sts,GetCallerIdentity,True,,32,True
+2026-10-02,AWS service on our behalf (acm),kms,CreateGrant,False,,3,True
+2026-10-02,AWS service on our behalf (acm),kms,DescribeKey,True,,4,True
+2026-10-02,AWS service on our behalf (apigateway),apigateway,CreateDomainName,False,TooManyRequestsException,4,True
+2026-10-02,AWS service on our behalf (lambda),kms,Decrypt,True,,62,True
+2026-10-02,AWS service on our behalf (lambda),kms,DescribeKey,True,,2,True
+2026-10-02,AWS service on our behalf (lambda),kms,Encrypt,True,,2,True
+2026-10-02,AWS service on our behalf (secretsmanager),kms,Decrypt,True,,4,True
+2026-10-02,AWS service on our behalf (secretsmanager),kms,GenerateDataKey,True,,2,True
+2026-10-02,"CloudFormation, acting for a stack deploy",apigateway,CreateAuthorizer,False,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",apigateway,CreateRoute,False,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",apigateway,GetApi,True,,4,True
+2026-10-02,"CloudFormation, acting for a stack deploy",apigateway,GetAuthorizer,True,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",apigateway,GetRoute,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",apigateway,TagResource,False,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",apigateway,UpdateApi,False,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",cognito-idp,CreateUserPool,False,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",cognito-idp,CreateUserPoolClient,False,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",cognito-idp,CreateUserPoolDomain,False,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",cognito-idp,DescribeUserPool,True,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",cognito-idp,DescribeUserPoolClient,True,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",cognito-idp,DescribeUserPoolDomain,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",cognito-idp,GetUserPoolMfaConfig,True,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",dynamodb,CreateTable,False,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",dynamodb,DescribeContinuousBackups,True,,5,True
+2026-10-02,"CloudFormation, acting for a stack deploy",dynamodb,DescribeContributorInsights,True,,5,True
+2026-10-02,"CloudFormation, acting for a stack deploy",dynamodb,DescribeKinesisStreamingDestination,True,,5,True
+2026-10-02,"CloudFormation, acting for a stack deploy",dynamodb,DescribeTable,True,,7,True
+2026-10-02,"CloudFormation, acting for a stack deploy",dynamodb,DescribeTable,True,ResourceNotFoundException,2,True
+2026-10-02,"CloudFormation, acting for a stack deploy",dynamodb,DescribeTimeToLive,True,,6,True
+2026-10-02,"CloudFormation, acting for a stack deploy",dynamodb,GetResourcePolicy,True,PolicyNotFoundException,5,True
+2026-10-02,"CloudFormation, acting for a stack deploy",dynamodb,ListTagsOfResource,True,,5,True
+2026-10-02,"CloudFormation, acting for a stack deploy",dynamodb,UpdateTimeToLive,False,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",iam,GetPolicy,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",iam,GetPolicyVersion,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",iam,GetRole,True,,8,True
+2026-10-02,"CloudFormation, acting for a stack deploy",iam,GetRolePolicy,True,,8,True
+2026-10-02,"CloudFormation, acting for a stack deploy",iam,ListAttachedRolePolicies,True,,8,True
+2026-10-02,"CloudFormation, acting for a stack deploy",iam,ListAttachedUserPolicies,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",iam,ListGroupsForUser,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",iam,ListPoliciesGrantingServiceAccess,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",iam,ListRolePolicies,True,,8,True
+2026-10-02,"CloudFormation, acting for a stack deploy",iam,ListUserPolicies,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",iam,PutRolePolicy,False,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",lambda,GetFunction20150331v2,True,,10,True
+2026-10-02,"CloudFormation, acting for a stack deploy",lambda,GetFunctionCodeSigningConfig,True,,4,True
+2026-10-02,"CloudFormation, acting for a stack deploy",lambda,GetFunctionRecursionConfig,True,,4,True
+2026-10-02,"CloudFormation, acting for a stack deploy",lambda,GetRuntimeManagementConfig,True,,4,True
+2026-10-02,"CloudFormation, acting for a stack deploy",lambda,UpdateFunctionCode20150331v2,False,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",lambda,UpdateFunctionConfiguration20150331v2,False,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",logs,DescribeIndexPolicies,True,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",logs,DescribeLogGroups,True,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",logs,DescribeResourcePolicies,True,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",logs,ListTagsForResource,True,,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetAccelerateConfiguration,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketAbac,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketAnalyticsConfiguration,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketCors,True,NoSuchCORSConfiguration,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketEncryption,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketIntelligentTieringConfiguration,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketInventoryConfiguration,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketLifecycle,True,,2,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketLifecycle,True,NoSuchLifecycleConfiguration,1,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketLogging,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketMetadataConfiguration,True,MetadataConfigurationNotFound,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketMetadataTableConfiguration,True,V1APIsNotAllowed,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketMetricsConfiguration,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketNotification,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketObjectLockConfiguration,True,ObjectLockConfigurationNotFoundError,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketOwnershipControls,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketPublicAccessBlock,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketReplication,True,ReplicationConfigurationNotFoundError,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketVersioning,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,GetBucketWebsite,True,NoSuchWebsiteConfiguration,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",s3,ListTagsForResource,True,,3,True
+2026-10-02,"CloudFormation, acting for a stack deploy",sts,GetCallerIdentity,True,,3,True
+2026-10-02,"Kiro (AWS CLI, tagged app/kiro-ide)",sts,GetCallerIdentity,True,,2,True
+2026-10-02,Python SDK script (boto3),polly,DescribeVoices,True,,1,True
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",apigateway,GetDomainNames,True,,1,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",budgets,CreateBudget,False,,1,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",budgets,DescribeBudgets,True,,6,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,CreateChangeSet,False,,2,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeChangeSet,True,,2,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeStackResources,True,,1,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeStacks,True,,28,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,GetTemplateSummary,True,,2,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",cloudtrail,LookupEvents,True,,1,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetAccountSettings20160819,True,,1,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetFunctionConcurrency,True,,1,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",lambda,GetFunctionConfiguration20150331v2,True,,2,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",lambda,UpdateFunctionCode20150331v2,False,,1,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",monitoring,DescribeAlarms,True,,5,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",s3,GetBucketLifecycle,True,,1,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",servicequotas,GetServiceQuota,True,,1,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",servicequotas,ListRequestedServiceQuotaChangeHistory,True,,1,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",servicequotas,RequestServiceQuotaIncrease,False,IllegalArgumentException,1,False
+2026-10-03,"AWS CLI from the developer terminal, where Claude Code ran",sts,GetCallerIdentity,True,,8,False
+2026-10-03,AWS service on our behalf (lambda),kms,Decrypt,True,,3,False
+2026-10-06,"AWS CLI from the developer terminal, where Claude Code ran",budgets,DescribeBudgets,True,,1,False
+2026-10-06,"AWS CLI from the developer terminal, where Claude Code ran",cloudformation,DescribeStacks,True,,3,False
+2026-10-06,"AWS CLI from the developer terminal, where Claude Code ran",monitoring,DescribeAlarms,True,,1,False
+2026-10-06,"AWS CLI from the developer terminal, where Claude Code ran",sts,GetCallerIdentity,True,,1,False
