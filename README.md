@@ -1,13 +1,33 @@
-# KinShield
+<p align="center">
+  <img src="web/src/img/logo-mark.svg" width="96" alt="KinShield logo">
+</p>
+<h1 align="center">KinShield</h1>
+<p align="center"><b>The voice can be perfect. The script still gives the scam away.</b><br>
+Scam protection a caregiver sets up once, for a parent who does nothing.</p>
+<p align="center">
+  <a href="https://kinshield.site"><b>Live app: kinshield.site</b></a> ·
+  <a href="docs/guides/kinvoice.md">KinVoice guide</a> ·
+  <a href="docs/guides/kinbot.md">KinBot guide</a> ·
+  <a href="docs/guides/kinmodel.md">KinModel guide</a> ·
+  <a href="docs/guides/ask-kip.md">Ask Kip guide</a>
+</p>
+<p align="center">
+  <img alt="Live on AWS" src="https://img.shields.io/badge/live%20on-AWS-23863D">
+  <img alt="Amazon Bedrock" src="https://img.shields.io/badge/Amazon%20Bedrock-gpt--oss--20b-23863D">
+  <img alt="No login needed" src="https://img.shields.io/badge/login-not%20needed-5EBE6A">
+  <img alt="Category" src="https://img.shields.io/badge/category-daily--life--enhancement-001123">
+  <img alt="Lane" src="https://img.shields.io/badge/lane-startup-001123">
+</p>
 
-**Category:** `#daily-life-enhancement` · **Lane:** `#startup`
-**Live on AWS:** **https://kinshield.site** (public, no login needed) · **Coding agents:** Kiro + Claude Code, both operating the AWS account through the AWS CLI
+![KinShield home page: One family. Two ways to keep watch.](docs/screenshots/hub-hero.jpg)
+
+**Category:** `#daily-life-enhancement` · **Lane:** `#startup` · **Coding agents:** Kiro + Claude Code, both operating the AWS account through the AWS CLI
 
 > Existing scam protection asks whether an unknown caller looks suspicious. KinShield asks whether a trusted conversation has become dangerous.
 
-_Last updated 2026-10-04. Full history: [PROGRESS.md](PROGRESS.md). Long-form write-up: [docs/WRITEUP.md](docs/WRITEUP.md). Coding-agent evidence: [docs/evidence/](docs/evidence/)._
+_Last updated 2026-10-06. Full history: [PROGRESS.md](PROGRESS.md). Long-form write-up: [docs/WRITEUP.md](docs/WRITEUP.md). Coding-agent evidence: [docs/evidence/](docs/evidence/)._
 
-**Contents:** [The gap](#the-gap) · [What is live](#what-is-live-all-on-aws-no-login) · [How to use KinShield](#how-to-use-kinshield) · [Results](#results-measured-on-the-live-api) · [Architecture](#architecture-and-decisions) · [Proof the coding agents operated AWS](#proof-the-coding-agents-operated-aws) · [Debugging stories](#debugging-stories) · [Who it's for](#who-its-for-and-the-business-model) · [Honest limits](#honest-limits) · [API](#api-kinshield-detector-lambda-behind-api-gateway-http-api) · [Layout and deploy](#layout)
+**Contents:** [The gap](#the-gap) · [The products](#the-products) · [How to use KinShield](#how-to-use-kinshield) · [Results](#results-measured-on-the-live-api) · [Architecture](#architecture-and-decisions) · [Proof the coding agents operated AWS](#proof-the-coding-agents-operated-aws) · [Debugging stories](#debugging-stories) · [Who it's for](#who-its-for-and-the-business-model) · [Honest limits](#honest-limits) · [API](#api-kinshield-detector-lambda-behind-api-gateway-http-api) · [Layout and deploy](#layout)
 
 ## The gap
 Elder fraud is large and growing. FBI IC3's 2025 report counts more than 201,000 complaints from people over 60 and more than $7.7B lost, up 59%. The grandparent scam follows a known script: a panicked "relative" claims an arrest or accident, asks for secrecy, then asks for payment by wire or gift cards.
@@ -16,19 +36,17 @@ Voice cloning makes the voice and caller ID look right. Google and Samsung's on-
 
 KinShield is delegated protection: a caregiver sets it up once, for a parent who does nothing. It detects the *behaviour* of a dangerous conversation (impersonation, manufactured emergency, secrecy, payment escalation, authority pressure, urgency), not the voice, so it works even against a perfect clone. It never gives a bare percentage: every warning quotes the exact words that triggered it.
 
-## What is live (all on AWS, no login)
+## The products
 
-KinShield is the umbrella brand. The site has a hub page and three products, all built on the same seven-signal detector.
+KinShield is the umbrella brand. All products share the same seven warning signs and the same rule: **never a bare percentage, always the exact words.** Everything runs on AWS at **https://kinshield.site** with no login.
 
-| Page | What it does |
-|---|---|
-| [`/`](https://kinshield.site): hub | Introduces the products ("One family. Two ways to keep watch."), how it runs on AWS, honest notes, planned pricing and the Android beta download. |
-| [`kinvoice.html`](https://kinshield.site/kinvoice.html) + [`kinvoice-app.html`](https://kinshield.site/kinvoice-app.html): **KinVoice** | Call demo. Plays a scripted call and re-scores it with Amazon Bedrock after every caller turn: risk timeline, cited evidence, a mid-call alert, a simulated "Verify with family" step and a fraud report. You can also type, paste or dictate your own call. 63 scenarios. |
-| [`kinbot.html`](https://kinshield.site/kinbot.html) + [`kinbot-chat.html`](https://kinshield.site/kinbot-chat.html): **KinBot** | Check a text, email, call script, **screenshot** (read by a vision model) or **voicemail** (transcribed by an audio model). Every warning sign is quoted from your own text. Then an **investigator agent** checks the links and phone numbers. Ask mode answers follow-up safety questions. Optional sign-in saves a summary of each check. |
-| [`kinmodel.html`](https://kinshield.site/kinmodel.html): **KinModel** | Scores one message two ways: KinShield-Lite (a 119 KB int8 TF-IDF + logistic-regression model running inside the Lambda) next to the Bedrock detector, and shows whether they agree. Also documents our gpt-oss-20b fine-tune research. |
-| "Ask Kip" help widget | On the hub and product info pages. Answers only from a written knowledge base (`lambda/evidence-detector/kb.md`) and cites its source. If someone says a scam is happening now, or that they already paid, it skips the model and shows a fixed safety card. |
-
-![KinBot checking a grandparent-scam text: High risk, with four warning signs each quoted from the message](web/src/img/kinbot-app-shot.jpg)
+| | Product | What it does | Try it | Guide |
+|---|---|---|---|---|
+| 📞 | **KinVoice** | Plays a call turn by turn while Amazon Bedrock re-scores it after every caller line: risk timeline, quoted evidence, a mid-call alert, "Verify with family" and a fraud report. Test your own call too. 63 scripted calls. | [Open](https://kinshield.site/kinvoice-app.html?run=scam) | [KinVoice guide](docs/guides/kinvoice.md) |
+| 💬 | **KinBot** | Checks a text, email, **screenshot** or **voicemail**, quotes the warning signs from *your* message, then an **investigator agent** checks every link and phone number. Ask follow-up questions. | [Open](https://kinshield.site/kinbot-chat.html?example=0) | [KinBot guide](docs/guides/kinbot.md) |
+| ⚡ | **KinModel** | Our own 119 KB scam model, running inside the Lambda, scores a message next to the Bedrock detector so you can see when they agree. | [Open](https://kinshield.site/kinmodel.html) | [KinModel guide](docs/guides/kinmodel.md) |
+| 🙋 | **Ask Kip** | A help widget on the info pages that answers only from a written knowledge base and cites its source. | [Open](https://kinshield.site/) | [Ask Kip guide](docs/guides/ask-kip.md) |
+| 📱 | **Android beta** | KinBot and the KinVoice demo as a native app (sideloaded APK, built after the hackathon deadline). | [Download](https://kinshield.site/#android) | [Below](#android-beta) |
 
 **URLs**
 - Site + API (HTTPS): **https://kinshield.site** (also `www.`). An API Gateway regional custom domain with an ACM certificate and Route 53 DNS. The Lambda serves the pages and the API from the same origin.
@@ -39,53 +57,70 @@ KinShield is the umbrella brand. The site has a hub page and three products, all
 
 ## How to use KinShield
 
-Everything below works in a normal browser at **https://kinshield.site** with no account, no install and no phone call. Phones work too; the layouts adapt down to 390px wide.
+Everything works in a normal browser at **https://kinshield.site**, with no account, no install and no phone call, on desktop or phone. Below is the short version of each product; every guide has the full step-by-step with a screenshot for each step.
 
 ### Quick start (3 minutes)
-1. Open **https://kinshield.site/kinvoice-app.html?run=scam**. A scam call starts playing straight away. Wait about 30 seconds and the HIGH-risk alert appears.
-2. Open **https://kinshield.site/kinbot-chat.html?example=0**. KinBot checks a "grandson in jail" text and shows High risk with the exact quotes, then the investigator agent runs.
-3. Open **https://kinshield.site/kinmodel.html**, press **Grandson in jail** under "Try an example:", and see the small model and the Bedrock detector score it side by side.
+1. **https://kinshield.site/kinvoice-app.html?run=scam**: a scam call starts straight away. About 30 seconds later the High-risk alert appears.
+2. **https://kinshield.site/kinbot-chat.html?example=0**: KinBot checks a "grandson in jail" text, quotes four warning signs, then investigates it.
+3. **https://kinshield.site/kinmodel.html**: press **Grandson in jail** and see the small model and the Bedrock detector agree.
 
-### KinVoice: watch a trusted call turn dangerous
-Open **KinVoice** from the hub, then **Try a scam call**, or go straight to `kinvoice-app.html`.
+### 📞 KinVoice: watch a trusted call turn dangerous
+[Full KinVoice guide →](docs/guides/kinvoice.md)
 
-1. **(Optional) Set up the family.** Press **Set up** in the sidebar. Enter the protected person (default "Mom"), your name as caregiver, up to three trusted contacts, the alert level (High, or Medium and above) and an optional family safe word. This is saved only in your browser and the names appear throughout the demo.
-2. **Pick a call.** The **Calls** tab lists all 63 scripted calls. Search them, or filter with **Scam / Safe / All**. In the sidebar, **Random scam call** always picks a scam that reliably scores HIGH; **New call** starts again.
-3. **Watch it play.** The **Live call** tab shows the transcript on the left. After each caller turn, the page sends the conversation so far to the Bedrock detector (at most 6 scores per call). The risk meter and the **risk timeline** rise only when the evidence adds up. A greeting alone scores LOW; a greeting plus an emergency, secrecy and a gift-card request scores HIGH.
-4. **Read the evidence.** Each warning sign shows its signal name (for example *Secrecy*), the exact line it came from and its timestamp. The lead line under the timeline says when the alert fired, for example "Alert at 00:18 (turn 4 of 6) · on the line that asked for money".
-5. **Get the alert.** When the score first crosses your alert level, a push-style toast appears mid-call. At the end of the call, the alert dialog shows the three strongest quotes.
-6. **Verify with family.** Press **Verify with family**. A simulated message goes to the matching trusted contact ("Did that call really come from family?"). Answer **No, it wasn't me** to see the "caller not verified" result, or **Yes, it was me**. This step is simulated and labelled that way.
-7. **Make a report.** Press **Fraud report** to copy it or download it as a .txt file. It lists the caller's claim, the likely scam type, every money ask with its time, every quoted sign, the full transcript, and where to report: FTC, FBI IC3 and the DOJ Elder Fraud Hotline (1-833-372-8311). Scripted calls are marked "practice only".
-8. **Hear it.** Switch **Voice off** to on, and Amazon Polly reads the caller's lines aloud while your browser reads the other side.
-9. **Test your own call.** Open the **Your call** tab (or `kinvoice-app.html?own=1`). Add lines as **Caller** or as the protected person by typing, using the microphone (Chrome, Edge or Safari), or pasting a whole conversation as `Name: line` rows. **Start from a scripted call** loads one to edit. Press **Run through KinVoice** to score it the same way.
-10. **Review.** The **Alerts** tab and the sidebar's history list every call you played in this visit.
+1. **Pick a call** on the **Calls** tab (search, or filter **Scam / Safe / All**), or press **Random scam call**. Optionally press **Family setup** first to name the person you protect and your trusted contacts.
+2. **Watch it play.** After each caller line, Bedrock scores the call so far. A greeting scores 0; the score climbs only as warning signs add up. When it crosses your alert level, a push alert appears mid-call, quoting the line that tipped it.
 
-Also try a safe call: the hard negatives include a real $100 loan for a plumber and a "don't tell Dad, it's a surprise party" secret. Both should stay LOW.
+   ![Mid-call: the score jumps to 80 and the caregiver gets a push alert](docs/screenshots/kinvoice-live-toast.jpg)
 
-### KinBot: check a message, screenshot or voicemail
-Open **KinBot** from the hub, then **Open KinBot**, or go straight to `kinbot-chat.html`. A welcome popup appears on the first visit. **Continue as guest** gives you every feature.
+3. **Read the alert.** At the end of the call you get the three strongest warning signs, each with the caller's exact words.
 
-1. **Check a message.** Paste a text, email or call script (up to 2,000 characters) into the box. Make sure the mode is **Check**, then send. Or press one of the quick-start cards (**Check a message**, **Grandson in jail**, **Ask a safety question**, **Already sent money?**) or an example chip under "More examples:".
-2. **Read the verdict.** You get a badge (High risk / Be careful / Looks safe), a one-line headline, "Why Kip is worried" with each warning sign quoted from *your* text, and a numbered "What to do now". Quotes that aren't really in your text are removed by the server before you see them. Open **How Kip checked this** to see the model and the KinModel-Lite score.
-3. **Let the agent investigate.** Straight after the verdict, the investigator agent checks every link and phone number in the message: who owns the website and how old it is, brand look-alike domains, a phishing feed (OpenPhish), a guarded fetch of the page (no JavaScript, cookies or forms), phone-number patterns (one-ring area codes, 900 numbers) and scam guidance from the FTC. It shows its conclusion and a **Next step** first, then each check with a Danger / Caution / Note label. You can also switch to the **Investigate** tab.
-4. **Kip's overall take.** If the agent finds danger that the text check missed (for example a fake USPS fee link), an **Overall** card raises the verdict. It can raise the verdict, never lower it.
-5. **Check a screenshot.** Press **+** or the attach button, choose **Check a screenshot**, then pick an image, paste one with Ctrl/Cmd+V or drag it in. The vision model reads the visible text, the brand, any QR code and visual warning signs, shows "What Kip read", then runs the same check and investigation. It takes about 8 seconds.
-6. **Check a voicemail.** Choose **Check a voicemail** and upload a recording, or press the mic to record (up to about 110 seconds). The audio model transcribes it in the original language, shows "What Kip heard", then checks it.
-7. **Ask a follow-up.** Switch the mode to **Ask** (or press a follow-up chip such as **Copy a call-back script**) and ask a safety question. If you write that you already sent money or that it's happening right now, KinBot shows a fixed safety card with the next steps instead of a model answer.
-8. **(Optional) Sign in.** **Sign in to save history** opens a hosted sign-in page (email and a verification code). Signed-in users see "Your checks" in the sidebar. Only the risk level, type, headline, score and date are saved, never the message, for 90 days. The account view has **Delete my history** and **Sign out**.
-9. **Get started guide.** The **Get started** pill in the corner walks through six steps (check, investigate, ask, screenshot, voicemail, open KinVoice) and ticks them off as you go.
+   ![End-of-call alert with three quoted warning signs](docs/screenshots/kinvoice-alert.jpg)
 
-### KinModel: a second opinion
-1. Open `kinmodel.html` and scroll to **Score a message, two ways**.
-2. Paste a message (up to 2,000 characters), or press **Grandson in jail**, **Fake USPS fee**, **"Social Security officer"** or **Real pharmacy text**.
-3. On the left, KinModel-Lite gives a probability and "scam-like / not scam-like". On the right, the Bedrock detector gives a level, a score and the top three quotes. A line underneath says whether they agree.
-4. Read **The numbers, and why to doubt them** and **We fine-tuned gpt-oss-20b, then shrank it again** for the research behind it.
+4. **Verify with family.** Swipe to ping the claimed family member on *their own* phone and answer "Was this you?" (simulated). "No" means hang up and send nothing.
+5. **Make a fraud report**, ready to copy or download with links to the FTC, FBI IC3 and the DOJ Elder Fraud Hotline (1-833-372-8311).
 
-### Ask Kip (help widget)
-On the hub, KinVoice, KinBot and KinModel info pages, press **Questions? Ask Kip** in the bottom corner. Pick a common question or type your own. Each answer shows its **Source** from the knowledge base.
+   ![The fraud report](docs/screenshots/kinvoice-report.jpg)
 
-### Android beta (optional)
-The hub's **Android beta** section links a 2.3 MB APK (KinShield Beta 0.1.0). It runs KinBot, share-to-KinBot, offline KinModel-Lite and the KinVoice demo. It's sideloaded, so Play Protect may warn you. It is a beta made after the hackathon deadline and isn't part of the submission.
+6. **Test your own call** on the **Your call** tab: type, speak or paste a conversation, then press **Run through KinVoice**.
+
+### 💬 KinBot: check a message, screenshot or voicemail
+[Full KinBot guide →](docs/guides/kinbot.md)
+
+1. **Open KinBot** and press **Continue as guest** (sign-in is optional and only saves a short history).
+2. **Paste a message** and press send, or press **Grandson in jail**. You get a verdict with every warning sign quoted from *your* text, and what to do now.
+
+   ![A High-risk verdict with four quoted warning signs](docs/screenshots/kinbot-verdict.jpg)
+
+3. **Kip investigates.** The agent checks each link and phone number (domain age and owner, brand look-alikes, a phishing feed, a safe page fetch, phone-number patterns, FTC advice) and gives a next step.
+
+   ![Kip looked into it: conclusion, next step and checks](docs/screenshots/kinbot-investigate.jpg)
+
+4. **Check a screenshot** (attach, paste or drag an image) or **check a voicemail** (upload or record). A vision model reads the picture and an audio model transcribes the recording, then the same check runs. If the links or the picture fail Kip's checks, the **overall take** raises the verdict.
+
+   ![Overall · High risk for a fake USPS text](docs/screenshots/kinbot-overall.jpg)
+
+5. **Ask a follow-up** in **Ask mode**, for example "Should I reply to them?".
+
+### ⚡ KinModel: a second opinion
+[Full KinModel guide →](docs/guides/kinmodel.md)
+
+1. Open **kinmodel.html** and scroll to **Score a message, two ways**.
+2. Paste a message or press an example, then press **Score it**.
+3. Compare KinModel's probability with the detector's level and quotes, and read whether they agree.
+
+![KinModel 0.98 scam-like next to the detector's High, with quotes](docs/screenshots/kinmodel-score.jpg)
+
+### 🙋 Ask Kip: questions about KinShield
+[Full Ask Kip guide →](docs/guides/ask-kip.md)
+
+Press **Questions? Ask Kip** at the bottom right of any info page, pick a common question or type your own, and read the answer with its **Source**. If you say a scam is happening now, or that you already paid, it shows fixed safety steps instead of an AI answer.
+
+<p align="center"><img src="docs/screenshots/askkip-answer.jpg" width="720" alt="Ask Kip answering a pricing question with its source"></p>
+
+### Android beta
+The home page's **Android beta** section links a 2.3 MB APK (KinShield Beta 0.1.0) with KinBot, share-to-KinBot, offline KinModel and the KinVoice demo. It's sideloaded, so Play Protect may warn you. It was built after the hackathon deadline and isn't part of the submission.
+
+![Android beta section on the home page](docs/screenshots/hub-android.jpg)
 
 ### What is real and what is simulated
 | Real (live on AWS) | Simulated (labelled in the UI) |
@@ -305,7 +340,7 @@ infra/            CloudFormation templates (backend, frontend-s3, auth) + deploy
 web/src/          index, kinvoice, kinvoice-app, kinbot, kinbot-chat, kinmodel pages; kinvoice-app.js, kinbot-app.js, kinbot-guide.js, kinmodel.js, chat.js, guide.js, ui.js; styles
 android/          KinShield Beta (Kotlin + Jetpack Compose), built after the deadline
 eval/kinbot/      46-message KinBot eval set, runner and REPORT.md
-docs/             WRITEUP.md, evidence/ (redacted agent + AWS evidence)
+docs/             WRITEUP.md, guides/ (step-by-step guide per product), screenshots/, evidence/ (redacted agent + AWS evidence)
 .kiro/specs/      Kiro requirements / design / tasks
 ```
 
