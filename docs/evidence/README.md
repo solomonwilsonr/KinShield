@@ -21,6 +21,26 @@ Every file here was captured before the 2026-10-02 23:59 PT deadline, except `cl
 | Sep 30 | [`readonly-aws-evidence-2026-09-30.log`](readonly-aws-evidence-2026-09-30.log), [`day4-uxfixes-verify.log`](day4-uxfixes-verify.log) | Checked stack and Lambda status, redeployed, and checked the live files. Checked `/detect` with a scam call (HIGH) and a birthday-secret call (LOW). |
 | Oct 2 | [`kinbot-ship-2026-10-02.md`](kinbot-ship-2026-10-02.md), [`kinbot-agent-investigation-2026-10-02.png`](kinbot-agent-investigation-2026-10-02.png) | Shipped KinBot and KinShield-Lite (Lambda code update, S3 sync, smoke tests, Playwright checks of the live site). The screenshot shows the live investigator agent. |
 
+## Screenshots
+
+These images were made on 2026-10-07, after the deadline. Each one renders a saved log from this folder that was captured before the deadline. The output text is verbatim, account and user IDs are redacted as in the source log, and anything shortened is marked `[… trimmed …]`. The footer of each image names its source file and capture time.
+
+| Captured | Agent | Image |
+|---|---|---|
+| Sep 28 | Kiro | [Identity check, Bedrock `Converse` blocked, Mantle working](screenshots/01-identity-and-bedrock-2026-09-28.png) |
+| Sep 29 | Kiro | [CloudFormation deploy of `kinshield-backend`, live `/health` and `/detect`](screenshots/02-backend-deploy-2026-09-29.png) |
+| Sep 30 | Coding agent (log doesn't say which) | [Redeploy and live verification](screenshots/03-redeploy-verify-2026-09-30.png) |
+| Sep 30 | Coding agent (log doesn't say which) | [Stacks, function and CloudTrail by client: 0 AWS MCP Server events](screenshots/04-readonly-check-cloudtrail-2026-09-30.png) |
+| Oct 2 | Claude Code | [KinBot backend deploy and smoke test](screenshots/05-kinbot-backend-deploy-2026-10-02.png) |
+
+![CloudFormation deploy of kinshield-backend, Sep 29](screenshots/02-backend-deploy-2026-09-29.png)
+
+![Read-only check with CloudTrail by client, Sep 30](screenshots/04-readonly-check-cloudtrail-2026-09-30.png)
+
+<!-- TODO(user): AWS console screenshots, taken 2026-10-07 of build-week records, account ID blurred:
+     screenshots/console-cloudtrail-event-history.png  (Event history filtered on user kiro, Sep 28 – Oct 2)
+     screenshots/console-cloudformation-stacks.png     (kinshield-backend / -frontend / -tiny-ml with timestamps) -->
+
 ## Not included
 
 - The helper shell scripts and Playwright test runs are kept locally. Some of them build resource names from the account ID.

@@ -4,7 +4,7 @@ _Last updated: 2026-10-02 (§11–§17 cover Oct 1–2). Hackathon: AWS "Zero to
 _Category: `#daily-life-enhancement` · Lane: `#startup`._
 
 This document is a complete record of everything built and decided so far, including the account
-surprises we hit and how we worked around each one. Account IDs are redacted (`0616647XXXXX`).
+surprises we hit and how we worked around each one. Account IDs are redacted (`<ACCOUNT_ID>`).
 
 ---
 
@@ -22,7 +22,7 @@ taxonomy, never a bare probability.
 
 | Thing | Value |
 |---|---|
-| **Site (current UI)** | S3 static website `http://kinshield-site-0616647XXXXX.s3-website-us-east-1.amazonaws.com` (HTTP; hostname contains the account id) |
+| **Site (current UI)** | S3 static website `http://kinshield-site-<ACCOUNT_ID>.s3-website-us-east-1.amazonaws.com` (HTTP; hostname contains the account id) |
 | Pages | `index.html` (hub), `kinvoice.html`, `kinbot.html`, `kinbot-chat.html`, `kinmodel.html` |
 | **API (HTTPS)** | `https://zx9d4nrkni.execute-api.us-east-1.amazonaws.com/` — `/health`, `/scenarios`, `/scenario`, `/detect`, `/chat`, `/kinbot` |
 | Backend stack | `kinshield-backend` — UPDATE_COMPLETE (last update 2026-10-02, adds voicemail bucket + media permissions) |
@@ -40,7 +40,7 @@ updated for the new pages), so the S3 site is the real one.
 
 ## 3. Day 0 — AWS connection + Bedrock verification (DONE)
 
-- Confirmed the personal account `0616647XXXXX` is **standalone** (not in any AWS Organization —
+- Confirmed the personal account `<ACCOUNT_ID>` is **standalone** (not in any AWS Organization —
   `organizations describe-organization` → `AWSOrganizationsNotInUseException`).
 - **Discovery #1:** classic `bedrock-runtime` Converse/InvokeModel is **hard-blocked** on this
   account (`ValidationException: Operation not allowed`) for every model (Nova, Llama, Claude),
