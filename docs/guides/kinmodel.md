@@ -36,6 +36,8 @@ Beyond the in-app KinModel, we trained two bigger models and published them:
 | [**kinshield-20b**](https://huggingface.co/Solomonwilsonr/kinshield-20b) | QLoRA fine-tune of gpt-oss-20b on an NVIDIA DGX Spark | 62/63, no safe call flagged (stock 20b: 61/63) |
 | [**kinshield-tiny-v3**](https://huggingface.co/Solomonwilsonr/kinshield-tiny-v3) | 22.9 MB int8 MiniLM-L6, distilled from kinshield-20b, CPU only | 60/63, no safe call flagged |
 
+![How the models were trained](../architecture/pipeline-models.jpg)
+
 Each model card has the training method, results and code to run it. kinshield-tiny-v3 is also live on its own AWS endpoint (about 20 ms per call). See [the README section](../../README.md#-our-models-on-hugging-face) for a `curl` example. The live KinShield app still uses stock gpt-oss-20b on Amazon Bedrock.
 
 ## Limits

@@ -92,6 +92,13 @@ Press **Sign in to save history** at the bottom of the sidebar. Sign-in uses ema
 - only the risk level, type, headline, score and date are saved, **never the message**, and they are deleted after 90 days;
 - **Delete my history** and **Sign out** are in the account view.
 
+## How it works under the hood
+Screenshots are read by Qwen3-VL and voicemails transcribed by Voxtral (both on Amazon Bedrock). The resulting text goes through the same check as a pasted message, then the investigator agent runs its read-only tools. Sign-in uses Amazon Cognito and stores only a summary in DynamoDB.
+
+![KinBot request flow](../architecture/flow-kinbot.jpg)
+
+![Optional sign-in and saved history](../architecture/flow-signin.jpg)
+
 ## Privacy
 Messages, screenshots and voicemails aren't logged or stored. Remove names and account numbers before you paste.
 

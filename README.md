@@ -10,7 +10,8 @@ Scam protection a caregiver sets up once, for a parent who does nothing.</p>
   <a href="docs/guides/kinbot.md">KinBot guide</a> ·
   <a href="docs/guides/kinmodel.md">KinModel guide</a> ·
   <a href="docs/guides/ask-kip.md">Ask Kip guide</a> ·
-  <a href="#-our-models-on-hugging-face">🤗 Our models on Hugging Face</a>
+  <a href="#-our-models-on-hugging-face">🤗 Our models on Hugging Face</a> ·
+  <a href="#architecture-and-decisions">Architecture diagrams</a>
 </p>
 <p align="center">
   <img alt="Live on AWS" src="https://img.shields.io/badge/live%20on-AWS-23863D">
@@ -33,6 +34,19 @@ Scam protection a caregiver sets up once, for a parent who does nothing.</p>
 _Last updated 2026-10-06. Full history: [PROGRESS.md](PROGRESS.md). Long-form write-up: [docs/WRITEUP.md](docs/WRITEUP.md). Coding-agent evidence: [docs/evidence/](docs/evidence/)._
 
 **Contents:** [The gap](#the-gap) · [The products](#the-products) · [Our models on Hugging Face](#-our-models-on-hugging-face) · [How to use KinShield](#how-to-use-kinshield) · [Results](#results-measured-on-the-live-api) · [Architecture](#architecture-and-decisions) · [Proof the coding agents operated AWS](#proof-the-coding-agents-operated-aws) · [Debugging stories](#debugging-stories) · [Who it's for](#who-its-for-and-the-business-model) · [Honest limits](#honest-limits) · [API](#api-kinshield-detector-lambda-behind-api-gateway-http-api) · [Layout and deploy](#layout)
+
+### Quick tour
+| If you want to see… | Go to |
+|---|---|
+| The app working, in 3 minutes | [Quick start](#quick-start-3-minutes) → https://kinshield.site |
+| How it's built on AWS (diagrams) | [Architecture and decisions](#architecture-and-decisions) |
+| The models we trained and published | [🤗 Our models on Hugging Face](#-our-models-on-hugging-face) |
+| Measured results, including the weak ones | [Results](#results-measured-on-the-live-api) · [Honest limits](#honest-limits) |
+| Proof the coding agents operated the AWS account | [Proof the coding agents operated AWS](#proof-the-coding-agents-operated-aws) · [docs/evidence/](docs/evidence/) |
+| What broke and how we fixed it | [Debugging stories](#debugging-stories) |
+| Who would pay, and what's next | [Who it's for and the business model](#who-its-for-and-the-business-model) |
+
+<a href="#architecture-and-decisions"><img src="docs/architecture/architecture-overview.jpg" alt="KinShield architecture on AWS (click for details)"></a>
 
 ## The gap
 Elder fraud is large and growing. FBI IC3's 2025 report counts more than 201,000 complaints from people over 60 and more than $7.7B lost, up 59%. The grandparent scam follows a known script: a panicked "relative" claims an arrest or accident, asks for secrecy, then asks for payment by wire or gift cards.
@@ -72,14 +86,7 @@ We trained two models for KinShield and published both, with model cards, result
 
 **How they were made**
 
-```
-1,565 synthetic calls (English + Hinglish)          gpt-oss-120b on Bedrock relabels them
-written by gpt-oss-20b on Amazon Bedrock    ──▶     + intent filter → 1,201 train / 213 val
-                                                                   │
-                                                                   ▼
-kinshield-tiny-v3 (MiniLM-L6, int8 ONNX)    ◀──     kinshield-20b: QLoRA on gpt-oss-20b
-distilled from the fine-tuned teacher               (DGX Spark, 2 epochs, 90 min, val loss 0.049 → 0.035)
-```
+![Model pipeline: synthetic calls generated on Bedrock, relabelled by gpt-oss-120b, filtered to 1,201 train / 213 val, QLoRA fine-tune on an NVIDIA DGX Spark, distilled into MiniLM-L6, published to Hugging Face and deployed to the throttled kinshield-tiny-ml stack; results 61/63, 62/63 and 60/63 with 0/32 safe calls flagged](docs/architecture/pipeline-models.jpg)
 
 1. **Data.** gpt-oss-20b on Amazon Bedrock wrote 1,565 synthetic calls: scams, ordinary calls and hard negatives such as "don't tell Dad, it's a surprise party". Near-duplicates of the test calls were removed.
 2. **Better labels.** gpt-oss-120b relabelled every call with the live detector prompt. A label was kept only if it matched what the call was written to be (scams MEDIUM or HIGH, safe calls LOW), leaving 1,201 calls for training and 213 for validation.
@@ -247,25 +254,36 @@ Signal taxonomy (fixed; each signal is cited to an FTC/IC3 pattern in `benchmark
 
 ## Architecture and decisions
 
-```
-Browser ──HTTPS──▶ kinshield.site (Route 53 + ACM, API Gateway regional custom domain)
-                        │
-                        ▼
-              API Gateway HTTP API ──JWT authorizer (Cognito)──▶ /history
-                        │
-                        ▼
-          Lambda "kinshield-detector" (Python 3.12)
-           ├─ serves the static pages (same origin as the API)
-           ├─ /detect, /kinbot check ──▶ Bedrock Mantle: openai.gpt-oss-20b
-           ├─ /kinbot investigate ─────▶ gpt-oss-20b function calling + read-only tools
-           ├─ /kinbot screenshot ──────▶ Bedrock Mantle: qwen.qwen3-vl-235b-a22b-instruct
-           ├─ /kinbot voicemail ───────▶ Bedrock Mantle: mistral.voxtral-small-24b-2507
-           ├─ /kinbot speak ───────────▶ Amazon Polly
-           ├─ /chat (Ask Kip) ─────────▶ gpt-oss-20b, grounded in kb.md
-           ├─ KinModel-Lite (in-process, no model call)
-           ├─ Secrets Manager (Bedrock API key) · DynamoDB (demo sessions, opt-in history)
-           └─ CloudWatch Logs
-```
+### System overview
+Everything a user touches runs in one AWS Region (us-east-1) behind **one HTTPS origin, kinshield.site**. Route 53 and ACM front an API Gateway HTTP API. A single Lambda, `kinshield-detector`, serves both the web pages and the API, so there's no CORS and no second hosting service to break. The Lambda calls three models on Amazon Bedrock, plus Polly, Secrets Manager, DynamoDB and CloudWatch, and runs KinModel-Lite in-process. Everything is deployed with CloudFormation by the coding agents through the AWS CLI.
+
+![KinShield architecture on AWS: users, Route 53, ACM, API Gateway, the kinshield-detector Lambda, Bedrock, Secrets Manager, Polly, DynamoDB, CloudWatch, Cognito, the Tiny v3 experiment stack, the legacy S3 site, CloudFormation, Budgets, the read-only internet tools and the build and research tools](docs/architecture/architecture-overview.jpg)
+
+| Layer | Service | Why it's there |
+|---|---|---|
+| Edge | Amazon Route 53, AWS Certificate Manager, Amazon API Gateway (regional custom domain) | One HTTPS address with no account ID in it. CloudFront was refused on this account ("must be verified"), so API Gateway serves the domain directly. |
+| Compute | AWS Lambda `kinshield-detector` (Python 3.12) | Pages + API from one origin; detector, KinBot agent, Ask Kip and KinModel-Lite in one function |
+| AI | Amazon Bedrock (Mantle endpoint): gpt-oss-20b, Qwen3-VL 235B, Voxtral Small 24B | Text detection and the agent; reading screenshots; transcribing voicemails |
+| Voice | Amazon Polly (neural voice "Joanna") | Reads caller lines aloud in KinVoice |
+| Data | Amazon DynamoDB `kinshield-sessions`, `kinshield-history` | Demo events; opt-in check history with a 90-day TTL |
+| Identity | Amazon Cognito user pool + API Gateway JWT authorizer | Optional sign-in; only `/history` needs it |
+| Secrets & ops | AWS Secrets Manager, Amazon CloudWatch Logs, AWS Budgets | Bedrock API key; logs; a $100/month budget |
+| IaC | AWS CloudFormation: `kinshield-backend`, `kinshield-auth`, `kinshield-frontend`, `kinshield-tiny-ml` | Every resource is in a template under `infra/` |
+
+### KinVoice: scoring a call turn by turn
+After each caller line, the browser sends the whole call so far to `POST /detect` (at most 6 scores per call). Bedrock returns evidence; the Lambda's `_normalise()` recomputes the score and level in code, so the model's arithmetic is never trusted. When the score crosses the caregiver's alert level, the browser shows a push alert mid-call.
+
+![KinVoice flow: the browser loads a scenario, posts each turn to /detect, the Lambda gets the key from Secrets Manager, calls gpt-oss-20b on Bedrock, normalises the evidence and returns it; a red alert path shows the mid-call push toast; Polly reads caller lines](docs/architecture/flow-kinvoice.jpg)
+
+### KinBot: check, read, investigate
+Screenshots go to Qwen3-VL and voicemails to Voxtral. Their text then goes through the same check as a pasted message. The Lambda drops any quote that isn't in the user's text. The investigator agent (gpt-oss-20b function calling, at most 5 turns, 7 tool calls and 22 s) calls five read-only tools, and a deterministic checklist runs any check the model skips. The browser then combines the text verdict, the picture and the agent's findings into **Kip's overall take**, which can raise the verdict but never lower it. Ask mode sends "it's happening now" or "I already paid" messages to fixed safety cards with no model call.
+
+![KinBot flow: text, screenshot or voicemail input; Qwen3-VL and Voxtral on Bedrock; the check with quote verification and KinModel-Lite; the investigator agent with five read-only tools and a deterministic checklist; Kip's overall take; Ask mode with fixed safety cards](docs/architecture/flow-kinbot.jpg)
+
+### Optional sign-in and saved history
+Guests get every feature. Signing in uses the Cognito hosted UI (email + one-time code, OAuth code flow with PKCE). Only `GET/POST/DELETE /history` sit behind the JWT authorizer, and DynamoDB stores the level, type, headline, score and date of each check, **never the message**. Google sign-in is configured but turned off.
+
+![Sign-in flow: the browser signs in through the Cognito hosted UI, then calls /history through API Gateway's JWT authorizer to the Lambda and DynamoDB kinshield-history; Google is configured but off](docs/architecture/flow-signin.jpg)
 
 **AWS services used:** AWS Lambda, Amazon API Gateway (HTTP API, custom domain, JWT authorizer), Amazon Bedrock (Mantle endpoint: gpt-oss-20b, gpt-oss-120b for labelling, Qwen3-VL, Voxtral), Amazon Polly, Amazon Cognito, Amazon DynamoDB, AWS Secrets Manager, Amazon Route 53, AWS Certificate Manager, AWS CloudFormation, Amazon CloudWatch, AWS Budgets, and Amazon S3 (the older static site). Amazon Textract and Amazon Transcribe are **not** enabled on this account and aren't used.
 
@@ -403,7 +421,7 @@ infra/            CloudFormation templates (backend, frontend-s3, auth) + deploy
 web/src/          index, kinvoice, kinvoice-app, kinbot, kinbot-chat, kinmodel pages; kinvoice-app.js, kinbot-app.js, kinbot-guide.js, kinmodel.js, chat.js, guide.js, ui.js; styles
 android/          KinShield Beta (Kotlin + Jetpack Compose), built after the deadline
 eval/kinbot/      46-message KinBot eval set, runner and REPORT.md
-docs/             WRITEUP.md, guides/ (step-by-step guide per product), screenshots/, evidence/ (redacted agent + AWS evidence)
+docs/             WRITEUP.md, architecture/ (diagrams), guides/ (step-by-step guide per product), screenshots/, evidence/ (redacted agent + AWS evidence)
 .kiro/specs/      Kiro requirements / design / tasks
 ```
 

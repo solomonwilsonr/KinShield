@@ -100,6 +100,11 @@ Your lines are sent to Amazon Bedrock to be scored and aren't stored. Leave out 
 - **This visit** in the sidebar: every call you played and its result.
 - **Get started:** a checklist that walks you through scam call → alert → verify → report → your own call → family setup.
 
+## How it works under the hood
+After each caller line, the browser sends the call so far to `POST /detect`. The Lambda gets the Bedrock key from Secrets Manager, asks gpt-oss-20b for evidence, recomputes the score in code (`_normalise()`) and returns it. Polly reads the caller's lines when the voice is on.
+
+![KinVoice request flow](../architecture/flow-kinvoice.jpg)
+
 ## Try these calls
 | Call | What to expect |
 |---|---|
